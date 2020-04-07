@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c3db1700cefe43dc8d3e1f1cc3ff8ce7" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Admin" Width="1.5" PointX="0.75" PointY="37.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.BadReport" Width="1.5" PointX="5.25" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.BadReportType" Width="1.5" PointX="3" PointY="22" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CheckStock" Width="1.5" PointX="5.25" PointY="36.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.CheckStockType" Width="1.5" PointX="3" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Customer" Width="1.5" PointX="3" PointY="32.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Depart" Width="1.5" PointX="3" PointY="36.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Function" Width="1.5" PointX="3" PointY="39.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.InStorage" Width="1.5" PointX="8.25" PointY="43.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.InStorageType" Width="1.5" PointX="3" PointY="48.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Location" Width="1.5" PointX="5.25" PointY="58.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.LocationType" Width="1.5" PointX="3" PointY="51.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Measure" Width="1.5" PointX="3" PointY="54.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MoveReport" Width="1.5" PointX="10.75" PointY="48" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MoveReportType" Width="1.5" PointX="3" PointY="57.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OutStorage" Width="1.5" PointX="5.25" PointY="45.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OutStorageType" Width="1.5" PointX="3" PointY="61" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Product" Width="1.5" PointX="7.5" PointY="49.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ProductCategory" Width="1.5" PointX="3" PointY="64" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ReturnOrderStock" Width="1.5" PointX="9.75" PointY="52.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.ReturnOrderType" Width="1.5" PointX="3" PointY="67.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Role" Width="1.5" PointX="3" PointY="70.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.RolePower" Width="1.5" PointX="5.25" PointY="53.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Storage" Width="1.5" PointX="3" PointY="73.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Supplier" Width="1.5" PointX="8.25" PointY="59.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SupplierType" Width="1.5" PointX="3" PointY="82" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_Admin_Depart1" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_BadReport_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_BadReportType_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_CheckStock_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_CheckStockType_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Customer_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Depart_Depart" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Function_Function" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_InStorage_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_InStorageType_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Location_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_LocationType_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Measure_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_MoveReport_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_MoveReportType_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_OutStorage_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_OutStorageType_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Product_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ProductCategory_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ReturnOrderStock_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ReturnOrderType_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Role_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_RolePower_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Storage_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Supplier_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SupplierType_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_BadReport_BadReportType" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_BadReport_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_CheckStock_CheckStockType" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_CheckStock_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_OutStorage_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_RolePower_Function" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_InStorage_InStorageType" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_InStorage_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_InStorage_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Location_InStorageType" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Location_Storage" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Product_Location" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Product_Measure" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_MoveReport_MoveReportType" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_MoveReport_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_OutStorage_OutStorageType" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Product_ProductCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ReturnOrderStock_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_ReturnOrderStock_ReturnOrderType" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_RolePower_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Supplier_SupplierType" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
