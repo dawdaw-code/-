@@ -99,6 +99,7 @@
     <Content Include="Css\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Jpg\DengLubj.jpg" />
+    <Content Include="Jpg\1.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Css\bootstrap-theme.css.map" />
@@ -148,6 +149,7 @@
     <Content Include="Views\Text\Index.cshtml" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Views\Text\Home.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

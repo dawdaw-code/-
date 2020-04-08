@@ -13,5 +13,9 @@ namespace 仓储系统.Controllers
         {
             return View();
         }
+        public ActionResult Home()
+        {
+            return View();
+        }
     }
 }
