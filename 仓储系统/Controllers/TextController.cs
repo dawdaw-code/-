@@ -18,7 +18,7 @@ namespace 仓储系统.Controllers
             return View();
         }
 
-        public ActionResult 2222()
+        public ActionResult fewwf()
         {
             return View();
         }
