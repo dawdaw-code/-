@@ -10,59 +10,6 @@
 </div>
 <br />
 
-
-@*<script src="//res.layui.com/layui/dist/layui.js" charset="utf-8"></script>*@
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
-@*<script>
-            layui.use('table', function () {
-                var table = layui.table;
-                table.render({
-                    elem: '#test'
-                    , url: '/demo/table/user/'
-                    , cellMinWidth: 100 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-                    //, cols: [[
-                    //    { field: 'id', width: 100, title: 'ID',  }
-                    //    , { field: 'username', width: 100, title: '退货单' }
-                    //    , { field: 'sex', width: 100, title: '退货类型',  }
-                    //    , { field: 'city', width: 100, title: '退货数量' }
-                    //    , { field: 'sign', title: '关联单号', width: 100, } //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
-                    //    , { field: 'sex', width: 100, title: '关联单号', }
-                    //    , { field: 'sex', width: 100, title: '状态', }
-                    //    , { field: 'classify', title: '制单人', width: 100, }
-                    //    , { field: 'sex', width: 100, title: '操作方式', }
-                    //    , { field: 'sex', width: 100, title: '创建时间', }
-                    //    , { field: 'sex', width: 100, title: '操作', }
-                    //]]
-
-                });
-            });
-        </script>
-    <table class="layui-table" lay-data="{height:315, url:'/demo/table/user/', page:true, id:'test'}" lay-filter="test">
-        <thead>
-            <tr>
-                <th lay-data="{field:'id', width:80, sort: true}">ID</th>
-                <th lay-data="{field:'username', width:80}">用户名</th>
-                <th lay-data="{field:'sex', width:80, sort: true}">性别</th>
-                <th lay-data="{field:'city'}">城市</th>
-                <th lay-data="{field:'sign'}">签名</th>
-                <th lay-data="{field:'experience', sort: true}">积分</th>
-                <th lay-data="{field:'score', sort: true}">评分</th>
-                <th lay-data="{field:'classify'}">职业</th>
-                <th lay-data="{field:'wealth', sort: true}">财富</th>
-            </tr>
-            <tr>
-                <th lay-data="{field:'id', width:80, sort: true}">ID</th>
-                <th lay-data="{field:'username', width:80}">用户名</th>
-                <th lay-data="{field:'sex', width:80, sort: true}">性别</th>
-                <th lay-data="{field:'city'}">城市</th>
-                <th lay-data="{field:'sign'}">签名</th>
-                <th lay-data="{field:'experience', sort: true}">积分</th>
-                <th lay-data="{field:'score', sort: true}">评分</th>
-                <th lay-data="{field:'classify'}">职业</th>
-                <th lay-data="{field:'wealth', sort: true}">财富</th>
-            </tr>
-        </thead>
-    </table>*@
 <div style="float:left; width:1020px">
     <div class="layui-btn-group">
         <button type="button" class="layui-btn layui-btn-primary">所有</button>
@@ -82,16 +29,21 @@
 
 <div>
     <div class="layui-inline" style="float:left">
-        <input type="text" name="title" required lay-verify="required" placeholder="输入报损单号" autocomplete="off" class="layui-input" style="width:150px">
+        <input type="text" name="title" required lay-verify="required" placeholder="输入单号" autocomplete="off" class="layui-input" style="width:150px">
     </div>
     <label class="layui-form-label">时间</label>
     <div class="layui-inline" style="float:left">
         <input type="text" class="layui-input" id="test1">
     </div>
     <div class="layui-inline" style="float:left">
+        —
+    </div>
+    <div class="layui-inline" style="float:left">
         <input type="text" class="layui-input" id="test1">
     </div>
-    <button type="button" class="layui-btn layui-btn-primary">搜索</button>
+    <div class="layui-inline" style="float:left">
+        <button type="button" class="layui-btn layui-btn-primary">搜索</button>
+    </div>
 </div>
 
 
