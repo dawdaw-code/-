@@ -9,5 +9,6 @@ namespace BLL.luo
     public class IndexManager
     {
 
+
     }
 }
