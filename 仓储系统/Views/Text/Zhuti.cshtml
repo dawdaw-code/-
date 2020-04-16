@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Zhuti";
+    Layout = "~/Views/Home.cshtml";
+}
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>marquee</title>
+    <style>
+     
+        marquee {
+            
+            font-weight: bolder;
+            font-size: 40px;
+            color: white;
+        }
+        .gundo {
+            width:800px;
+            height:50px;
+            
+            position:fixed;
+            left:650px;
+            top:350px;
+        }
+        .gundo1 {
+            width: 720px;
+            height: 50px;
+            
+            position: fixed;
+            left: 730px;
+            top: 350px;
+        }
+        .gundo2 {
+            width: 640px;
+            height: 50px;
+            
+            position: fixed;
+            left: 810px;
+            top: 350px;
+        }
+        .gundo3 {
+            width: 560px;
+            height: 50px;
+            
+            position: fixed;
+            left: 890px;
+            top: 350px;
+        }
+        a {
+            color:white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="gundo">
+        <marquee behavior="slide" scrolldelay="150" scrollamount="100" style="color:#000000;">欢迎</marquee>
+    </div>
+    <div class="gundo1">
+        <marquee behavior="slide" scrolldelay="200" scrollamount="100" style="color:#000000;">进入</marquee>
+    </div>
+    <div class="gundo2">
+        <marquee behavior="slide" scrolldelay="240" scrollamount="100" style="color:#000000;">仓储</marquee>
+    </div>  
+    <div  class="gundo3">
+        <marquee behavior="slide" scrolldelay="300" scrollamount="100" style="color:#000000;">系统</marquee>
+    </div>   
+       
+    
+</body>
+
+</html>
