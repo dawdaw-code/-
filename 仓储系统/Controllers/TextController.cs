@@ -18,7 +18,7 @@ namespace 仓储系统.Controllers
             return View();
         }
 
-        public ActionResult www()
+        public ActionResult aaa()
         {
             return View();
         }
