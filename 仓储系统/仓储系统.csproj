@@ -269,6 +269,8 @@
     <Content Include="Views\Yangwenjie\buMenGuanLi.cshtml" />
     <Content Include="Views\Yangwenjie\caiDanGuanLi.cshtml" />
     <Content Include="Views\Yangwenjie\quanXian.cshtml" />
+    <Content Include="Views\Text\Yuango.cshtml" />
+    <Content Include="Views\Text\Juese.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
