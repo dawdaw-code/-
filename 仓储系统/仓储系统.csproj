@@ -43,6 +43,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>D:\Y2\VS作业文件\仓储系统\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
@@ -286,6 +290,10 @@
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{c2c0152c-3cfc-44b7-9506-d75750eb2ee8}</Project>
       <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models1\Models1.csproj">
+      <Project>{a290ce7d-6454-44fd-b589-d8a6918bc837}</Project>
+      <Name>Models1</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{30f0f7e0-bc9f-41ab-9e14-cd6cc0c16d00}</Project>
