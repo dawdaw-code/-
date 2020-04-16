@@ -53,10 +53,6 @@
       <Project>{a290ce7d-6454-44fd-b589-d8a6918bc837}</Project>
       <Name>Models1</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{30f0f7e0-bc9f-41ab-9e14-cd6cc0c16d00}</Project>
-      <Name>Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
