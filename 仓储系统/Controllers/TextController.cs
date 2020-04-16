@@ -17,8 +17,11 @@ namespace 仓储系统.Controllers
         {
             return View();
         }
-
-        public ActionResult aaa()
+        public ActionResult Yuango()
+        {
+            return View();
+        }
+        public ActionResult Juese()
         {
             return View();
         }

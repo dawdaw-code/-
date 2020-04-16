@@ -29,16 +29,21 @@
 
 <div>
     <div class="layui-inline" style="float:left">
-        <input type="text" name="title" required lay-verify="required" placeholder="输入移库单号" autocomplete="off" class="layui-input" style="width:150px">
+        <input type="text" name="title" required lay-verify="required" placeholder="输入单号" autocomplete="off" class="layui-input" style="width:150px">
     </div>
     <label class="layui-form-label">时间</label>
     <div class="layui-inline" style="float:left">
         <input type="text" class="layui-input" id="test1">
     </div>
     <div class="layui-inline" style="float:left">
+        —
+    </div>
+    <div class="layui-inline" style="float:left">
         <input type="text" class="layui-input" id="test1">
     </div>
-    <button type="button" class="layui-btn layui-btn-primary">搜索</button>
+    <div class="layui-inline" style="float:left">
+        <button type="button" class="layui-btn layui-btn-primary">搜索</button>
+    </div>
 </div>
 
 
@@ -123,27 +128,6 @@
 <script src="~/layui/layui.js"></script>
 <link href="~/layui/css/layui.mobile.css" rel="stylesheet" />
 <script src="~/layui/layui.all.js"></script>
-@*<script>
-
-            laypage.render({
-                elem: 'demo20'
-                , count: data.length
-                , jump: function (obj) {
-                    //模拟渲染
-                    document.getElementById('biuuu_city_list').innerHTML = function () {
-                        var arr = []
-                            , thisData = data.concat().splice(obj.curr * obj.limit - obj.limit, obj.limit);
-                        layui.each(thisData, function (index, item) {
-                            arr.push('<li>' + item + '</li>');
-                        });
-                        return arr.join('');
-                    }();
-                }
-            });
-    </script>*@
-
-
-
 <script src="~/layui/layui.js"></script>
 <script>
     layui.use('laydate', function () {
@@ -152,6 +136,28 @@
             elem: '#test1' //指定元素
         });
     });
+
+    $(function () {
+        PageList();
+    });
+
+    function PageList() {
+        $.ajax({
+            type: "post",
+            url: "/Student/GetStudentPage",
+            data: "{pageIndex:'" + pageIndex + "',pageSize:'" + pageSize + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                pageCount = result.PageCount;
+                $("#tb1 tr").remove();
+                $.each(result.DataList, function (index, data) {
+                    $("#tb1").append("<tr><td>" + data.code + "</td><td>" + data.name + "</td><td>" + job + "</td><td>" + major + "</td><td>" + data.grade + "</td><td>" + sex + "</td><td>" + Datte(data.birthday) + "</td><td>" + data.tel + "</td><td><a href='#' onclick='return GetByRecord(" + data.code + ")'>查看</a></td></tr>");
+
+                });
+            }
+        });
+    }
 </script>
 
 
