@@ -7,12 +7,11 @@ using Models1;
 using DAL;
 namespace BLL
 {
-    //报损
-    public class BadReportManager
+   public  class CheckStockManager
     {
-        public static PageList GetBadReport(int pageIndex, int pageSize)
+        public static PageList GetCheckStock(int pageIndex, int pageSize)
         {
-            return BadReportService.GetBadReport(pageIndex, pageSize);
+            return CheckStockService.GetCheckStock(pageIndex, pageSize);
         }
     }
 }

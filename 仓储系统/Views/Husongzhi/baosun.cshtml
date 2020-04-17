@@ -62,68 +62,19 @@
             <th>操作</th>
         </tr>
     </thead>
-    <tbody id=" td1">
-        @*<tr>
-            <th>1</th>
-            <th>2</th>
-            <th>3</th>
-            <th>4</th>
-            <th>5</th>
-            <th>6</th>
-            <th>7</th>
-            <th>8</th>
-            <th>
-                <div class="layui-btn-group">
-                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
-                        <i class="layui-icon">&#xe654;</i>
-                    </button>
-                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
-                        <i class="layui-icon">&#xe642;</i>
-                    </button>
-                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
-                        <i class="layui-icon">&#xe640;</i>
-                    </button>
-                </div>
-            </th>
-    <tbody>
-        <tr>
-            <th>1</th>
-            <th>2</th>
-            <th>3</th>
-            <th>4</th>
-            <th>5</th>
-            <th>6</th>
-            <th>7</th>
-            <th>8</th>
-            <th>
-                <div class="layui-btn-group">
-                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
-                        <i class="layui-icon">&#xe654;</i>
-                    </button>
-                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
-                        <i class="layui-icon">&#xe642;</i>
-                    </button>
-                    <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">
-                        <i class="layui-icon">&#xe640;</i>
-                    </button>
-                </div>
-            </th>
-        </tr>*@
+    <tbody id="td1">
+        
     </tbody>
 </table>
 
-<div style="float:right;margin-top:-5px; text-align:center;" >
+<div style=" text-align:center;">
     <div>
-        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">首页</button>
-        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">上一页</button>
-        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">1</button>
-        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">下一页</button>
-        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm">尾页</button>
+        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="First();">首页</button>
+        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="Back();">上一页</button>
+        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="First();">1</button>
+        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="Next();">下一页</button>
+        <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="Last();">尾页</button>
     </div>
-
-
-
-
 </div>
 
 <table class="layui-hide" id="test"></table>
@@ -133,6 +84,8 @@
 
 <script src="~/layui/layui.js"></script>
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+
 <script>
     layui.use('laydate', function () {
         var laydate = layui.laydate;
@@ -142,48 +95,41 @@
     });
 
     var pageIndex = 1;
-    var pageSize = 5;
+    var pageSize = 1;
     var pageCount = 0;
-    //$("#First").click(function () {
-    //    pageIndex = 1;
-    //    PageList();
-    //    return false;
-    //});
-    //$("#Back").click(function () {
-    //    pageIndex--;
-    //    PageList();
-    //    return false;
-    //});
-    //$("#Next").click(function () {
-    //    pageIndex++;
-    //    PageList();
-    //    return false;
-    //});
-    //$("#Last").click(function () {
-    //    pageIndex = pageCount;
-    //    PageList();
-    //    return false;
-    //});
+
+    function First() {
+        pageIndex = 1;
+        PageList();
+        return false;
+    };
+   
+    function Back() {
+        pageIndex--;
+        PageList();
+        return false;
+    };
+    
+    function Next() {
+        pageIndex++;
+        PageList();
+        return false;
+    };
+
+    function Last() {
+        pageIndex = pageCount;
+        PageList();
+        return false;
+    };
 
     $(function () {
-        PageList1();
+        PageList();
     });
-    function PageList1() {
-        $.ajax({
-            type: "post",
-            url: "/Husongzhi/GetBadReport1",
-            data: "{}",
-            dataType: "json",
-            contentType: "application/json",
-            success: function (result) {
-                pageCount = result.PageCount;
-                $("#tb1 tr").remove();
-                $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("tr>< th > " + data.BadNum + "</th >< th > " + data.BadTypeId + "</th>< th > " + data.BadDetailNum + "</th>< th >" + data.Num + "</th>< th > " + data.SumMoney + "</th > <th>" + data.AuditUser + "</th>< th >" + data.Operation + "</th>< th >" + data.AuditTime + "</th><th><div class='layui-btn-group'><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe654;</i></button><button type='button'class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe640;</i> </button></div></th></tr > ");
-
-                });
-            }
-        });
+    
+    //时间格式转化
+    function Datte(time) {
+        var date = new Date(parseInt(time.substr(6)));
+        return date.toLocaleDateString();
     }
 
     //页面加载
@@ -198,10 +144,35 @@
                 pageCount = result.PageCount;
                 $("#tb1 tr").remove();
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("tr>< th > "+data.BadNum+"</th >< th > "+data.BadTypeId+"</th>< th > "+data.BadDetailNum+"</th>< th >"+data.Num+"</th>< th > "+data.SumMoney+"</th > <th>"+data.AuditUser+"</th>< th >"+data.Operation+"</th>< th >"+data.AuditTime+"</th><th><div class='layui-btn-group'><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe654;</i></button><button type='button'class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe640;</i> </button></div></th></tr > ");
-
+                    $("#td1").append("<tr><td>" + data.BadNum + "</td><td>" + data.BadTypeId + "</td><td>" + data.BadDetailNum + "</td><td>" + data.Num + "</td><td>" + data.SumMoney + "</td><td>" + data.AuditUser + "</td><td>" + data.Operation + "</td><td>" + Datte(data.AuditTime) + "</td> <td><div class='layui-btn-group'><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' ><i class='layui-icon'>&#xe654;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon' onclick='Edit(" + data.BadNum + ")'>&#xe640;</i> </button></div></td></tr>");
                 });
             }
+        });
+    }
+
+    //删除（修改代替删除操作，改变状态）
+    function Edit(BadNum) {
+        alert(BadNum);
+        $.ajax({
+            type: "POST",
+            url: "/Test/Edit",
+            data: "{bill:" + jsons + ",list:" + $("#detail").val() + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("删除成功");
+                    PageList();
+                }
+                else {
+                    alert("删除失败");
+                }
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+
+            }
+            ,
         });
     }
 </script>

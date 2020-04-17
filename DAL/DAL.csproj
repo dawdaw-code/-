@@ -45,6 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Husongzhi\BadReportService.cs" />
+    <Compile Include="Husongzhi\CheckStockService.cs" />
+    <Compile Include="Husongzhi\MoveReportService.cs" />
+    <Compile Include="Husongzhi\ReturnOrderStockService.cs" />
     <Compile Include="luo\IndexService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

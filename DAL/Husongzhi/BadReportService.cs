@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Models1;
 namespace DAL
 {
+    //报损
     public class BadReportService
     {
 
@@ -14,7 +15,6 @@ namespace DAL
 
             WarehouseEntities entity = new WarehouseEntities();
             var obj = from p in entity.BadReport
-                      orderby p.BadNum ascending
                       select new
                       {
                           BadNum = p.BadNum,
