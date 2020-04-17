@@ -31,16 +31,44 @@
 <body style="background-image: url('../../Jpg/1.png');">
     <h1 style="color: #5bc0de;">仓储系统</h1>
     <div class="kuanjia">
-        <table style="position:absolute;left:170px;top:20px;width:0;"class="table table-bordered">
+        <table style="position:absolute;left:170px;top:20px;width:0;" class="table table-bordered">
             <tr>
-                <td>用户名：<input id="Text1" type="text" /><br /></td>
+                <td>用户名：<input id="name" type="text" /><br /></td>
             </tr>
             <tr>
-                <td>密&nbsp;&nbsp;&nbsp;码：<input id="Text1" type="text" /></td>
+                <td>密&nbsp;&nbsp;&nbsp;码：<input id="pwd" type="text" /></td>
             </tr>
         </table>
-        <input class="btn btn-info"style="width:180px;height:30px; position:absolute;left:210px;top:130px;" type="button" value="登录" />
-        
+        <input id="denglu" class="btn btn-info" style="width:180px;height:30px; position:absolute;left:210px;top:130px;" type="button" value="登录" />
+
     </div>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $("#denglu").click(function () {
+                var Name = $("#name").val();
+                var Pwd = $("#pwd").val();
+                $.ajax({
+                    type: "POST",
+                    url: "/Text/Indexselect",
+                    data: { name: Name, pwd: Pwd },
+                    success: function (result) {
+                        if (result != null) {
+                            window.location.href = "@Url.Action("Zhuti")";
+                        }
+
+                        else {
+
+                            alert("失败");
+                        }
+                    },
+                    error: function (ex) {
+                        alert(ex.responseText);
+                    }
+
+                });
+            });
+        });
+    </script>
 </body>
 </html>

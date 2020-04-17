@@ -51,7 +51,7 @@
 
             .ZhuTi #chebian {
                 width: 200px;
-                height: 650px;
+                height: 661px;
                 background-color: #383434;
                 float: left;
             }
@@ -67,12 +67,6 @@
             -webkit-box-sizing: border-box;
             box-sizing: border-box;
         }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
         h1, h2, h3 {
             margin: 0;
             font-weight: normal;
@@ -230,7 +224,7 @@
         }
 
         .nro {
-            border: 1px solid #ff0000;
+            /*border: 1px solid #ff0000;*/
             width: 1340px;
             height: 650px;
             float: right;
@@ -238,6 +232,9 @@
             position: fixed;
             top: 60px;
             left: 200px;
+        }
+        a {
+            color:#ffffff;
         }
     </style>
     <link href="~/css/iconfont.css" rel="stylesheet" />
@@ -248,14 +245,14 @@
 <body>
     <div>
         <div class="tobu">
-            <a id="wenzi">仓储管理系统</a>
+            <a id="wenzi"href="~/Text/Zhuti">仓储管理系统</a>
             <div>
                 <div class="dropdown">
                     <span style="color:#eee">当前登录</span>
                     <div class="dropdown-content">
-                        <p><a href="#">用户信息</a></p>
-                        <p><a href="#">修改密码</a></p>
-                        <p><a href="#">退出登录</a></p>
+                        <a href="#" style="color:#ffffff">用户信息</a><br />
+                       <a href="#" style="color:#ffffff">修改密码</a><br />
+                        <a href="#"style="color:#ffffff">退出登录</a>
                     </div>
                 </div>
             </div>
@@ -267,12 +264,12 @@
                         系统设置
                     </div>
                     <div class="body">
-                        <h2>员工管理</h2><hr />
-                        <h2>角色管理</h2><hr />
-                        <h2>部门管理</h2><hr />
-                        <h2>菜单管理</h2><hr />
-                        <h2>权限分配</h2><hr />
-                        <h2>标识符管理</h2>
+                        <h2><a href="~/Text/Yuango">员工管理</a></h2><hr />
+                        <h2><a href="~/Text/Juese">角色管理</a></h2><hr />
+                        <h2><a href="~/Text/buMenGuanLi">部门管理</a></h2><hr />
+                        <h2><a href="~/Text/caiDanGuanLi">菜单管理</a></h2><hr />
+                        <h2><a href="~/Text/quanXian">权限分配</a></h2><hr />
+                        <h2><a href="~/Text/">标识符管理</a></h2>
                     </div>
                 </div>
                 <div class="section">
@@ -301,12 +298,12 @@
                     </div>
 
                     <div class="body">
-                        <h2>入库管理</h2><hr />
-                        <h2>出库管理</h2><hr />
-                        <h2>报损管理</h2><hr />
-                        <h2>移库管理</h2><hr />
-                        <h2>盘点管理</h2><hr />
-                        <h2>退货管理</h2>
+                        <h2><a href="~/Text/">入库管理</a></h2><hr />
+                        <h2><a href="~/Text/">出库管理</a></h2><hr />
+                        <h2><a href="~/Husongzhi/baosun">报损管理</a></h2><hr />
+                        <h2><a href="~/Text/yiku">移库管理</a></h2><hr />
+                        <h2><a href="~/Text/pandian">盘点管理</a></h2><hr />
+                        <h2><a href="~/Text/tuihuo">退货管理</a></h2>
                     </div>
 
                 </div>
@@ -333,7 +330,7 @@
             </div>
         </div>@*侧边栏*@
         <div class="nro">
-            @RenderBody();
+            @RenderBody()
         </div>@*内容*@
     </div>
     
