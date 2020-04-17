@@ -50,6 +50,7 @@
     <Compile Include="Husongzhi\ReturnOrderStockService.cs" />
     <Compile Include="luo\IndexService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="yangWenJie\DepartService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models1\Models1.csproj">
@@ -57,5 +58,6 @@
       <Name>Models1</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
