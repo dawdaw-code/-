@@ -105,6 +105,17 @@
     <Content Include="Global.asax" />
     <Content Include="Jpg\DengLubj.jpg" />
     <Content Include="Jpg\1.png" />
+    <Content Include="layer-v3.1.1\layer\layer.js" />
+    <Content Include="layer-v3.1.1\layer\mobile\layer.js" />
+    <Content Include="layer-v3.1.1\layer\mobile\need\layer.css" />
+    <Content Include="layer-v3.1.1\layer\theme\default\icon-ext.png" />
+    <Content Include="layer-v3.1.1\layer\theme\default\icon.png" />
+    <Content Include="layer-v3.1.1\layer\theme\default\layer.css" />
+    <Content Include="layer-v3.1.1\layer\theme\default\loading-0.gif" />
+    <Content Include="layer-v3.1.1\layer\theme\default\loading-1.gif" />
+    <Content Include="layer-v3.1.1\layer\theme\default\loading-2.gif" />
+    <Content Include="layer-v3.1.1\test.html" />
+    <Content Include="layer-v3.1.1\更新日志.txt" />
     <Content Include="layui\css\layui.css" />
     <Content Include="layui\css\layui.mobile.css" />
     <Content Include="layui\css\modules\code.css" />
@@ -220,6 +231,11 @@
     <Content Include="layui\font\iconfont.ttf" />
     <Content Include="layui\font\iconfont.woff" />
     <Content Include="layui\font\iconfont.woff2" />
+    <Content Include="layer-v3.1.1\文档\jquery下载.url" />
+    <Content Include="layer-v3.1.1\文档\layer官网.url" />
+    <Content Include="layer-v3.1.1\文档\layer文档.url" />
+    <Content Include="layer-v3.1.1\文档\layui社区.url" />
+    <Content Include="layer-v3.1.1\文档\获得layim.url" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -251,6 +267,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\JiaJiaXinController.cs" />
     <Compile Include="Controllers\TextController.cs" />
     <Compile Include="Controllers\YangWenJieController.cs" />
     <Compile Include="Global.asax.cs">
@@ -277,6 +294,12 @@
     <Content Include="Views\Text\Yuango.cshtml" />
     <Content Include="Views\Text\Juese.cshtml" />
     <Content Include="Views\Text\Zhuti.cshtml" />
+    <Content Include="Views\JiaJiaXin\List.cshtml" />
+    <Content Include="Views\JiaJiaXin\List2.cshtml" />
+    <Content Include="Views\JiaJiaXin\AddChukudan.cshtml" />
+    <Content Include="Views\JiaJiaXin\AddRukudan.cshtml" />
+    <Content Include="Views\JiaJiaXin\Chukuguanli.cshtml" />
+    <Content Include="Views\JiaJiaXin\Rukuguanli.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
