@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Models1;
+using BLL.Jiajiaxin;
 namespace 仓储系统.Controllers
 {
     public class JiaJiaXinController : Controller
@@ -43,7 +44,11 @@ namespace 仓储系统.Controllers
         }
 
 
-
+        //产品类别管理查询
+        public ActionResult GetCategory(int pageIndex, int pageSize)
+        {
+            return Json(ProCategoryManager.GetCategory(pageIndex, pageSize), JsonRequestBehavior.AllowGet);
+        }
 
 
 
