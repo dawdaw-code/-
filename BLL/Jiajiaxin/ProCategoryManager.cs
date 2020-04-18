@@ -13,7 +13,10 @@ namespace BLL.Jiajiaxin
         {
             return ProCategoryService.GetCategory(pageIndex, pageSize);
         }
-
-
+        public static IQueryable QueryCategory()
+        {
+            return ProCategoryService.QueryCategory();
         }
+
+    }
 }

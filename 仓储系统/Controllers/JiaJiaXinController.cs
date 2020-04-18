@@ -50,7 +50,10 @@ namespace 仓储系统.Controllers
             return Json(ProCategoryManager.GetCategory(pageIndex, pageSize), JsonRequestBehavior.AllowGet);
         }
 
-
+        public ActionResult QueryCategory()
+        {
+            return Json(ProCategoryManager.QueryCategory(), JsonRequestBehavior.AllowGet);
+        }
 
 
 

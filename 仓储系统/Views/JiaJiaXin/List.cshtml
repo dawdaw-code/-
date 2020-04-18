@@ -57,17 +57,6 @@
                 <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="btnLast();">尾页</button>
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
             <div class="row" id="mypager"></div>
             <div  id="div1" style="display:none;">
                 <div style="text-align:center;margin-top:20px;">
@@ -86,11 +75,15 @@
 </div>
 @*@section foot{*@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
 <script src="~/layer-v3.1.1/layer/layer.js"></script>
 <script src="~/layui/layui.js"></script>
     <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
     <script>
 
+        $(function () {
+            Query();
+        });
         var pageIndex = 1;
         var pageSize = 1;
         var pageCount = 0;
@@ -119,9 +112,7 @@
             return false;
         };
 
-        $(function () {
-            PageList();
-        });
+       
 
         function PageList() {
             $.ajax({
@@ -139,6 +130,47 @@
                 }
             });
         }
+
+        function Query() {
+            $.ajax({
+                type: "post",
+                url: "/JiaJiaXin/QueryCategory",
+                data: "{}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {                 
+                    $.each(result, function (index, data) {
+                        $("#tbody1").append("<tr style='text - align: center;'><td>" + data.Id + "</td><td>" + data.PCateName + "</td><td>" + data.CreateUser + "</td><td>" + data.CreateTime + "</td><td>" + data.Remark + "</td><td> <button type='button' class='layui - btn layui - btn - sm'><i class='layui - icon layui - icon - edit'></i></button><button type='button' class='layui - btn layui - btn - sm'><i class='layui - icon layui - icon - delete'></i></button></td></tr>");
+                    });
+                },
+                 error: function (ex) {
+                    alert(ex.responseText);
+                },
+            });
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         //页面层
         function divShow()
