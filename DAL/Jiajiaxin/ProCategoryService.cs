@@ -57,6 +57,37 @@ namespace DAL.Jiajiaxin
 
 
 
+        public static int AddCategory(ProductCategory pc)
+        {
+            WarehouseEntities entity = new WarehouseEntities();
+            entity.ProductCategory.Add(pc);
+            return entity.SaveChanges();
+        }
+
+
+
+        public static int DeleteCategory(int id)
+        {
+            WarehouseEntities entity = new WarehouseEntities();
+            var obj = (from p in entity.ProductCategory where p.Id == id select p).First();
+            entity.ProductCategory.Remove(obj);
+            return entity.SaveChanges();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

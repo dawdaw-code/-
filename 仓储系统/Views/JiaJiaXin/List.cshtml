@@ -58,7 +58,7 @@
             </div>
 
             <div class="row" id="mypager"></div>
-            <div  id="div1" style="display:none;">
+            @*<div  id="hidePage" style="display:none;">
                 <div style="text-align:center;margin-top:20px;">
                     <span>类别编号<input id="Text1" type="text" placeholder="自动生成，可不填"  style="margin-left:20px;"/></span><br />
                     <span>类别名称<input id="Text2" type="text" placeholder="请输入类别名称" style="margin-left:20px;margin-top:13px;" /></span><br />
@@ -67,7 +67,7 @@
                     <input id="Button2" type="button" value="关闭" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;"/>
                 </div>
 
-            </div>
+            </div>*@
         </div>
     </div>
     <div>
@@ -84,33 +84,33 @@
         $(function () {
             Query();
         });
-        var pageIndex = 1;
-        var pageSize = 1;
-        var pageCount = 0;
+        //var pageIndex = 1;
+        //var pageSize = 1;
+        //var pageCount = 0;
 
-        function btnFirst() {
-            pageIndex = 1;
-            PageList();
-            return false;
-        };
+        //function btnFirst() {
+        //    pageIndex = 1;
+        //    PageList();
+        //    return false;
+        //};
 
-        function btnBack() {
-            pageIndex--;
-            PageList();
-            return false;
-        };
+        //function btnBack() {
+        //    pageIndex--;
+        //    PageList();
+        //    return false;
+        //};
 
-        function btnNext() {
-            pageIndex++;
-            PageList();
-            return false;
-        };
+        //function btnNext() {
+        //    pageIndex++;
+        //    PageList();
+        //    return false;
+        //};
 
-        function btnLast() {
-            pageIndex = pageCount;
-            PageList();
-            return false;
-        };
+        //function btnLast() {
+        //    pageIndex = pageCount;
+        //    PageList();
+        //    return false;
+        //};
 
        
 
@@ -138,7 +138,8 @@
                 data: "{}",
                 dataType: "json",
                 contentType: "application/json",
-                success: function (result) {                 
+                success: function (result) {
+                    console.log(result);
                     $.each(result, function (index, data) {
                         $("#tbody1").append("<tr style='text - align: center;'><td>" + data.Id + "</td><td>" + data.PCateName + "</td><td>" + data.CreateUser + "</td><td>" + data.CreateTime + "</td><td>" + data.Remark + "</td><td> <button type='button' class='layui - btn layui - btn - sm'><i class='layui - icon layui - icon - edit'></i></button><button type='button' class='layui - btn layui - btn - sm'><i class='layui - icon layui - icon - delete'></i></button></td></tr>");
                     });
@@ -182,7 +183,7 @@
                 area: ['420px', '240px'], //宽高
                 content: 'html内容',
                 shadeClose: true,
-                content: $('#div1')
+                content: $('#hidePage')
             });
             $.post('url', {}, function (str) {
                 layer.open({
