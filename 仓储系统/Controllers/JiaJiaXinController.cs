@@ -44,16 +44,27 @@ namespace 仓储系统.Controllers
         }
 
 
-        //产品类别管理查询
-        public ActionResult GetCategory(int pageIndex, int pageSize)
+      
+
+        public ActionResult DelCategory(ProductCategory pc)
         {
-            return Json(ProCategoryManager.GetCategory(pageIndex, pageSize), JsonRequestBehavior.AllowGet);
+            pc.IsDelete = 1;
+            return Json(ProCategoryManager.DelCategory(pc), JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult QueryCategory()
+
+
+
+        public ActionResult GetQuery(int pageIndex, int pageSize, ProductCategory pc)
         {
-            return Json(ProCategoryManager.QueryCategory(), JsonRequestBehavior.AllowGet);
+            return Json(ProCategoryManager.GetQuery(pageIndex, pageSize,pc), JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult pageCount(int pageSize)
+        {
+            return Json(ProCategoryManager.PageCount(pageSize), JsonRequestBehavior.AllowGet);
+        }
+
 
 
 

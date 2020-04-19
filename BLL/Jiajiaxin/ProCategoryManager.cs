@@ -9,14 +9,39 @@ namespace BLL.Jiajiaxin
 {
     public class ProCategoryManager
     {
-        public static PageList GetCategory(int pageIndex, int pageSize)
+       
+       
+        public static int DelCategory(ProductCategory pc)
         {
-            return ProCategoryService.GetCategory(pageIndex, pageSize);
-        }
-        public static IQueryable QueryCategory()
-        {
-            return ProCategoryService.QueryCategory();
+            return ProCategoryService.DelCategory(pc);
         }
 
-    }
+
+
+        public static PageList GetQuery(int pageIndex, int pageSize, ProductCategory pc)
+        {
+            return ProCategoryService.GetQuery(pageIndex, pageSize, pc);
+        }
+
+
+
+        public static int PageCount(int pageSize)
+        {
+            int a = ProCategoryService.PageCount();
+            if (a % pageSize == 0)
+            {
+                return a / pageSize;
+            }
+            else
+            {
+                return a / pageSize + 1;
+            }
+        }
+
+       
+
+
+
+
+        }
 }
