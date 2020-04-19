@@ -175,24 +175,7 @@
         });
     }
 
-    //function Query() {
-    //    $.ajax({
-    //        type: "post",
-    //        url: "/JiaJiaXin/QueryCategory",
-    //        data: "{}",
-    //        dataType: "json",
-    //        contentType: "application/json",
-    //        success: function (result) {
-    //            console.log(result);
-    //            $.each(result, function (index, data) {
-    //                $("#tbody1").append("<tr style='text - align: center;'><td><input id='Checkbox1' type='checkbox' /></td><td id='hao'>" + data.Id + "</td><td>" + data.PCateName + "</td><td>" + data.CreateUser + "</td><td>" + ConvertTime(data.CreateTime) + "</td><td>" + data.Remark + "</td><td> <button type='button' class='layui - btn layui - btn - sm'><i class='layui - icon layui - icon - edit'></i></button><button type='button' class='layui - btn layui - btn - sm'><i class='layui - icon layui - icon - delete'></i></button></td></tr>");
-    //            });
-    //        },
-    //        error: function (ex) {
-    //            alert(ex.responseText);
-    //        },
-    //    });
-    //}
+   
 
 
     function ConvertTime(time) {
@@ -226,29 +209,10 @@
                 ,
             });
         }
-
     }
 
 
-    //function GetQuery() {
-    //    $.ajax({
-    //        type: "post",
-    //        url: "/JiaJiaXin/GetQuery",
-    //        data: "{pageIndex:'" + pageIndex + "',pageSize:'" + pageSize + "'}",
-    //        dataType: "json",
-    //        contentType: "application/json",
-    //        success: function (result) {
-    //            rows = result.PageCount;
-    //            $("#tbody1 tr").remove();
-    //            $.each(result.DataList, function (index, data) {
-    //                $("#tbody1").append("<tr style='text - align: center;'><td><input id='Checkbox1' type='checkbox' /></td><td id='hao'>" + data.Id + "</td><td>" + data.PCateName + "</td><td>" + data.CreateUser + "</td><td>" + ConvertTime(data.CreateTime) + "</td><td>" + data.Remark + "</td><td> <button type='button' class='layui-btn layui-btn-sm' onclick='Del(" + data.Id + ")'><i class='layui-icon layui-icon-edit'></i></button><button type='button' class='layui-btn layui-btn-sm'><i class='layui-icon layui-icon-delete'></i></button></td></tr>");
-    //            });
-    //        },
-    //        error: function (ex) {
-    //            alert(ex.responseText);
-    //        }
-    //    });
-    //}
+  
 
 
 

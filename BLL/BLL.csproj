@@ -46,6 +46,7 @@
     <Compile Include="Husongzhi\MoveReportManager.cs" />
     <Compile Include="Husongzhi\ReturnOrderStockManager.cs" />
     <Compile Include="Jiajiaxin\ProCategoryManager.cs" />
+    <Compile Include="Jiajiaxin\ProductManager.cs" />
     <Compile Include="luo\IndexManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="yangWenJie\DepartManager.cs" />

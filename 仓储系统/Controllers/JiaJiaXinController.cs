@@ -67,6 +67,23 @@ namespace 仓储系统.Controllers
 
 
 
+        //产品管理查询
+        public ActionResult GetQueryPro(int pageIndex, int pageSize, Product pc)
+        {
+            return Json(ProductManager.GetQueryPro(pageIndex,pageSize,pc), JsonRequestBehavior.AllowGet);
+        }
+
+
+        public ActionResult pageCount2(int pageSize)
+        {
+            return Json(ProductManager.PageCount(pageSize), JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
 
 
 
