@@ -46,10 +46,10 @@ namespace 仓储系统.Controllers
 
       
 
-        public ActionResult DelCategory(ProductCategory pc)
+        public ActionResult DelCategory(ProductCategory pc, int id)
         {
             pc.IsDelete = 1;
-            return Json(ProCategoryManager.DelCategory(pc), JsonRequestBehavior.AllowGet);
+            return Json(ProCategoryManager.DelCategory(pc,id), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -85,6 +85,46 @@ namespace 仓储系统.Controllers
             
             return Json(ProCategoryManager.GetTypes(), JsonRequestBehavior.AllowGet); 
         }
+
+
+        public ActionResult DelPro(Product pc, int id)
+        {
+            pc.IsDelete = 1;
+            return Json(ProductManager.DelPro(pc, id), JsonRequestBehavior.AllowGet);                
+        }
+
+
+
+        //新增入库单
+        public ActionResult AddInStorage(InStorage ie)
+        {
+            return Json(InStorageManager.AddInStorage(ie), JsonRequestBehavior.AllowGet);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

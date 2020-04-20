@@ -56,36 +56,37 @@
             <div id="ss" style="text-align:center;">
                 <div id="demo8"></div>
                 <div id="div1" style="display:none;">
-                    <div style="text-align:center;margin-top:20px;">
-                        <div>产品编号<input id="Text1" type="text" style="margin-right:15px;" /><span>产品条码<input id="Text2" type="text" style="margin-right:15px;" /></span></div>
-                        <div style="margin-top:10px;">
-                            产品名称<input id="Text1" type="text" style="margin-right:15px;" /><span>
-                                产品类别<select id="Select1" style="margin-right:15px;width:155px;height:24px;" name="typeid">
-                                    <option>请选择类别</option>
-                                </select>
-                            </span>
+                    <form id="f1">
+                        <div style="text-align:center;margin-top:20px;">
+                            <div>产品编号<input id="Text1" type="text" style="margin-right:15px;" /><span>产品条码<input id="Text2" type="text" style="margin-right:15px;" /></span></div>
+                            <div style="margin-top:10px;">
+                                产品名称<input id="Text1" type="text" style="margin-right:15px;" /><span>
+                                    产品类别<select id="Select1" style="margin-right:15px;width:155px;height:24px;" name="typeid">
+                                        <option>请选择类别</option>
+                                    </select>
+                                </span>
+                            </div>
+                            <div style="margin-top:10px;">预警下限<input id="Text1" type="text" style="margin-right:15px;" /><span>预警上限<input id="Text2" type="text" style="margin-right:15px;" /></span></div>
+                            <div style="margin-top:10px;">
+                                <span>规格</span><input id="Text1" type="text" style="margin-right:-20px;" /><span>
+                                    <span>单位</span><select id="Select4" style="margin-right:25px;width:155px;height:24px;">
+                                        <option>请选择单位</option>
+                                    </select>
+                                </span>
+                            </div>
+                            <div style="margin-top:10px;">
+                                <span>价格</span><input id="Text1" type="text" style="margin-right:-20px;" /><span>
+                                    <span>客户</span><select id="Select3" style="margin-right:25px;width:155px;height:24px;">
+                                        <option>请选择客户</option>
+                                    </select>
+                                </span>
+                            </div>
+                            <div style="margin-top:10px;">默认仓库<input id="Text1" type="text" style="margin-right:15px;" /><span>默认库位<input id="Text2" type="text" style="margin-right:15px;" /></span></div>
+                            <div style="margin-top:10px;">描述<input id="Text1" type="text" style="margin-right:15px;" /></div>
+                            <input id="Button1" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" />
+                            <input id="Button2" type="button" value="关闭" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" />
                         </div>
-                        <div style="margin-top:10px;">预警下限<input id="Text1" type="text" style="margin-right:15px;" /><span>预警上限<input id="Text2" type="text" style="margin-right:15px;" /></span></div>
-                        <div style="margin-top:10px;">
-                            <span>规格</span><input id="Text1" type="text" style="margin-right:-20px;" /><span>
-                                <span>单位</span><select id="Select4" style="margin-right:25px;width:155px;height:24px;">
-                                    <option>请选择单位</option>
-                                </select>
-                            </span>
-                        </div>
-                        <div style="margin-top:10px;">
-                            <span>价格</span><input id="Text1" type="text" style="margin-right:-20px;" /><span>
-                                <span>客户</span><select id="Select3" style="margin-right:25px;width:155px;height:24px;">
-                                    <option>请选择客户</option>
-                                </select>
-                            </span>
-                        </div>
-                        <div style="margin-top:10px;">默认仓库<input id="Text1" type="text" style="margin-right:15px;" /><span>默认库位<input id="Text2" type="text" style="margin-right:15px;" /></span></div>
-                        <div style="margin-top:10px;">描述<input id="Text1" type="text" style="margin-right:15px;" /></div>
-                        <input id="Button1" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" />
-                        <input id="Button2" type="button" value="关闭" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" />
-                    </div>
-
+                    </form>
                 </div>
             </div>
         </div>
@@ -185,7 +186,7 @@
                 $("#tbody1 tr").remove();
                 rows = result.pageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tbody1").append("<tr style='text-align:center;'><td><input id='Checkbox1' type='checkbox' /></td><td id='hao'>" + data.Id + "</td><td>" + data.ProductNum + "</td><td>" + data.ProductName + "</td><td>" + data.MaxNum + "</td><td>" + data.MinNum + "</td><td>" + data.InPrice + "</td><td>" + data.Size + "</td><td>" + data.PCateId + "</td><td>" + data.MeasureId + "</td><td>" + data.Remark + "</td><td> <button type='button' class='layui-btn layui-btn-sm'><i class='layui-icon layui-icon-edit'></i></button><button type='button' class='layui-btn layui-btn-sm' ><i class='layui-icon layui-icon-delete'></i></button></td></tr>");
+                    $("#tbody1").append("<tr style='text-align:center;'><td><input id='Checkbox1' type='checkbox' /></td><td id='hao'>" + data.Id + "</td><td>" + data.ProductNum + "</td><td>" + data.ProductName + "</td><td>" + data.MaxNum + "</td><td>" + data.MinNum + "</td><td>" + data.InPrice + "</td><td>" + data.Size + "</td><td>" + data.PCateId + "</td><td>" + data.MeasureId + "</td><td>" + data.Remark + "</td><td> <button type='button' class='layui-btn layui-btn-sm'><i class='layui-icon layui-icon-edit'></i></button><button type='button' class='layui-btn layui-btn-sm' onclick='Del(" + data.Id + ")'><i class='layui-icon layui-icon-delete'></i></button></td></tr>");
                 });
             },
             error: function (ex) {
@@ -211,6 +212,60 @@
             }
         });
     }
+
+
+
+
+    function Del(id) {
+        if (confirm('是否删除?')) {
+            $.ajax({
+                type: "POST",
+                url: "/JiaJiaXin/DelPro",
+                data: "{Id:'" + id + "'}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    if (result > 0) {
+                        alert("删除成功");
+                        PageList();
+                    }
+                    else {
+                        alert("删除失败");
+                    }
+                },
+                error: function (ex) {
+                    alert(ex.responseText);
+                }
+                ,
+            });
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

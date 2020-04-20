@@ -21,6 +21,7 @@ namespace DAL.Jiajiaxin
             {
                 query = query.Where(p => p.ProductName.Contains(pc.ProductName));
             }
+          
             var obj = from p in query
                       orderby p.Id
                       where p.IsDelete == 0
@@ -58,7 +59,13 @@ namespace DAL.Jiajiaxin
             return (from p in entities.ProductCategory select p).Count();
         }
 
-
+        public static int DelPro(Product pc,int id)
+        {
+            WarehouseEntities entities = new WarehouseEntities();
+            var obj = (from p in entities.Product where p.Id == id select p).First();
+            obj.IsDelete = pc.IsDelete;
+            return entities.SaveChanges();
+        }
 
 
 

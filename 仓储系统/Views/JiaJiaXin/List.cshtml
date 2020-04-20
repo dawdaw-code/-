@@ -157,12 +157,12 @@
 
 
 
-    function Del() {
+    function Del(id) {
         if (confirm('是否删除?')) {
             $.ajax({
                 type: "POST",
                 url: "/JiaJiaXin/DelCategory",
-                data: "{}",
+                data: "{Id:'"+id+"'}",
                 dataType: "json",
                 contentType: "application/json",
                 success: function (result) {

@@ -29,10 +29,13 @@ namespace BLL.Jiajiaxin
         }
 
 
+        public static int DelPro(Product pc, int id)
+        {
+            return ProductService.DelPro(pc,id);
+        }
 
 
 
 
-
-    }
+        }
 }
