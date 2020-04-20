@@ -277,6 +277,10 @@
     <Content Include="Views\Text\Yuango.cshtml" />
     <Content Include="Views\Text\Juese.cshtml" />
     <Content Include="Views\Text\Zhuti.cshtml" />
+    <Content Include="Views\Husongzhi\baosunAdd.cshtml" />
+    <Content Include="Views\Husongzhi\yikuAdd.cshtml" />
+    <Content Include="Views\Husongzhi\pandianAdd.cshtml" />
+    <Content Include="Views\Husongzhi\tuihuoAdd.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

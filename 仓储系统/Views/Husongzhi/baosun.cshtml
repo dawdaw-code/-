@@ -5,7 +5,7 @@
 }
 <style>
     a {
-        color:aliceblue;
+        color: aliceblue;
     }
 </style>
 <div style="background-color:aliceblue">
@@ -25,7 +25,7 @@
 
 <div style="float:left;">
     <div class="layui-btn-group">
-        <button type="button" class="layui-btn">增加</button>
+        <button type="button" class="layui-btn" onclick="javascrtpt:window.location.href='/Husongzhi/baosunAdd'">增加</button>
         <button type="button" class="layui-btn">编辑</button>
         <button type="button" class="layui-btn">导出</button>
     </div>
@@ -66,11 +66,24 @@
             <th>操作</th>
         </tr>
     </thead>
-    <tbody id="td1">
-        
-    </tbody>
+    <tbody id="td1"></tbody>
 </table>
 
+<div style="float:left">
+    <div style="float:left">
+        共<span id="span1"></span>行，
+    </div>
+    <div style="float:left">
+        <span>每页</span>
+        <select name="city" lay-verify="required" id="select1">
+            <option value="0">5</option>
+            <option value="1">10</option>
+            <option value="3">15</option>
+            <option value="4">20</option>
+        </select>
+        <span>行</span>
+    </div>
+</div>
 <div style=" text-align:center;">
     <div>
         <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="First();">首页</button>
@@ -99,7 +112,7 @@
     });
 
     var pageIndex = 1;
-    var pageSize = 1;
+    var pageSize = $("#select1 option:selected").text();
     var pageCount = 0;
 
     function First() {
@@ -107,13 +120,13 @@
         PageList();
         return false;
     };
-   
+
     function Back() {
         pageIndex--;
         PageList();
         return false;
     };
-    
+
     function Next() {
         pageIndex++;
         PageList();
@@ -128,8 +141,9 @@
 
     $(function () {
         PageList();
+        GetBadReportCount();
     });
-    
+
     //时间格式转化
     function Datte(time) {
         var date = new Date(parseInt(time.substr(6)));
@@ -146,21 +160,41 @@
             contentType: "application/json",
             success: function (result) {
                 pageCount = result.PageCount;
-                $("#tb1 tr").remove();
+                $("#td1 tr").remove();
                 $.each(result.DataList, function (index, data) {
-                    $("#td1").append("<tr><td>" + data.BadNum + "</td><td>" + data.BadTypeId + "</td><td>" + data.BadDetailNum + "</td><td>" + data.Num + "</td><td>" + data.SumMoney + "</td><td>" + data.AuditUser + "</td><td>" + data.Operation + "</td><td>" + Datte(data.AuditTime) + "</td> <td><div class='layui-btn-group'><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' ><i class='layui-icon'>&#xe654;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon' onclick='Edit(" + data.BadNum + ")'>&#xe640;</i> </button></div></td></tr>");
+                    $("#td1").append("<tr><td>" + data.BadNum + "</td><td>" + data.BadTypeId + "</td><td>" + data.ProductId + "</td><td>" + data.Num + "</td><td>" + data.SumMoney + "</td><td>" + data.AuditUser + "</td><td>" + data.Operation + "</td><td>" + Datte(data.AuditTime) + "</td> <td><div class='layui-btn-group'><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' ><i class='layui-icon'>&#xe654;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon' onclick='Edit(" + data.BadNum + ")'>&#xe640;</i> </button></div></td></tr>");
                 });
             }
         });
     }
 
+    function GetBadReportCount() {
+        $.ajax({
+            type: "post",
+            url: "/Husongzhi/GetBadReportCount",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#span1").html(result);
+            }
+        });
+    }
+    
+
     //删除（修改代替删除操作，改变状态）
     function Edit(BadNum) {
         alert(BadNum);
+        //var data = $("#td1").serializeArray();
+        //var obj = {};
+        //$.each(data, function (a, b) {
+        //    obj[b.name] = b.value;
+        //});
+        //var jsons = JSON.stringify(obj);
         $.ajax({
             type: "POST",
-            url: "/Test/Edit",
-            data: "{bill:" + jsons + ",list:" + $("#detail").val() + "}",
+            url: "/Husongzhi/BadReportEdit",
+            data: "{BadNum:'" + BadNum + "'}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {

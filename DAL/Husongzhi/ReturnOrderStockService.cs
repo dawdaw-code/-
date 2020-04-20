@@ -10,6 +10,14 @@ namespace DAL
     //退货
     public class ReturnOrderStockService
     {
+        //获取总条数
+        public static int GetReturnOrderStockCount()
+        {
+            WarehouseEntities entity = new WarehouseEntities();
+            var obj = (from p in entity.ReturnOrderStock select p).Count();
+            return obj;
+        }
+
         public static PageList GetReturnOrderStock(int pageIndex, int pageSize)
         {
             //实例化分页类
@@ -17,6 +25,7 @@ namespace DAL
 
             WarehouseEntities entity = new WarehouseEntities();
             var obj = from p in entity.ReturnOrderStock
+                      where p.IsDelete == 0
                       orderby p.ReturnNum ascending
                       select new
                       {

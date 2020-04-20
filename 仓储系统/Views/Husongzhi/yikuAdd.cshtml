@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewBag.Title = "yikuAdd";
+    Layout = "~/Views/Home.cshtml";
+}
+
+<h2>新增移库单</h2>
+<div>
+    <div style="float:left;">
+        <label class="control-label" for="txtOrderNum">报损单编号</label>
+        <div class="controls">
+            <input type="text" lay-verify="title" placeholder="可不填,自动生成" disabled="disabled">
+        </div>
+    </div>
+    <div style="float:left;">
+        <div class="control-group">
+            <label class="control-label" for="ddlBadType">报损类型</label>
+            <div class="controls">
+                <select id="ddlBadType" name="ddlBadType" class="span12">
+                    <option value="">请选择报损类型</option>
+                    <option value="1" selected="selected">损坏报损</option>
+                    <option value="2">丢失报损</option>
+                </select>
+                <span class="help-block"></span>
+            </div>
+        </div>
+    </div>
+
+    <div style="float:left;">
+        <div class="control-group">
+            <!--control-group error-->
+            <label class="control-label" for="txtContractOrder">关联订单号</label>
+            <div class="controls">
+                <input type="text" placeholder="">
+                <span class="help-block"></span>
+            </div>
+        </div>
+    </div>
+    <div style="float:left;">
+        <div class="control-group">
+            <label class="control-label" for="txtOrderTime">制单时间</label>
+            <div class="controls">
+                <input type="text" id="txtOrderTime" onfocus="WdatePicker()" realvalue="">
+                <span class="help-block"></span>
+            </div>
+        </div>
+    </div>
+    <div class="control-group" style="float:left;">
+        <label class="control-label" for="txtCrateUser">制单人</label>
+        <div class="controls">
+            <input type="text" id="txtCrateUser" value="administrator">
+            <span class="help-block"></span>
+        </div>
+    </div>
+    <label>备注</label>
+    <div class="controls">
+        <input type="text" id="txtRemark">
+        <span class="help-block"></span>
+    </div>
+
+
+    @*<div class="control-group">
+            <label class="control-label" for="ddlProductType">入库产品类型</label>
+            <div class="controls">
+                <select id="ddlProductType" name="ddlProductType" class="span12" disabled="disabled">
+                    <option value="">请选择入库产品类型</option>
+                    <option value="1">原料</option>
+                    <option value="2" selected="selected">产品</option>
+                </select>
+                <span class="help-block"></span>
+            </div>
+        </div>*@
+    <table class="layui-table">
+        <thead>
+            <tr>
+                <th>产品编号</th>
+                <th>产品名称</th>
+                <th>产品条码</th>
+                <th>批次</th>
+                <th>库位</th>
+                <th>报损数量</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div class="form-actions formBtn">
+        <button type="submit" class="layui-btn layui-btn-primary" onclick="">新增产品</button>
+        <button type="submit" class="layui-btn layui-btn-primary" onclick="">保存</button>
+        <button type="button" class="layui-btn layui-btn-primary" onclick="">取消</button>
+    </div>
+</div>

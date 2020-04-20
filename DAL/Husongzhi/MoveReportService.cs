@@ -9,6 +9,14 @@ namespace DAL
     //移库
     public class MoveReportService
     {
+        //获取总条数
+        public static int GetMoveReportCount()
+        {
+            WarehouseEntities entity = new WarehouseEntities();
+            var obj = (from p in entity.MoveReport select p).Count();
+            return obj;
+        }
+
         public static PageList GetMoveReport(int pageIndex, int pageSize)
         {
             //实例化分页类
@@ -16,11 +24,13 @@ namespace DAL
 
             WarehouseEntities entity = new WarehouseEntities();
             var obj = from p in entity.MoveReport
+                      where p.IsDelete == 0
                       orderby p.MoveNum ascending
                       select new
                       {
                           MoveNum = p.MoveNum,
                           MoveTypeId = p.MoveTypeId,
+                          ProductId =p.ProductId,
                           Num = p.Num,
                           Status = p.Status,
                           AuditUser = p.AuditUser,
