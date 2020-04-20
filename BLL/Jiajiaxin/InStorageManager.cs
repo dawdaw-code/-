@@ -16,7 +16,10 @@ namespace BLL.Jiajiaxin
 
 
 
-
+        public static PageList GetQueryInStorage(int pageIndex, int pageSize, InStorage io)
+        {
+            return InStorageService.GetQueryInStorage(pageIndex, pageSize,io);
+        }
 
 
 

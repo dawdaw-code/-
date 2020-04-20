@@ -101,8 +101,12 @@ namespace 仓储系统.Controllers
             return Json(InStorageManager.AddInStorage(ie), JsonRequestBehavior.AllowGet);
         }
 
-
-
+        //入库单查询
+        public ActionResult GetQueryInStorage(int pageIndex, int pageSize, InStorage io)
+        {
+            return Json(InStorageManager.GetQueryInStorage(pageIndex, pageSize, io), JsonRequestBehavior.AllowGet);
+             
+        }
 
 
 
