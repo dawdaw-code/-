@@ -21,7 +21,7 @@
 
 <div style="float:left;">
     <div class="layui-btn-group">
-        <button type="button" class="layui-btn">增加</button>
+        <button type="button" class="layui-btn" onclick="javascrtpt:window.location.href='/Husongzhi/tuihuoAdd'">增加</button>
         <button type="button" class="layui-btn">编辑</button>
         <button type="button" class="layui-btn">导出</button>
     </div>
@@ -65,6 +65,21 @@
     <tbody id="td1"></tbody>
 </table>
 
+<div style="float:left">
+    <div style="float:left">
+        共<span id="span1"></span>行，
+    </div>
+    <div style="float:left">
+        <span>每页</span>
+        <select name="city" lay-verify="required" id="select1">
+            <option value="0">5</option>
+            <option value="1">10</option>
+            <option value="3">15</option>
+            <option value="4">20</option>
+        </select>
+        <span>行</span>
+    </div>
+</div>
 <div style=" text-align:center;">
     <div>
         <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="First();">首页</button>
@@ -90,7 +105,7 @@
     });
 
     var pageIndex = 1;
-    var pageSize = 1;
+    var pageSize = $("#select1 option:selected").text();
     var pageCount = 0;
 
     function First() {
@@ -119,6 +134,7 @@
 
     $(function () {
         PageList();
+        GetReturnOrderStockCount();
     });
 
 
@@ -137,10 +153,23 @@
             contentType: "application/json",
             success: function (result) {
                 pageCount = result.PageCount;
-                $("#tb1").remove();
+                $("#td1 tr").remove();
                 $.each(result.DataList, function (index, data) {
                     $("#td1").append("<tr><td>" + data.ReturnNum + "</td><td>" + data.ReturnTypeId + "</td><td>" + data.ProductId + "</td><td>" + data.Num + "</td><td>" + data.Status + "</td><td>" + data.Operation + "</td><td>" + data.AuditUser + "</td><td>" + Datte(data.AuditTime) + "<td><div class='layui-btn-group'><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe654;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
                 });
+            }
+        });
+    }
+
+    function GetReturnOrderStockCount() {
+        $.ajax({
+            type: "post",
+            url: "/Husongzhi/GetReturnOrderStockCount",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#span1").html(result);
             }
         });
     }

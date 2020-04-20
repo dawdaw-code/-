@@ -14,5 +14,15 @@ namespace BLL
         {
             return BadReportService.GetBadReport(pageIndex, pageSize);
         }
-    }
+
+        public static int BadReportEdit(string BadNum)
+        {
+            return BadReportService.BadReportEdit(BadNum);
+        }
+
+        public static int  GetBadReportCount()
+        {
+            return BadReportService.GetBadReportCount();
+        }
+        }
 }

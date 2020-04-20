@@ -8,6 +8,14 @@ namespace DAL
 {
   public   class CheckStockService
     {
+        //获取总条数
+        public static int GetCheckStockCount()
+        {
+            WarehouseEntities entity = new WarehouseEntities();
+            var obj = (from p in entity.CheckStock select p).Count();
+            return obj;
+        }
+
         public static PageList GetCheckStock(int pageIndex, int pageSize)
         {
             //实例化分页类
@@ -15,6 +23,7 @@ namespace DAL
 
             WarehouseEntities entity = new WarehouseEntities();
             var obj = from p in entity.CheckStock
+                      where p.IsDelete == 0
                       orderby p.CheckNum ascending
                       select new
                       {

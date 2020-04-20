@@ -13,5 +13,10 @@ namespace BLL
         {
             return CheckStockService.GetCheckStock(pageIndex, pageSize);
         }
+
+        public static int GetCheckStockCount()
+        {
+            return CheckStockService.GetCheckStockCount();
+        }
     }
 }

@@ -15,5 +15,10 @@ namespace BLL
         {
             return MoveReportService.GetMoveReport(pageIndex, pageSize);
         }
+
+        public static int GetMoveReportCount()
+        {
+            return MoveReportService.GetMoveReportCount();
         }
+    }
 }
