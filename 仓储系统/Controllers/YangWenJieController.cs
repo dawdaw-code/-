@@ -24,10 +24,24 @@ namespace 仓储系统.Controllers
             return View();
         }
 
-
-        public ActionResult selectBuMen()
+        public ActionResult getDepart(int pageIndex, int pageSize)
         {
-            return Json(DepartManager.selectAll(),JsonRequestBehavior.AllowGet);
+            return Json(DepartManager.getDepart(pageIndex,pageSize), JsonRequestBehavior.AllowGet);
+        }
+        //public ActionResult selectBuMen()
+        //{
+        //    return Json(DepartManager.selectAll(),JsonRequestBehavior.AllowGet);
+
+        //}
+
+        public ActionResult Add(Depart det)
+        {
+            return Json(DepartManager.Add(det), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult selectByName(string name)
+        {
+            return Json(DepartManager.selectByName(name), JsonRequestBehavior.AllowGet);
         }
     }
 }
