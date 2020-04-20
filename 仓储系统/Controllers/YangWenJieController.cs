@@ -24,7 +24,8 @@ namespace 仓储系统.Controllers
             return View();
         }
 
-        public ActionResult getDepart(int pageIndex, int pageSize)
+        public ActionResult getDepart
+            (int pageIndex, int pageSize)
         {
             return Json(DepartManager.getDepart(pageIndex,pageSize), JsonRequestBehavior.AllowGet);
         }

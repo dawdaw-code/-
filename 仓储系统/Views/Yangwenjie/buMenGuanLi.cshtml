@@ -101,10 +101,10 @@
                     <tbody id="tb1"></tbody>
                 </table>
                 <div id="divBtn" style="text-align:center;">
-                    <input id="btnFirst" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="首页" />
-                    <input id="btnBack"  class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="上一页" />
-                    <input id="btnNext"  class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="下一页" />
-                    <input id="btnLast"  class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="尾页" />
+                    <input id="First" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="首页" />
+                    <input id="Back"  class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="上一页" />
+                    <input id="Next"  class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="下一页" />
+                    <input id="Last"  class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="尾页" />
                 </div>
             </div>
         </div>
@@ -120,37 +120,29 @@
     var pageSize = 2;
     var pageCount = 0;
     $(function () {
-        $("#btnQuery").click(function () {
-
-            GetAllQuery();
-        });
-        //GetAll();
-        $("#btnFirst").click(function () {
-            pageIndex = 1;
-            // GetAll();
-            GetAllQuery();
-        });
-        $("#btnBack").click(function () {
-            pageIndex--;
-            // GetAll();
-            GetAllQuery();
-        });
-        $("#btnNext").click(function () {
-            pageIndex++;
-            // GetAll();
-            GetAllQuery();
-        });
-        $("#btnLast").click(function () {
-            pageIndex = pageCount;
-            //GetAll();
-            GetAllQuery();
-        });
+        PageList();
     });
 
-
-
-
-
+    $("#First").click(function () {
+        pageIndex = 1;
+        PageList();
+        return false;
+    });
+    $("#Back").click(function () {
+        pageIndex--;
+        PageList();
+        return false;
+    });
+    $("#Next").click(function () {
+        pageIndex++;
+        PageList();
+        return false;
+    });
+    $("#Last").click(function () {
+        pageIndex = pageCount;
+        PageList();
+        return false;
+    });
 
 
     //layui.use(['laypage', 'layer'], function () {
@@ -226,15 +218,16 @@
         return date.toLocaleDateString();
     }
 
-    function GetAllQuery() {
+    function PageList() {
         $.ajax({
             type: "POST",
             url: "/Yangwenjie/getDepart",
-            data: "{pageIndex:" + pageIndex + ",pageSize:" + pageSize + "}",
+            data: "{pageIndex:'" + pageIndex + "',pageSize:'" + pageSize + "'}",
             dataType: "json",
             contentType: "application/json",
 
             success: function (result) {
+                pageCount = result.PageCount;
                 $("#tb1 tr").remove();
                 $.each(result.DataList, function (index, data) {
                     //alert(data.Id);
@@ -246,6 +239,7 @@
                 alert(ex.responseText);
             }
         });
+        btnState();
     }
 
     function btnState() {
@@ -253,13 +247,13 @@
         $("#divBtn :button").prop("disabled", false);
         if (pageIndex == 1) {
             //禁用首页和上一页
-            $("#btnFirst").prop("disabled", true);
-            $("#btnBack").prop("disabled", true);
+            $("#First").prop("disabled", true);
+            $("#Back").prop("disabled", true);
         }
         if (pageIndex == pageCount) {
             //禁用尾页和下一页
-            $("#btnNext").prop("disabled", true);
-            $("#btnLast").prop("disabled", true);
+            $("#Next").prop("disabled", true);
+            $("#Last").prop("disabled", true);
         }
     }
 

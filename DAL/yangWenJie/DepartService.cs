@@ -34,8 +34,6 @@ namespace DAL
             //设置总页数
             int rows = obj.Count();
             list.PageCount = rows % pageSize == 0 ? rows / pageSize : rows / pageSize + 1;
-
-
             return list;
         }
 
