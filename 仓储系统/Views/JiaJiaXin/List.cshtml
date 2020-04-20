@@ -52,14 +52,7 @@
             </table>
             <div id="ss" style="text-align:center;">
 
-            </div>
-            @*<div style="text-align:center;">
-            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="btnFirst();">首页</button>
-            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="btnBack();">上一页</button>
-            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="btnNext();">下一页</button>
-            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="btnLast();">尾页</button>
-        </div>*@
-
+            </div>         
             <div class="row" id="mypager"></div>
             <div id="hidePage" style="display:none;">
                 <div style="text-align:center;margin-top:20px;">
@@ -126,29 +119,7 @@
                 }
             });
         });
-        function btnFirst() {
-            pageIndex = 1;
-            PageList();
-            return false;
-        };
-
-        function btnBack() {
-            pageIndex--;
-            PageList();
-            return false;
-        };
-
-        function btnNext() {
-            pageIndex++;
-            PageList();
-            return false;
-        };
-
-        function btnLast() {
-            pageIndex = pageCount;
-            PageList();
-            return false;
-        };
+      
     });
 
 
@@ -191,7 +162,7 @@
             $.ajax({
                 type: "POST",
                 url: "/JiaJiaXin/DelCategory",
-                data: "{pc:}",
+                data: "{}",
                 dataType: "json",
                 contentType: "application/json",
                 success: function (result) {

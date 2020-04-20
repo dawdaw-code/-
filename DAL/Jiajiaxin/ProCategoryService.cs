@@ -9,13 +9,13 @@ namespace DAL.Jiajiaxin
 {
     public class ProCategoryService
     {
-        
 
 
-      
 
 
-        public static PageList GetQuery(int pageIndex, int pageSize,ProductCategory pc)
+
+
+        public static PageList GetQuery(int pageIndex, int pageSize, ProductCategory pc)
         {
             //实例化分页类
             PageList list = new PageList();
@@ -24,7 +24,7 @@ namespace DAL.Jiajiaxin
             var query = from p in entity.ProductCategory select p;
             if (!string.IsNullOrEmpty(pc.PCateName))
             {
-                query = query.Where(p=>p.PCateName.Contains(pc.PCateName));
+                query = query.Where(p => p.PCateName.Contains(pc.PCateName));
             }
             var obj = from p in query
                       orderby p.Id
@@ -59,6 +59,50 @@ namespace DAL.Jiajiaxin
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public static int AddCategory(ProductCategory pc)
+        {
+            WarehouseEntities entity = new WarehouseEntities();
+            entity.ProductCategory.Add(pc);
+            return entity.SaveChanges();
+        }
+
+
+        //修改产品状态(删除)
+        public static int DelCategory(ProductCategory pc)
+        {
+            WarehouseEntities entity = new WarehouseEntities();
+            var obj = (from p in entity.ProductCategory where p.Id == pc.Id select p).First();
+            obj.IsDelete = pc.IsDelete;
+            return entity.SaveChanges();
+        }
+
+
+
+        public static IQueryable GetTypes()
+        {
+            WarehouseEntities entity = new WarehouseEntities();
+            var obj = from p in entity.ProductCategory
+                      select new
+                      {
+                          Id = p.Id,
+                          PCateName = p.PCateName
+                      };
+            return obj;
+        }
     
 
 
@@ -73,41 +117,8 @@ namespace DAL.Jiajiaxin
 
 
 
-            public static int AddCategory(ProductCategory pc)
-        {
-            WarehouseEntities entity = new WarehouseEntities();
-            entity.ProductCategory.Add(pc);
-            return entity.SaveChanges();
-        }
-
-
-        //修改产品状态(删除)
-        public static int DelCategory(ProductCategory pc)
-        {
-            WarehouseEntities entity = new WarehouseEntities();
-            var obj = (from p in entity.ProductCategory where p.Id==pc.Id select p).First();
-            obj.IsDelete = pc.IsDelete;
-            return entity.SaveChanges();
-        }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
+}
 }

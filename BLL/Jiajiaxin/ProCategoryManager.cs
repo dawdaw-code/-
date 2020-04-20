@@ -38,7 +38,37 @@ namespace BLL.Jiajiaxin
             }
         }
 
-       
+
+
+
+        public static IQueryable GetTypes()
+        {
+            return ProCategoryService.GetTypes();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

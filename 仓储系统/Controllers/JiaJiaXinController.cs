@@ -79,7 +79,12 @@ namespace 仓储系统.Controllers
             return Json(ProductManager.PageCount(pageSize), JsonRequestBehavior.AllowGet);
         }
 
-
+        //绑定类别
+        public ActionResult  GetTypes()
+        {
+            
+            return Json(ProCategoryManager.GetTypes(), JsonRequestBehavior.AllowGet); 
+        }
 
 
 
