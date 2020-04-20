@@ -13,5 +13,9 @@ namespace BLL
         {
             return ReturnOrderStockService.GetReturnOrderStock(pageIndex, pageSize);
         }
+        public static int GetReturnOrderStockCount()
+        {
+            return ReturnOrderStockService.GetReturnOrderStockCount();
+        }
         }
 }

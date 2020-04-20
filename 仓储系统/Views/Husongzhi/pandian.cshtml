@@ -21,7 +21,7 @@
 
 <div style="float:left;">
     <div class="layui-btn-group">
-        <button type="button" class="layui-btn">增加</button>
+        <button type="button" class="layui-btn" onclick="javascrtpt:window.location.href='/Husongzhi/pandianAdd'">增加</button>
         <button type="button" class="layui-btn">编辑</button>
         <button type="button" class="layui-btn">导出</button>
     </div>
@@ -63,16 +63,21 @@
     </thead>
     <tbody id="td1"></tbody>
 </table>
-@*<div style="margin-top:-28px;margin-left:95px;">
-        <select class="form-control" style="width:50px;height:30px;">
-            <option value="1">1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+<div style="float:left">
+    <div style="float:left">
+        共<span id="span1"></span>行，
+    </div>
+    <div style="float:left">
+        <span>每页</span>
+        <select name="city" lay-verify="required" id="select1">
+            <option value="0">5</option>
+            <option value="1">10</option>
+            <option value="3">15</option>
+            <option value="4">20</option>
         </select>
-
-    </div>*@
+        <span>行</span>
+    </div>
+</div>
 <div style=" text-align:center;">
     <div>
         <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="First();">首页</button>
@@ -101,7 +106,7 @@
     });
 
     var pageIndex = 1;
-    var pageSize = 1;
+    var pageSize = $("#select1 option:selected").text();
     var pageCount = 0;
 
     function First() {
@@ -130,6 +135,7 @@
 
     $(function () {
         PageList();
+        GetCheckStockCount();
     });
 
 
@@ -148,10 +154,23 @@
             contentType: "application/json",
             success: function (result) {
                 pageCount = result.PageCount;
-                $("#tb1").remove();
+                $("#td1 tr").remove();
                 $.each(result.DataList, function (index, data) {
                     $("#td1").append("<tr><td>" + data.CheckNum + "</td><td>" + data.CheckTypeId + "</td><td>" + data.DetailNum + "</td><td>" + data.Status + "</td><td>" + data.Operation + "</td><td>" + data.AuditUser + "</td><td>" + Datte(data.AuditTime) + "<td><div class='layui-btn-group'><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe654;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
                 });
+            }
+        });
+    }
+
+    function GetCheckStockCount() {
+        $.ajax({
+            type: "post",
+            url: "/Husongzhi/GetCheckStockCount",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#span1").html(result);
             }
         });
     }
