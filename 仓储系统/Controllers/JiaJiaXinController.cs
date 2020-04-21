@@ -43,8 +43,11 @@ namespace 仓储系统.Controllers
             return View();
         }
 
+        public ActionResult HidePage()
+        {
+            return View();
+        }
 
-      
 
         public ActionResult DelCategory(ProductCategory pc, int id)
         {
@@ -109,6 +112,12 @@ namespace 仓储系统.Controllers
         }
 
 
+        //删除入库单
+        public ActionResult DelInStorage(InStorage pc, int id)
+        {
+            pc.IsDelete = 1;
+            return Json(InStorageManager.DelInStorage(pc, id), JsonRequestBehavior.AllowGet);
+        }
 
 
 
@@ -134,7 +143,5 @@ namespace 仓储系统.Controllers
 
 
 
-
-
-    }
+        }
 }

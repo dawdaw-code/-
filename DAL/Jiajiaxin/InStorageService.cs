@@ -58,7 +58,13 @@ namespace DAL.Jiajiaxin
 
 
 
-
+        public static int DelInStorage(InStorage pc, int id)
+        {
+            WarehouseEntities entity = new WarehouseEntities();
+            var obj = (from p in entity.InStorage where p.Id == id select p).First();
+            obj.IsDelete = pc.IsDelete;
+            return entity.SaveChanges();
+        }
 
 
 

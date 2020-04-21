@@ -22,7 +22,10 @@ namespace BLL.Jiajiaxin
         }
 
 
-
+        public static int DelInStorage(InStorage pc, int id)
+        {
+            return InStorageService.DelInStorage(pc, id);
+        }
 
 
 
