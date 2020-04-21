@@ -10,13 +10,13 @@ namespace BLL
 {
     public class DepartManager
     {
-        //public static List<Depart> selectAll()
-        //{
-        //    return DepartService.selectAll();
-        //}
         public static PageList getDepart(int pageIndex, int pageSize)
         {
             return DepartService.getDepart(pageIndex, pageSize);
+        }
+        public static PageList getDepartByName(int pageIndex, int pageSize, string name)
+        {
+            return DepartService.getDepartByName(pageIndex, pageSize, name);
         }
 
         public static int Add(Depart det)
@@ -24,9 +24,9 @@ namespace BLL
             return DepartService.Add(det);
         }
 
-        public static Depart selectByName(string name)
-        {
-            return DepartService.selectByName(name);
-        }
+        //public static List<Depart> selectByName(string name)
+        //{
+        //    return DepartService.selectByName(name);
+        //}
     }
 }

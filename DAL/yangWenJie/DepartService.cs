@@ -9,13 +9,36 @@ namespace DAL
 {
     public class DepartService
     {
-        //显示全部
-        //public static List<Depart> selectAll()
-        //{
-        //    WarehouseEntities con = new WarehouseEntities();
-        //    var obj = from p in con.Depart select p;
-        //    return obj.ToList();
-        //}
+        //根据部门名查询
+        public static PageList getDepartByName(int pageIndex, int pageSize,string name)
+        {
+            WarehouseEntities con = new WarehouseEntities();
+            PageList list = new PageList();
+            var obj = from p in con.Depart
+                      where p.DepartName.IndexOf(name)!=-1
+                      orderby p.Id
+                      select new
+                      {
+                          Id = p.Id,
+                          DepartNum = p.DepartNum,
+                          DepartName = p.DepartName,
+                          CreateTime = p.CreateTime
+                      };
+            //设置分页数据
+            //list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            ////设置总页数
+            //int rows = obj.Count();
+            //list.PageCount = rows; //% pageSize == 0 ? rows / pageSize : rows / pageSize + 1;
+            //return list;
+
+            list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            //设置总页数
+            int rows = obj.Count();
+            list.PageCount = rows; //rows % pageSize == 0 ? rows / pageSize : rows / pageSize + 1;
+
+            return list;
+        }
+        //页面加载
         public static PageList getDepart(int pageIndex, int pageSize)
         {
             WarehouseEntities con = new WarehouseEntities();
@@ -29,11 +52,11 @@ namespace DAL
                           DepartName = p.DepartName,
                           CreateTime = p.CreateTime
                       };
-            //设置分页数据
             list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
             //设置总页数
             int rows = obj.Count();
-            list.PageCount = rows % pageSize == 0 ? rows / pageSize : rows / pageSize + 1;
+            list.PageCount = rows; //rows % pageSize == 0 ? rows / pageSize : rows / pageSize + 1;
+
             return list;
         }
 
@@ -43,12 +66,12 @@ namespace DAL
             con.Depart.Add(det);
             return con.SaveChanges();
         }
-        //条件查询
-        public static Depart selectByName(string name) {
-            WarehouseEntities con = new WarehouseEntities();
-            var obj = from p in con.Depart where p.DepartName == name select p;
-            return obj.First();
-        }
+        ////条件查询
+        //public static List<Depart> selectByName(string name) {
+        //    WarehouseEntities con = new WarehouseEntities();
+        //    var obj = from p in con.Depart where p.DepartName.IndexOf(name)!=-1 select p;
+        //    return obj.ToList();
+        //}
 
     }
 }
