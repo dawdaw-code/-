@@ -119,29 +119,32 @@ namespace 仓储系统.Controllers
             return Json(InStorageManager.DelInStorage(pc, id), JsonRequestBehavior.AllowGet);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        //产品类别修改
+        public ActionResult GetById(int id)
+        {
+            return Json(ProCategoryManager.GetById(id), JsonRequestBehavior.AllowGet); 
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 }

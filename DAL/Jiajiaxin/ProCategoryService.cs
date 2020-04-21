@@ -82,7 +82,7 @@ namespace DAL.Jiajiaxin
 
 
         //修改产品状态(删除)
-        public static int DelCategory(ProductCategory pc,int id)
+        public static int DelCategory(ProductCategory pc, int id)
         {
             WarehouseEntities entity = new WarehouseEntities();
             var obj = (from p in entity.ProductCategory where p.Id == id select p).First();
@@ -103,7 +103,22 @@ namespace DAL.Jiajiaxin
                       };
             return obj;
         }
-    
+
+
+
+        public static IQueryable GetById(int id)
+        {
+            WarehouseEntities entities = new WarehouseEntities();
+            var obj = from p in entities.ProductCategory
+                      where p.Id == id
+                      select new
+                      {
+                          id = p.Id,
+                          PCateName = p.PCateName,
+                          Remark = p.Remark
+                      };
+            return obj;
+        }
 
 
 
@@ -117,8 +132,5 @@ namespace DAL.Jiajiaxin
 
 
 
-
-
-
-}
+    }
 }

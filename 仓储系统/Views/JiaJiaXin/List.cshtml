@@ -64,9 +64,9 @@
 
 <div id="hidePage" style="display:none;">
     <div style="text-align:center;margin-top:20px;">
-        <span>类别编号<input id="Text1" type="text" placeholder="自动生成，可不填" style="margin-left:20px;" /></span><br />
-        <span style="margin-top:10px;">类别名称<input id="Text2" type="text" placeholder="请输入类别名称" style="margin-left:20px;margin-top:5px;" /></span><br />
-        <span style="margin-top:10px;">备注<input id="Text3" type="text" style="margin-left:45px;margin-top:5px;" /></span><br />
+        <span>类别编号<input id="Text1" type="text" placeholder="自动生成，可不填" style="margin-left:20px;"  name="typeId"/></span><br />
+        <span style="margin-top:10px;">类别名称<input id="Text2" type="text" placeholder="请输入类别名称" style="margin-left:20px;margin-top:5px;"  name="typeName"/></span><br />
+        <span style="margin-top:10px;">备注<input id="Text3" type="text" name="remark" style="margin-left:45px;margin-top:5px;" /></span><br />
         @*<input id="Button1" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" />
         <input id="Button2" type="button" value="关闭" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" />*@
     </div>
@@ -79,6 +79,10 @@
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
 
+    //function GetById(id) {
+       
+    //}
+    
     function divShow() {
         layui.use('layer', function () {
             var layer = layui.layer;
@@ -126,6 +130,7 @@
     var rows = 0;
     $(function () {
         PageList();
+        //$("#hidePage").hide();
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
@@ -145,8 +150,30 @@
         });
 
     });
+    function Gai(id) {
+        divShow();
+        //$("#hidePage").show(function () {
+            $.ajax({
+                type: "POST",
+                url: "/JiaJiaXin/GetById",
+                data: "{Id:" + id + "}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    $.each(result, function (index, data) {
+                        $("[name='typeId']").val(data.Id);
+                        $("[name='typeName']").val(data.PCateName);
+                        $("[name='remark']").val(data.Remark);
+                    });
+                },
+                error: function (ex) {
+                    alert(ex.responseText);
+                }
+            });
+        //});
 
-
+    }
+    
 
 
     function PageList() {
@@ -161,7 +188,7 @@
                 $("#tbody1 tr").remove();
                 rows = result.pageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tbody1").append("<tr style='text - align: center;'><td><input id='Checkbox1' type='checkbox' /></td><td id='hao'>" + data.Id + "</td><td>" + data.PCateName + "</td><td>" + data.CreateUser + "</td><td>" + ConvertTime(data.CreateTime) + "</td><td>" + data.Remark + "</td><td> <button type='button' class='layui-btn layui-btn-sm'><i class='layui-icon layui-icon-edit'></i></button><button type='button' class='layui-btn layui-btn-sm' onclick='Del(" + data.Id + ")'><i class='layui-icon layui-icon-delete'></i></button></td></tr>");
+                    $("#tbody1").append("<tr style='text - align: center;'><td><input id='Checkbox1' type='checkbox' /></td><td id='hao'>" + data.Id + "</td><td>" + data.PCateName + "</td><td>" + data.CreateUser + "</td><td>" + ConvertTime(data.CreateTime) + "</td><td>" + data.Remark + "</td><td> <button type='button' id='btnGai' class='layui-btn layui-btn-sm'onclick='Gai(" + data.Id + ")'><i class='layui-icon layui-icon-edit'></i></button><button type='button' class='layui-btn layui-btn-sm' onclick='Del(" + data.Id + ")'><i class='layui-icon layui-icon-delete'></i></button></td></tr>");
                 });
             },
             error: function (ex) {
@@ -206,7 +233,20 @@
         }
     }
 
+
+
+
     
+
+
+
+
+
+
+
+
+
+
 </script>
 
 

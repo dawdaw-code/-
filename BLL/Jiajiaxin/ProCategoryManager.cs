@@ -49,7 +49,10 @@ namespace BLL.Jiajiaxin
 
 
 
-
+        public static IQueryable GetById(int id)
+        {
+            return ProCategoryService.GetById(id);
+        }
 
 
 
