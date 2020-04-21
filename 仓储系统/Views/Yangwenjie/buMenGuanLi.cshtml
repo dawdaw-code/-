@@ -14,7 +14,6 @@
     <link href="~/layui/css/layui.css" rel="stylesheet" />
     <link href="~/layui/css/layui.mobile.css" rel="stylesheet" />
     <script src="~/layui/layui.js"></script>
-    <link href="~/layui/css/layui.css" rel="stylesheet" />
     <style>
         #text-1 {
             width: 100%;
@@ -22,13 +21,13 @@
             /*border: solid 1px red;*/
         }
 
-        a {
+        /*a {
             text-decoration: none;
         }
 
             a:hover {
                 text-decoration: underline;
-            }
+            }*/
 
         p {
             margin-top: 20px;
@@ -69,12 +68,26 @@
         #table1 {
             text-align: center;
         }
+        #dingchen {
+            border: 1px solid white;
+            width: 100%;
+            height: 40px;
+            background-color: #d4d3d3
+        }
     </style>
 </head>
 <body>
     <div id="text-1">
         <div>
-            <p><a href="">首页</a>><a href="">基本资料</a>><a href="">部门管理</a></p>
+            @*<p><a href="">首页</a>><a href="">基本资料</a>><a href="">部门管理</a></p>*@
+
+            <div id="dingchen">
+                <div style="position:absolute;top:10px;left:20px;">
+                    <img style="float:left" src="~/Jpggzi.png" /> <div style="width:200px;"><a href="">首页</a>><a href="">系统设置</a>><a href="">员工管理</a></div>
+                </div>
+            </div>
+
+
             <h5>部门管理</h5>
             <div id="text-3">
                 @*<input id="Button1" type="button" value="新增" class="btn btn-primary" onclick="Add" />*@
@@ -85,7 +98,7 @@
             </div>
             <div id="text-4">
                 <div id="text-2">
-                    <input id="Text1" type="text" /><input id="Button1" type="button" value="搜索" class="btn btn-info" onclick="selectByName()" />
+                    <input id="Text1" type="text" /><input id="Button1" type="button" value="搜索" class="btn btn-info" onclick="PageList()" />
                 </div>
                 <table style="width:100%;" class="layui-table" id="table1">
                     <thead>
@@ -100,11 +113,14 @@
                     </thead>
                     <tbody id="tb1"></tbody>
                 </table>
+                <div id="pageDemo">
+
+                </div>
                 <div id="divBtn" style="text-align:center;">
                     <input id="First" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="首页" />
-                    <input id="Back"  class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="上一页" />
-                    <input id="Next"  class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="下一页" />
-                    <input id="Last"  class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="尾页" />
+                    <input id="Back" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="上一页" />
+                    <input id="Next" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="下一页" />
+                    <input id="Last" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="尾页" />
                 </div>
             </div>
         </div>
@@ -117,10 +133,29 @@
 
 
     var pageIndex = 1;
-    var pageSize = 2;
+    var pageSize = 10;
     var pageCount = 0;
-    $(function () {
+    var rows = 0;
+    $(function () { 
         PageList();
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+                , layer = layui.layer;
+
+            laypage.render({
+                elem: 'pageDemo'
+                , count: rows
+                , limit: 10
+                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+                , jump: function (obj) {
+                    //console.log(obj)
+                        pageIndex = obj.curr;
+                        pageSize = obj.limit;
+
+                        PageList(); 
+                }
+            });
+        });
     });
 
     $("#First").click(function () {
@@ -145,57 +180,9 @@
     });
 
 
-    //layui.use(['laypage', 'layer'], function () {
-    //    var laypage = layui.laypage
-    //        , layer = layui.layer;
+    
 
-    //    laypage.render({
-    //        elem: 'demo11'
-    //        , count: 1000
-    //        , limit: 100
-    //        , limits: [100, 300, 500]
-    //    });
-    //});
-
-
-    //layui.use('layer', function () { //独立版的layer无需执行这一句
-    //    var $ = layui.jquery, layer = layui.layer; //独立版的layer无需执行这一句
-
-    //    //触发事件
-    //    var active = {
-    //        setTop: function () {
-    //            var that = this;
-    //            //多窗口模式，层叠置顶
-    //            layer.open({
-    //            });
-    //        }
-    //        , offset: function (othis) {
-    //            var type = othis.data('type')
-    //                , text = othis.text();
-
-    //            layer.open({
-    //                type: 1
-    //                , offset: type //具体配置参考：http://www.layui.com/doc/modules/layer.html#offset
-    //                , id: 'layerDemo' + type //防止重复弹出
-    //                , content: '<div style="padding: 20px 100px;">' + text + '</div>'
-    //                , btn: '关闭全部'
-    //                , btnAlign: 'c' //按钮居中
-    //                , shade: 0 //不显示遮罩
-    //                , yes: function () {
-    //                    layer.closeAll();
-    //                }
-    //            });
-    //        }
-    //    };
-
-    //    $('#layerDemo .layui-btn').on('click', function () {
-    //        var othis = $(this), method = othis.data('method');
-    //        active[method] ? active[method].call(this, othis) : '';
-    //    });
-
-    //});
-
-
+    //全选以及反选
     $(function () {
         $("#Checkbox1").click(function () {
             if (this.checked) {
@@ -209,7 +196,6 @@
             }
         });
 
-        selectByBuMen();
     });
 
     //时间格式转化
@@ -218,21 +204,22 @@
         return date.toLocaleDateString();
     }
 
+    //分页加载全部
     function PageList() {
+        var name = $("#Text1").val();
         $.ajax({
             type: "POST",
             url: "/Yangwenjie/getDepart",
-            data: "{pageIndex:'" + pageIndex + "',pageSize:'" + pageSize + "'}",
+            data: "{pageIndex:'" + pageIndex + "',pageSize:'" + pageSize + "',name:'" + name + "'}",
             dataType: "json",
             contentType: "application/json",
-
             success: function (result) {
-                pageCount = result.PageCount;
+                rows = result.PageCount;
                 $("#tb1 tr").remove();
                 $.each(result.DataList, function (index, data) {
-                    //alert(data.Id);
                     $("#tb1").append("<tr><td><input id='Checkbox5' type='checkbox' name='item' /></td><td>" + data.Id + "</td><td>" + data.DepartNum + "</td><td>" + data.DepartName + "</td><td>" + Datte(data.CreateTime) + "<td></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
                 });
+                
             },
             //请求失败后的回调函数
             error: function (ex) {
@@ -242,6 +229,7 @@
         btnState();
     }
 
+    //设置按钮
     function btnState() {
         //先设置所有按钮为可用状态
         $("#divBtn :button").prop("disabled", false);
@@ -257,28 +245,27 @@
         }
     }
 
-    function selectByName() {
-        4
-        $.ajax({
-            type: "POST",
-            url: "/Yangwenjie/selectByName",
-            data: "{name:" + name + "}",
-            dataType: "json",
-            contentType: "application/json",
-
-            success: function (result) {
-                $("#tb1 tr").remove();
-                $.each(result, function (index, data) {
-                    //alert(data.Id);
-                    $("#tb1").append("<tr><td><input id='Checkbox5' type='checkbox' name='item' /></td><td>" + data.Id + "</td><td>" + data.DepartNum + "</td><td>" + data.DepartName + "</td><td>" + Datte(data.CreateTime) + "<td></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
-                });
-            },
-            //请求失败后的回调函数,
-            error: function (ex) {
-                alert(ex.responseText);
-            }
-        });
-    }
+    //function selectByName() {
+    //    var name = $("#Text1").val();
+    //    //alert(name);
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/Yangwenjie/selectByName",
+    //        data: "{name:'" + name + "'}",
+    //        dataType: "json",
+    //        contentType: "application/json",
+    //        success: function (result) {
+    //            $("#tb1 tr").remove();
+    //            $.each(result, function (index, data) {
+    //                $("#tb1").append("<tr><td><input id='Checkbox5' type='checkbox' name='item' /></td><td>" + data.Id + "</td><td>" + data.DepartNum + "</td><td>" + data.DepartName + "</td><td>" + data.CreateTime + "<td></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
+    //            });
+    //        },
+    //        //请求失败后的回调函数
+    //        error: function (ex) {
+    //            alert(ex.responseText);
+    //        }
+    //    });
+    //}
     
 </script>
 
