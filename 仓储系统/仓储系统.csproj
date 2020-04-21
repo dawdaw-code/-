@@ -105,6 +105,7 @@
     <Content Include="Global.asax" />
     <Content Include="Jpg\DengLubj.jpg" />
     <Content Include="Jpg\1.png" />
+    <Content Include="Jpg\fangzi.png" />
     <Content Include="layui\css\layui.css" />
     <Content Include="layui\css\layui.mobile.css" />
     <Content Include="layui\css\modules\code.css" />
