@@ -127,11 +127,17 @@ namespace 仓储系统.Controllers
 
 
 
+        public ActionResult EditProductCategory(ProductCategory pc)
+        {
+            pc.CreateTime = DateTime.Now;
+            return Json(ProCategoryManager.EditProductCategory(pc), JsonRequestBehavior.AllowGet);
+        }
 
 
-
-
-
+        public ActionResult AddCategory(ProductCategory pc)
+        {
+            return Json(ProCategoryManager.AddCategory(pc) ,JsonRequestBehavior.AllowGet);
+        }
 
 
 

@@ -113,7 +113,7 @@ namespace DAL.Jiajiaxin
                       where p.Id == id
                       select new
                       {
-                          id = p.Id,
+                          Id = p.Id,
                           PCateName = p.PCateName,
                           Remark = p.Remark
                       };
@@ -121,6 +121,20 @@ namespace DAL.Jiajiaxin
         }
 
 
+
+
+        public static int EditProductCategory(ProductCategory pc)
+        {
+            WarehouseEntities entities = new WarehouseEntities();
+            var obj = (from p in entities.ProductCategory
+                       where p.Id == pc.Id
+                       select p).First();
+            obj.Id = pc.Id;
+            obj.PCateName = pc.PCateName;
+            obj.Remark = pc.Remark;
+            obj.CreateTime = pc.CreateTime;
+            return entities.SaveChanges();
+        }
 
 
 

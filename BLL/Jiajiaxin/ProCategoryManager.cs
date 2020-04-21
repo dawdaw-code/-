@@ -56,25 +56,31 @@ namespace BLL.Jiajiaxin
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        public static int EditProductCategory(ProductCategory pc)
+        {
+            return ProCategoryService.EditProductCategory(pc);
         }
+
+
+
+        public static int AddCategory(ProductCategory pc)
+        {
+            return ProCategoryService.AddCategory(pc);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 }

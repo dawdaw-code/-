@@ -22,7 +22,7 @@
         <ul style="display:inline-block;">
             <li style="margin-top:-43px;"><strong style="margin-left:15px;">产品类别管理</strong></li>
         </ul>
-        <input id="Button1" type="button" value="新增" class="btn btn-primary" style="margin-left:823px;" onclick="divShow()" />
+        <input id="Button1" type="button" value="新增" class="btn btn-primary" style="margin-left:823px;" onclick="AddPage()" />
         <input id="Button2" type="button" value="删除" class="btn btn-danger" />
         <input id="Button3" type="button" value="导出" class="btn btn-info" />
         <div style="width:1100px;height:450px;border:1px solid #EFEFEF;margin-top:-20px;">
@@ -64,13 +64,27 @@
 
 <div id="hidePage" style="display:none;">
     <div style="text-align:center;margin-top:20px;">
-        <span>类别编号<input id="Text1" type="text" placeholder="自动生成，可不填" style="margin-left:20px;"  name="typeId"/></span><br />
-        <span style="margin-top:10px;">类别名称<input id="Text2" type="text" placeholder="请输入类别名称" style="margin-left:20px;margin-top:5px;"  name="typeName"/></span><br />
-        <span style="margin-top:10px;">备注<input id="Text3" type="text" name="remark" style="margin-left:45px;margin-top:5px;" /></span><br />
-        @*<input id="Button1" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" />
-        <input id="Button2" type="button" value="关闭" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" />*@
+        <form id="form1">
+            <span>类别编号<input id="Text1" type="text" placeholder="自动生成，可不填" style="margin-left:20px;" name="Id" readonly="readonly" /></span><br />
+            <span style="margin-top:10px;">类别名称<input id="Text2" type="text" placeholder="请输入类别名称" style="margin-left:20px;margin-top:5px;" name="PCateName" /></span><br />
+            <span style="margin-top:10px;">备注<input id="Text3" type="text" name="Remark" style="margin-left:45px;margin-top:5px;" /></span><br />
+            <input id="btnSub" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" onclick=" Update()" />
+            <input id="Button2" type="button" value="关闭" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" />
+        </form>
     </div>
+</div>
 
+<div id="hidePage2" style="display:none;">    
+    <div style="text-align:center;margin-top:20px;">
+        <form id="form2">
+            <span>类别编号<input id="bianhao" type="text" placeholder="自动生成，可不填" style="margin-left:20px;" readonly="readonly" name="Id2" /></span><br />
+            <span style="margin-top:10px;">类别名称<input id="mingcheng" type="text" placeholder="请输入类别名称" style="margin-left:20px;margin-top:5px;" name="PCateName2" /></span><br />
+            <span style="margin-top:10px;">备注<input id="remark2" type="text" name="Remark2" style="margin-left:45px;margin-top:5px;" /></span><br />
+            <input id="btnSub2" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" onclick="AddPro()" />
+            <input id="guanbi" type="button" value="关闭" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" />
+        </form>
+    </div>
+    
 </div>
 @*@section foot{*@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
@@ -79,31 +93,32 @@
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
 
-    //function GetById(id) {
-       
-    //}
-    
-    function divShow() {
-        layui.use('layer', function () {
-            var layer = layui.layer;
-            layer.open({
-                title: ['添加产品类别', 'font-size:15px'],
-                area: ['420px', '190px'], //宽高
-                type: 1,
-                shade: 0,
-                content: $('#hidePage'),
-                btn: ['确定', '关闭'],
-                yes: function (index, layero) {
-                    //index为当前层索引
-                    //layero 为 弹出层对象
-                    //在回调函数末尾添加 “return false”可以禁止点击该按钮关闭弹出层
-                    return false;
-                },
-                cancel: function () {//右上角关闭毁回调
-                    //return false;
+    function AddPro() {
+        //var data = $("#form2").serializeArray();
+        //var obj = {};
+        //$.each(data, function (a, b) {
+        //    obj[b.name] = b.value;
+        //});
+        //var jsons = JSON.stringify(obj);
+        $.ajax({
+            type: "POST",
+            url: "/JiaJiaXin/AddCategory",
+            data: "{pc:{Id:'" + $("#bianhao").val() + "',PCateName: '" + $("#mingcheng").val() + "',Remark:'" + $("#remark2").val()+"'}}",
+            //{
+            //    Id: '" + $("#bianhao").val() + "', PCateName: '" + $("#mingcheng").val() + "', Remark: '" + $("#remark2").val()+ '"}
+            //data: "{pc:" + jsons + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("添加成功!");
+                    PageList();
                 }
-            })
-        })
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
     }
 
 
@@ -122,7 +137,8 @@
 
 
 
-    
+
+
 
     var pageIndex = 1;
     var pageSize = 6;
@@ -150,30 +166,117 @@
         });
 
     });
+
+   
+    function divShow() {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                title: ['添加产品类别', 'font-size:15px'],
+                area: ['420px', '190px'], //宽高
+                type: 1,
+                shade: 0,
+                content: $('#hidePage'),
+                //btn: ['确定', '关闭'],
+                yes: function (index, layero) {
+                    //index为当前层索引
+                    //layero 为 弹出层对象
+                    //在回调函数末尾添加 “return false”可以禁止点击该按钮关闭弹出层
+                    return false;
+                },
+                cancel: function () {//右上角关闭毁回调
+                    //return false;
+                }
+            })
+        })
+    }
+
+    function AddPage() {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                title: ['添加产品类别', 'font-size:15px'],
+                area: ['420px', '190px'], //宽高
+                type: 1,
+                shade: 0,
+                content: $('#hidePage2'),
+                //btn: ['确定', '关闭'],
+                yes: function (index, layero) {
+                    //index为当前层索引
+                    //layero 为 弹出层对象
+                    //在回调函数末尾添加 “return false”可以禁止点击该按钮关闭弹出层
+                    return false;
+                },
+                cancel: function () {//右上角关闭毁回调
+                    //return false;
+                }
+            })
+        })
+    }
+
+    function Update() {
+        //$("#btnSub").click(function () {
+        var data = $("#form1").serializeArray();
+        var obj = {};
+        $.each(data, function (a, b) {
+            obj[b.name] = b.value;
+        });
+        var jsons = JSON.stringify(obj);
+        $.ajax({
+            type: "POST",
+            url: "/JiaJiaXin/EditProductCategory",
+            //data: "{pc:{id:"+id+",animalName:'" + $("#animalName").val() + "',typeid:'" + $("#select1").val() + "',color:'" + $("#color").val() + "',weight:'" + $("#weight").val() + "',height:'" + $("#height").val() +"'}}",
+            data: "{pc:" + jsons + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("修改成功!");
+                    PageList();
+                }
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+        //});
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     function Gai(id) {
         divShow();
-        //$("#hidePage").show(function () {
-            $.ajax({
-                type: "POST",
-                url: "/JiaJiaXin/GetById",
-                data: "{Id:" + id + "}",
-                dataType: "json",
-                contentType: "application/json",
-                success: function (result) {
-                    $.each(result, function (index, data) {
-                        $("[name='typeId']").val(data.Id);
-                        $("[name='typeName']").val(data.PCateName);
-                        $("[name='remark']").val(data.Remark);
-                    });
-                },
-                error: function (ex) {
-                    alert(ex.responseText);
-                }
-            });
-        //});
-
+        $.ajax({
+            type: "POST",
+            url: "/JiaJiaXin/GetById",
+            data: "{Id:" + id + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $("[name='Id']").val(data.Id);
+                    $("[name='PCateName']").val(data.PCateName);
+                    $("[name='Remark']").val(data.Remark);
+                });
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
     }
-    
+
 
 
     function PageList() {
@@ -236,7 +339,7 @@
 
 
 
-    
+
 
 
 
