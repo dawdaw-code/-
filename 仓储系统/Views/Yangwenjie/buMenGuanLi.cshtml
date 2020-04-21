@@ -136,7 +136,7 @@
     var pageSize = 10;
     var pageCount = 0;
     var rows = 0;
-    $(function () {
+    $(function () { 
         PageList();
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
@@ -152,7 +152,7 @@
                         pageIndex = obj.curr;
                         pageSize = obj.limit;
 
-                        PageList();
+                        PageList(); 
                 }
             });
         });
