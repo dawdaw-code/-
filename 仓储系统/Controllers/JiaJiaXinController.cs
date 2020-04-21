@@ -43,13 +43,16 @@ namespace 仓储系统.Controllers
             return View();
         }
 
+        public ActionResult HidePage()
+        {
+            return View();
+        }
 
-      
 
-        public ActionResult DelCategory(ProductCategory pc)
+        public ActionResult DelCategory(ProductCategory pc, int id)
         {
             pc.IsDelete = 1;
-            return Json(ProCategoryManager.DelCategory(pc), JsonRequestBehavior.AllowGet);
+            return Json(ProCategoryManager.DelCategory(pc,id), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -87,10 +90,58 @@ namespace 仓储系统.Controllers
         }
 
 
+        public ActionResult DelPro(Product pc, int id)
+        {
+            pc.IsDelete = 1;
+            return Json(ProductManager.DelPro(pc, id), JsonRequestBehavior.AllowGet);                
+        }
+
+
+
+        //新增入库单
+        public ActionResult AddInStorage(InStorage ie)
+        {
+            return Json(InStorageManager.AddInStorage(ie), JsonRequestBehavior.AllowGet);
+        }
+
+        //入库单查询
+        public ActionResult GetQueryInStorage(int pageIndex, int pageSize, InStorage io)
+        {
+            return Json(InStorageManager.GetQueryInStorage(pageIndex, pageSize, io), JsonRequestBehavior.AllowGet);
+             
+        }
+
+
+        //删除入库单
+        public ActionResult DelInStorage(InStorage pc, int id)
+        {
+            pc.IsDelete = 1;
+            return Json(InStorageManager.DelInStorage(pc, id), JsonRequestBehavior.AllowGet);
+        }
 
 
 
 
 
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
 }

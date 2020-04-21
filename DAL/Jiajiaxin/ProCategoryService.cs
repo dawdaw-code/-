@@ -82,10 +82,10 @@ namespace DAL.Jiajiaxin
 
 
         //修改产品状态(删除)
-        public static int DelCategory(ProductCategory pc)
+        public static int DelCategory(ProductCategory pc,int id)
         {
             WarehouseEntities entity = new WarehouseEntities();
-            var obj = (from p in entity.ProductCategory where p.Id == pc.Id select p).First();
+            var obj = (from p in entity.ProductCategory where p.Id == id select p).First();
             obj.IsDelete = pc.IsDelete;
             return entity.SaveChanges();
         }

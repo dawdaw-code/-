@@ -105,6 +105,7 @@
     <Content Include="Global.asax" />
     <Content Include="Jpg\DengLubj.jpg" />
     <Content Include="Jpg\1.png" />
+    <Content Include="Jpg\fangzi.png" />
     <Content Include="layui\css\layui.css" />
     <Content Include="layui\css\layui.mobile.css" />
     <Content Include="layui\css\modules\code.css" />
@@ -251,6 +252,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\JiaJiaXinController.cs" />
     <Compile Include="Controllers\TextController.cs" />
     <Compile Include="Controllers\YangWenJieController.cs" />
     <Compile Include="Global.asax.cs">
@@ -281,6 +283,12 @@
     <Content Include="Views\Husongzhi\yikuAdd.cshtml" />
     <Content Include="Views\Husongzhi\pandianAdd.cshtml" />
     <Content Include="Views\Husongzhi\tuihuoAdd.cshtml" />
+    <Content Include="Views\JiaJiaXin\AddChukudan.cshtml" />
+    <Content Include="Views\JiaJiaXin\AddRukudan.cshtml" />
+    <Content Include="Views\JiaJiaXin\Chukuguanli.cshtml" />
+    <Content Include="Views\JiaJiaXin\List.cshtml" />
+    <Content Include="Views\JiaJiaXin\List2.cshtml" />
+    <Content Include="Views\JiaJiaXin\Rukuguanli.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

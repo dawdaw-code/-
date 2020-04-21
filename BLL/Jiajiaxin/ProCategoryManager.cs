@@ -11,9 +11,9 @@ namespace BLL.Jiajiaxin
     {
        
        
-        public static int DelCategory(ProductCategory pc)
+        public static int DelCategory(ProductCategory pc, int id)
         {
-            return ProCategoryService.DelCategory(pc);
+            return ProCategoryService.DelCategory(pc,id);
         }
 
 
