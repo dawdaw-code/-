@@ -136,6 +136,10 @@ namespace 仓储系统.Controllers
 
         public ActionResult AddCategory(ProductCategory pc)
         {
+            pc.CreateTime = DateTime.Now;
+            pc.CreateUser = "DA_0000";
+            pc.IsDelete = 0;
+            pc.PCateNum = "00008" + 1;
             return Json(ProCategoryManager.AddCategory(pc) ,JsonRequestBehavior.AllowGet);
         }
 
