@@ -27,8 +27,7 @@ namespace 仓储系统.Controllers
             return View();
         }
         //分页加载页面
-        public ActionResult getDepart
-            (int pageIndex, int pageSize,string name)
+        public ActionResult getDepart(int pageIndex, int pageSize, string name)
         {
             if (!string.IsNullOrEmpty(name))
             {
@@ -40,7 +39,7 @@ namespace 仓储系统.Controllers
                 //页面加载
                 return Json(DepartManager.getDepart(pageIndex, pageSize), JsonRequestBehavior.AllowGet);
             }
-            
+
         }
         //新增
         public ActionResult Add(Depart det)
@@ -48,9 +47,17 @@ namespace 仓储系统.Controllers
             return Json(DepartManager.Add(det), JsonRequestBehavior.AllowGet);
         }
 
-
-
-
+        //删除(修改标识Id)
+        public ActionResult delDepart(Depart det,int id)
+        {
+            //det.IsDelete = 1;
+            return Json(DepartManager.delDepart(det,id), JsonRequestBehavior.AllowGet);
+        }
+        //修改
+        public ActionResult upDepartById(string DepartName, int id)
+        {
+            return Json(DepartManager.upDepartById(DepartName, id), JsonRequestBehavior.AllowGet);
+        }
 
         //根据部门名查询
         //public ActionResult selectByName(string name)

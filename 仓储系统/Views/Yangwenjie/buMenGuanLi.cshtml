@@ -63,11 +63,13 @@
 
         #text-4 {
             border: solid 1px red;
+            height: 800px;
         }
 
         #table1 {
             text-align: center;
         }
+
         #dingchen {
             border: 1px solid white;
             width: 100%;
@@ -136,8 +138,12 @@
     var pageSize = 10;
     var pageCount = 0;
     var rows = 0;
-    $(function () { 
+    $(function () {
         PageList();
+        layFenYe();
+    });
+
+    function layFenYe() {
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
@@ -149,23 +155,23 @@
                 , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
                 , jump: function (obj) {
                     //console.log(obj)
-                        pageIndex = obj.curr;
-                        pageSize = obj.limit;
+                    pageIndex = obj.curr;
+                    pageSize = obj.limit;
 
-                        PageList(); 
+                    PageList();
                 }
             });
         });
-    });
+    }
 
     $("#First").click(function () {
         pageIndex = 1;
         PageList();
-        return false; 
+        return false;
     });
     $("#Back").click(function () {
         pageIndex--;
-        PageList(); 
+        PageList();
         return false;
     });
     $("#Next").click(function () {
@@ -180,7 +186,7 @@
     });
 
 
-    
+
 
     //全选以及反选
     $(function () {
@@ -217,9 +223,9 @@
                 rows = result.PageCount;
                 $("#tb1 tr").remove();
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td><input id='Checkbox5' type='checkbox' name='item' /></td><td>" + data.Id + "</td><td>" + data.DepartNum + "</td><td>" + data.DepartName + "</td><td>" + Datte(data.CreateTime) + "<td></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
+                    $("#tb1").append("<tr><td><input id='Checkbox5' type='checkbox' name='item' /></td><td>" + data.Id + "</td><td>" + data.DepartNum + "</td><td>" + data.DepartName + "</td><td>" + Datte(data.CreateTime) + "<td></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='divShow(" + data.Id + ")'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='Del(" + data.Id + ")'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
                 });
-                
+
             },
             //请求失败后的回调函数
             error: function (ex) {
@@ -245,6 +251,93 @@
         }
     }
 
+    //删除单行(修改表示ID)
+    function Del(id) {
+        if (confirm('是否删除?')) {
+            $.ajax({
+                type: "POST",
+                url: "/Yangwenjie/delDepart",
+                data: "{Id:'" + id + "'}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    if (result > 0) {
+                        alert("删除成功");
+                        layFenYe();
+                        PageList();
+                    }
+                    else {
+                        alert("删除失败");
+                    }
+                },
+                error: function (ex) {
+                    alert(ex.responseText);
+                }
+                ,
+            });
+        }
+    }
+
+    //编辑弹出层
+    function divShow(id) {
+        layer.prompt({
+            //formType: 2,
+            value: '',
+            title: '编辑部门',
+            area: ['200px', '30px'] //自定义文本域宽高
+            , success: function (layero) {
+                layero.find(".layui-layer-content").prepend('<div style="margin-bottom: 15px;">部门名称</div>')
+            }
+        }, function (value, index, elem) {
+            //alert(value); //得到value
+            layer.close(index);
+            $.ajax({
+                type: "POST",
+                url: "/Yangwenjie/upDepartById",
+                data: "{DepartName:'" + value + "',id:'" + id + "'}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    if (result > 0) {
+                        alert("修改成功");
+                        PageList();
+                    }
+                    else {
+                        alert("修改失败");
+                    }
+                },
+                //请求失败后的回调函数
+                error: function (ex) {
+                    alert(ex.responseText);
+                }
+            });
+        });
+
+        //layer.prompt({ title: '编辑部门', title2: '部门名' }, function (val, index, elem) {
+        //    layer.msg('得到了' + val);
+        //    layer.close(index);
+        //});
+        //laryer.prompt = function (e, t) {
+        //    console.log(e);
+        //    var a = "";
+        //    var addTitle = "";
+        //    if (e.title2) {
+        //        addTitle = '<div stytle="margin-bottom:10px">' + e.title2 + '</div>';
+        //    }
+        //    if (e = e || {}, "function" == typeof e && (t = e), e.area) {
+        //        var o = e.area;
+        //        a = 'style="width: ' + o[0] + ";height:" + o[1] + '"',
+        //        delete e.area;
+        //    }
+        //    var s, l = 2 == e.formType ? addTitle + '<textarea class="layui-layer -input"' + a + "></textarea>" : function () {
+        //        return '<input type="' + (1 == e.formType ? "password" : "text") + '"class="layui-layer-input">'
+        //    }(),
+        //        f = e.success;
+        //    console.log(1);
+        //}  
+    }
+
+
     //function selectByName() {
     //    var name = $("#Text1").val();
     //    //alert(name);
@@ -255,6 +348,7 @@
     //        dataType: "json",
     //        contentType: "application/json",
     //        success: function (result) {
+    //            rows = result.PageCount;
     //            $("#tb1 tr").remove();
     //            $.each(result, function (index, data) {
     //                $("#tb1").append("<tr><td><input id='Checkbox5' type='checkbox' name='item' /></td><td>" + data.Id + "</td><td>" + data.DepartNum + "</td><td>" + data.DepartName + "</td><td>" + data.CreateTime + "<td></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
@@ -266,6 +360,6 @@
     //        }
     //    });
     //}
-    
+
 </script>
 

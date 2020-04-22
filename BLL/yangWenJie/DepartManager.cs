@@ -24,9 +24,18 @@ namespace BLL
             return DepartService.Add(det);
         }
 
-        //public static List<Depart> selectByName(string name)
-        //{
-        //    return DepartService.selectByName(name);
-        //}
-    }
+        public static int delDepart(Depart det, int id)
+        {
+            return DepartService.delDepart(det, id);
+        }
+
+        public static int upDepartById(string DepartName, int id)
+        {
+            return DepartService.upDepartById(DepartName, id);
+        }
+            //public static List<Depart> selectByName(string name)
+            //{
+            //    return DepartService.selectByName(name);
+            //}
+        }
 }

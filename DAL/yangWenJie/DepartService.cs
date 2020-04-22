@@ -10,12 +10,12 @@ namespace DAL
     public class DepartService
     {
         //根据部门名查询
-        public static PageList getDepartByName(int pageIndex, int pageSize,string name)
+        public static PageList getDepartByName(int pageIndex, int pageSize, string name)
         {
             WarehouseEntities con = new WarehouseEntities();
             PageList list = new PageList();
             var obj = from p in con.Depart
-                      where p.DepartName.IndexOf(name)!=-1
+                      where p.DepartName.IndexOf(name) != -1 && p.IsDelete == 0
                       orderby p.Id
                       select new
                       {
@@ -44,6 +44,7 @@ namespace DAL
             WarehouseEntities con = new WarehouseEntities();
             PageList list = new PageList();
             var obj = from p in con.Depart
+                      where p.IsDelete == 0
                       orderby p.Id
                       select new
                       {
@@ -61,11 +62,31 @@ namespace DAL
         }
 
         //新增
-        public static int Add(Depart det) {
+        public static int Add(Depart det)
+        {
             WarehouseEntities con = new WarehouseEntities();
             con.Depart.Add(det);
             return con.SaveChanges();
         }
+
+        //删除(修改表示ID)
+        public static int delDepart(Depart det,int id)
+        {
+            WarehouseEntities con = new WarehouseEntities();
+            var obj = (from p in con.Depart where p.Id == id select p).First();
+            obj.IsDelete = 1;
+            return con.SaveChanges();
+        }
+
+        //根据id修改
+        public static int upDepartById(string DepartName, int id) {
+            WarehouseEntities con = new WarehouseEntities();
+            var obj = (from p in con.Depart where p.Id == id select p).First();
+            obj.DepartName = DepartName;
+            obj.CreateTime = DateTime.Now; ;
+            return con.SaveChanges();
+        }
+
         ////条件查询
         //public static List<Depart> selectByName(string name) {
         //    WarehouseEntities con = new WarehouseEntities();
