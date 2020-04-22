@@ -44,9 +44,9 @@
         <input id="Button2" type="button" value="删除" class="btn btn-danger" />
         <input id="Button3" type="button" value="导出" class="btn btn-info" />
         <div style="width:1100px;height:450px;border:1px solid #EFEFEF;margin-top:-20px;">
-            <span style="margin-left:20px;margin-bottom:-20px;"><input id="ProductName" type="text" style="width:200px;height:33px;margin-top:21px;margin-left:105px;" placeholder="请输入产品名称" /></span>
+            <span style="margin-left:20px;margin-bottom:-20px;"><input id="ProductName" type="text" style="width:200px;height:33px;margin-top:21px;margin-left:105px;border:1px solid #808080;" placeholder=" 请输入产品名称" /></span>
             <span style="margin-left:2px;position:relative;top:13px;">
-                <select id="Select2" name="typeid" style="width:200px;height:33px;border:1px solid #EFEFEF;">
+                <select id="Select2" name="typeid" style="width:200px;height:33px;border:1px solid #808080;">
                     <option style="margin-top:21px;">&nbsp;请选择类别</option>
                 </select>
             </span>
@@ -71,41 +71,54 @@
                 <tbody id="tbody1"></tbody>
             </table>
             <div id="ss" style="text-align:center;">
-                <div id="demo8"></div>
-                <div id="div1" style="display:none;">
-                    <form id="f1">
-                        <div style="text-align:center;margin-top:20px;">
-                            <div>产品编号<input id="bianhao" type="text" style="margin-right:15px;" /><span>产品条码<input id="tiaoma" type="text" style="margin-right:15px;" /></span></div>
-                            <div style="margin-top:10px;">
-                                产品名称<input id="mingcheng" type="text" style="margin-right:15px;" /><span>
-                                    产品类别<select id="Select1" style="margin-right:15px;width:155px;height:24px;" name="typeid">
-                                        <option>请选择类别</option>
-                                    </select>
-                                </span>
-                            </div>
-                            <div style="margin-top:10px;">预警下限<input id="xiaxian" type="text" style="margin-right:15px;" /><span>预警上限<input id="sahngxian" type="text" style="margin-right:15px;" /></span></div>
-                            <div style="margin-top:10px;">
-                                <span>规格</span><input id="guige" type="text" style="margin-right:-20px;" /><span>
-                                    <span>单位</span><select id="Select4" style="margin-right:25px;width:155px;height:24px;">
-                                        <option>请选择单位</option>
-                                    </select>
-                                </span>
-                            </div>
-                            <div style="margin-top:10px;">
-                                <span>价格</span><input id="jiage" type="text" style="margin-right:-20px;" /><span>
-                                    <span>客户</span><select id="Select3" style="margin-right:25px;width:155px;height:24px;">
-                                        <option>请选择客户</option>
-                                    </select>
-                                </span>
-                            </div>
-                            <div style="margin-top:10px;">默认仓库<input id="cangku" type="text" style="margin-right:15px;" /><span>默认库位<input id="kuwei" type="text" style="margin-right:15px;" /></span></div>
-                            <div style="margin-top:10px;">描述<input id="miaoshu" type="text" style="margin-right:15px;" /></div>
-                            <input id="btnSub" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" />
-                            <input id="guanbi" type="button" value="关闭" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" />
-                        </div>
-                    </form>
-                </div>
             </div>
+            <div id="demo8"></div>
+            <div id="hidePage" style="display:none;">
+                @*<form id="f1">*@
+                <div style="text-align:center;margin-top:20px;">
+                    <div>产品编号<input id="bianhao" type="text" style="margin-right:15px;" /><span>产品条码<input id="tiaoma" type="text" style="margin-right:15px;" /></span></div>
+                    <div style="margin-top:10px;">
+                        产品名称<input id="mingcheng" type="text" style="margin-right:15px;" /><span>
+                            产品类别<select id="Select1" style="margin-right:15px;width:155px;height:24px;border:1px solid #808080" name="typeid">
+                                <option style="">&nbsp;请选择类别</option>
+                            </select>
+                        </span>
+                    </div>
+                    <div style="margin-top:10px;">预警下限<input id="xiaxian" type="text" style="margin-right:15px;" /><span>预警上限<input id="sahngxian" type="text" style="margin-right:15px;" /></span></div>
+                    <div style="margin-top:10px;">
+                        <span>产品规格</span><input id="guige" type="text" style="margin-right:15px;" /><span>
+                            <span>产品单位</span><select id="Select4" style="margin-right:15px;width:155px;height:24px;border:1px solid #808080" name="mid">
+                                <option style="color:#d4d3d3">&nbsp;请选择单位</option>
+                            </select>
+                        </span>
+                    </div>
+                    <div style="margin-top:10px;">
+                        <span>产品价格</span><input id="jiage" type="text" style="margin-right:15px;" /><span>
+                            <span>客户名称</span><select id="Select3" name="cid" style="margin-right:15px;width:155px;height:24px;border:1px solid #808080">
+                                <option>&nbsp;请选择客户</option>
+                            </select>
+                        </span>
+                    </div>
+
+                    <div style="margin-top:10px;">
+                        <span>
+                            <span>默认仓库</span><select id="Select10" style="margin-right:15px;width:155px;height:24px;border:1px solid #808080" name="sid">
+                                <option>&nbsp;请选择仓库</option>
+                            </select>
+                        </span>
+                        <span>
+                            <span>默认库位</span><select id="Select11" style="margin-right:15px;width:155px;height:24px;border:1px solid #808080" name="lid">
+                                <option>&nbsp;请选择库位</option>
+                            </select>
+                        </span>@*<input id="cangku" type="text" style="margin-right:15px;" />*@@*<span>默认库位<input id="kuwei" type="text" style="margin-right:15px;" /></span>*@
+                    </div>
+                    <div style="margin-top:10px;">描述<input id="miaoshu" type="text" style="margin-right:120px;width:250px;" /></div>
+                    <input id="btnSub" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" />
+                    <input id="guanbi" type="button" value="关闭" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" />
+                </div>
+                @*</form>*@
+            </div>
+
         </div>
         <div>
         </div>
@@ -124,7 +137,11 @@
     var pageCount = 0;
     var rows = 0;
     $(function () {
+        BindCustomer();
+        BindLocation();
         PageList();
+        BindMeasure();
+        BindStorage();
         GetType();
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
@@ -151,10 +168,10 @@
             var layer = layui.layer;
             layer.open({
                 title: ['添加产品', 'font-size:15px'],
-                area: ['520px','360px'], //宽高
+                area: ['520px', '360px'], //宽高
                 type: 1,
                 shade: 0,
-                content: $('#div1'),
+                content: $('#hidePage'),
                 yes: function (index, layero) {
                     //index为当前层索引
                     //layero 为 弹出层对象
@@ -210,6 +227,92 @@
             }
         });
     }
+    //绑定客户
+    function BindCustomer() {
+        $.ajax({
+            type: "POST",
+            url: "/JiaJiaXin/BindCustomer",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $("[name='cid']").append("<option value='" + data.Id + "'>&nbsp;" + data.CustomerName + "</option>");
+                });
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
+    //绑定计量单位
+    function BindMeasure() {
+        $.ajax({
+            type: "POST",
+            url: "/JiaJiaXin/BindMeasure",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $("[name='mid']").append("<option value='" + data.Id + "'>&nbsp;" + data.MeasureName + "</option>");
+                });
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
+
+    //绑定仓库
+    function BindStorage() {
+        $.ajax({
+            type: "POST",
+            url: "/JiaJiaXin/BindStorage",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $("[name='sid']").append("<option value='" + data.Id + "'>&nbsp;" + data.StorageName + "</option>");
+                });
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
+    //绑定库位
+    function BindLocation() {
+        $.ajax({
+            type: "POST",
+            url: "/JiaJiaXin/BindLocation",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $("[name='lid']").append("<option value='" + data.Id + "'>&nbsp;" + data.LocationName + "</option>");
+                });
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

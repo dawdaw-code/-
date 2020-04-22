@@ -144,17 +144,32 @@ namespace 仓储系统.Controllers
         }
 
 
+        //绑定客户下拉框
+        public ActionResult BindCustomer()
+        {
+            return Json(ProductManager.BindCustomer(), JsonRequestBehavior.AllowGet);
+        }
+
+        //绑定计量单位
+        public ActionResult BindMeasure()
+        {
+            return Json(ProductManager.BindMeasure(), JsonRequestBehavior.AllowGet);
+        }
+
+        //绑定仓库
+        public ActionResult BindStorage()
+        {
+            return Json(ProductManager.BindStorage(), JsonRequestBehavior.AllowGet);
+        }
+        //绑定库位
+        public ActionResult BindLocation()
+        {
+            return Json(ProductManager.BindLocation(), JsonRequestBehavior.AllowGet);
+        }
 
 
 
 
 
-
-
-
-
-
-
-
-    }
+        }
 }
