@@ -26,6 +26,10 @@ namespace DAL.Jiajiaxin
             {
                 query = query.Where(p => p.PCateName.Contains(pc.PCateName));
             }
+            if (true)
+            {
+
+            }
             var obj = from p in query
                       orderby p.Id
                       where p.IsDelete == 0
@@ -38,6 +42,7 @@ namespace DAL.Jiajiaxin
                           Remark = p.Remark,
                           CreateUser = p.CreateUser,
                           CreateTime = p.CreateTime
+                          
                       };
             //设置分页数据
             list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);

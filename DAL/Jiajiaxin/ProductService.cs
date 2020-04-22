@@ -44,6 +44,7 @@ namespace DAL.Jiajiaxin
                           ProductNum = p.ProductNum,
                           Size = p.Size
                       };
+            
             //设置分页数据
             list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
             //设置总页数
