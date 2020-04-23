@@ -437,6 +437,30 @@
           <Property Name="CreateTime" Type="datetime" Nullable="false" />
           <Property Name="IsDelete" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Admin_Depart">
+          <End Role="Depart" Type="Self.Depart" Multiplicity="0..1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depart">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="DepartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Admin_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="WarehouseModelStoreContainer">
           <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BadReport" EntityType="Self.BadReport" Schema="dbo" store:Type="Tables" />
@@ -471,6 +495,14 @@
           <EntitySet Name="Storage" EntityType="Self.Storage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplierType" EntityType="Self.SupplierType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Admin_Depart" Association="Self.FK_Admin_Depart">
+            <End Role="Depart" EntitySet="Depart" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Admin_Role" Association="Self.FK_Admin_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
@@ -494,6 +526,8 @@
           <Property Name="CreateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsDelete" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Depart" Relationship="Self.FK_Admin_Depart" FromRole="Admin" ToRole="Depart" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Admin_Role" FromRole="Admin" ToRole="Role" />
         </EntityType>
         <EntityType Name="BadReport">
           <Key>
@@ -598,6 +632,7 @@
           <Property Name="CreateUser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsDelete" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_Admin_Depart" FromRole="Depart" ToRole="Admin" />
         </EntityType>
         <EntityType Name="Function">
           <Key>
@@ -847,6 +882,7 @@
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsDelete" Type="Int32" Nullable="false" />
           <Property Name="Remark" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Admin" Relationship="Self.FK_Admin_Role" FromRole="Role" ToRole="Admin" />
         </EntityType>
         <EntityType Name="RolePower">
           <Key>
@@ -909,6 +945,30 @@
           <Property Name="CreateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsDelete" Type="Int32" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Admin_Depart">
+          <End Role="Depart" Type="Self.Depart" Multiplicity="0..1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Depart">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="DepartId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Admin_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="WarehouseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Admin" EntityType="Self.Admin" />
           <EntitySet Name="BadReport" EntityType="Self.BadReport" />
@@ -943,6 +1003,14 @@
           <EntitySet Name="Storage" EntityType="Self.Storage" />
           <EntitySet Name="Supplier" EntityType="Self.Supplier" />
           <EntitySet Name="SupplierType" EntityType="Self.SupplierType" />
+          <AssociationSet Name="FK_Admin_Depart" Association="Self.FK_Admin_Depart">
+            <End Role="Depart" EntitySet="Depart" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Admin_Role" Association="Self.FK_Admin_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
