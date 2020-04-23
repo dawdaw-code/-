@@ -87,6 +87,22 @@ namespace DAL
             return con.SaveChanges();
         }
 
+
+
+
+
+
+
+
+        public static int del(int id)
+        {
+            WarehouseEntities con = new WarehouseEntities();
+            var obj = (from p in con.Depart where p.Id == id select p).First();
+            obj.IsDelete = 1;
+            return con.SaveChanges();
+        }
+
+
         ////条件查询
         //public static List<Depart> selectByName(string name) {
         //    WarehouseEntities con = new WarehouseEntities();

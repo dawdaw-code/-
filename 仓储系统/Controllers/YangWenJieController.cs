@@ -44,6 +44,12 @@ namespace 仓储系统.Controllers
         //新增
         public ActionResult Add(Depart det)
         {
+            Random random = new Random();
+            string n = random.Next(1000000,10000000).ToString();
+            det.DepartNum = n;
+            det.CreateUser = "DA_0000";
+            det.CreateTime = DateTime.Now;
+            det.IsDelete = 0;
             return Json(DepartManager.Add(det), JsonRequestBehavior.AllowGet);
         }
 
@@ -58,12 +64,9 @@ namespace 仓储系统.Controllers
         {
             return Json(DepartManager.upDepartById(DepartName, id), JsonRequestBehavior.AllowGet);
         }
-
-        //根据部门名查询
-        //public ActionResult selectByName(string name)
-        //{
-        //    //List<Depart> list = DepartManager.selectByName(name);
-        //    return Json(DepartManager.selectByName(name), JsonRequestBehavior.AllowGet);
-        //}
+        public ActionResult del(int id)
+        {
+            return Json(DepartManager.del(id), JsonRequestBehavior.AllowGet);
+        }
     }
 }

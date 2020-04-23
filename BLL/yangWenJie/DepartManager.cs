@@ -33,9 +33,10 @@ namespace BLL
         {
             return DepartService.upDepartById(DepartName, id);
         }
-            //public static List<Depart> selectByName(string name)
-            //{
-            //    return DepartService.selectByName(name);
-            //}
+
+        public static int del(int id)
+        {
+            return DepartService.del(id);
         }
+    }
 }
