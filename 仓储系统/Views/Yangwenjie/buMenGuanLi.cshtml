@@ -38,7 +38,7 @@
 
         h5 {
             margin-left: 50px;
-            margin-top: 25px;
+            margin-top: 20px;
             line-height: 0px;
             float: left;
         }
@@ -69,7 +69,8 @@
 
         #table1 {
             text-align: center;
-        }
+        } 
+        
 
         #dingchen {
             border: 1px solid white;
@@ -112,7 +113,7 @@
                         <tr>
                             <td><input id="Checkbox1" type="checkbox" name="item" onclick="isChekbox(this)" /></td>
                             <td>序号</td>
-                            <td>部门名称</td>
+                            <td>部门编号</td>
                             <td>部门名</td>
                             <td>创建时间</td>
                             <td>操作</td>
@@ -136,16 +137,8 @@
 </html>
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script>
-    var pageIndex = 1;
-    var pageSize = 10;
-    var pageCount = 0;
-    var rows = 0;
-    $(function () {
-        PageList();
-        layFenYe();
-    });
 
-    function layFenYe() {
+    $(function () {
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
@@ -162,6 +155,17 @@
                 }
             });
         });
+        PageList();
+
+    });
+    var pageIndex = 1;
+    var pageSize = 10;
+    var pageCount = 0;
+    var rows = 0;
+    
+
+    function layFenYe() {
+
     }
 
     $("#First").click(function () {

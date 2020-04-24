@@ -11,6 +11,9 @@
     <meta name="viewport" content="width=device-width" />
     <title>caiDanGuanLi</title>
     <link href="~/Css1/bootstrap.css" rel="stylesheet" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/layui/css/layui.mobile.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
     <style>
         #text-1 {
             width: 100%;
@@ -35,6 +38,7 @@
 
         h5 {
             margin-left: 50px;
+            margin-top: 20px;
             line-height: 0px;
             float: left;
         }
@@ -52,10 +56,23 @@
             /*margin-left: 20px;*/
             /*padding-bottom:20px;*/
             /*width: 45%;*/
-            padding-left: 300px;
+            padding-left: 500px;
             width: 800px;
             margin-left: 700px;
         }
+
+        #text-4 {
+            border: solid 1px blue;
+            overflow-x: auto;
+            height: 585px;
+        }
+
+        #pageDemo {
+            text-align: center;
+            border: 1px solid red;
+        }
+
+
 
         #Button0 {
             background-color: #2F96B4;
@@ -79,9 +96,11 @@
             width: 80px;
             height: 30px;
         }
+
         #table1 {
-            text-align:center;
+            text-align: center;
         }
+
         #dingchen {
             border: 1px solid white;
             width: 100%;
@@ -103,32 +122,115 @@
                 @*<input id="Button1" type="button" value="新增" class="btn btn-primary" onclick="Add" />*@
                 <input id="Button1" data-method="offset" type="button" @*data-type="auto"*@ value="新增" class="btn btn-primary" onclick="divInsertShow()" />
                 @*<button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal">居中弹出</button>*@
-                <input id="Button1" type="button" value="删除" class="btn btn-danger" onclick="CheckboxYN()" />
-                <input id="Button1" type="button" value="导出" class="btn btn-info" />
             </div>
+            <div id="text-4">
 
-            <div id="text-2">
-                <input id="Text1" type="text" /><input id="Button1" type="button" value="搜索" class="btn btn-info" onclick="PageList()" />
+                <div id="text-2">
+                    <input id="Text1" type="text" placeholder="请输入编号或名称" /><input id="Button1" type="button" value="搜索" class="btn btn-info" onclick="PageList1()" />
+                </div>
+                <table style="width:100%;" class="layui-table" id="table1">
+                    <thead>
+                        <tr>
+                            <td>编号</td>
+                            <td>菜单名称</td>
+                            <td>路径</td>
+                            <td>父级编号</td>
+                            <td>创建人</td>
+                            <td>创建时间</td>
+                            <td>操作</td>
+                        </tr>
+                    </thead>
+                    <tbody id="tb1"></tbody>
+                </table>
+                <div id="pageDemo">
+
+                </div>
             </div>
-
-
-
         </div>
-        <table style="width:100%;" class="layui-table" id="table1">
-            <tr>
-                <td>编号</td>
-                <td>菜单名称</td>
-                <td>父级菜单</td>
-                <td>类型</td>
-                <td>样式</td>
-                <td>排序</td>
-                <td>路径</td>
-                <td>创建时间</td>
-                <td>操作</td>
-            </tr>
-        </table>
     </div>
-
 </body>
 </html>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+    function layFenYe() {
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+                , layer = layui.layer;
+            laypage.render({
+                elem: 'pageDemo'
+                , count: rows
+                , limit: 10
+                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+                , jump: function (obj) {
+                    //console.log(obj)
+                    pageIndex = obj.curr;
+                    pageSize = obj.limit;
+                    PageList1();
+                }
+            });
+        });
+    }
 
+
+    var pageIndex = 1;
+    var pageSize = 10;
+    var pageCount = 0;
+    var rows = 0;
+    $(function () {
+        PageList1();
+        layFenYe();
+    });
+    
+    ////时间格式转化
+    //function Datte(time) {
+    //    var date = new Date(parseInt(time.substr(6));
+    //    return date.toLocaleDateString();
+    //}
+
+    function PageList1() {
+        var name = $("#Text1").val();
+        $.ajax({
+            type: "POST",
+            url: "/Yangwenjie/getFunction",
+            data: "{pageIndex:'" + pageIndex + "',pageSize:'" + pageSize + "',name:'" + name + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                //alert(JSON.stringify(result))
+                rows = result.PageCount;
+                $("#tb1 tr").remove();
+                $.each(result.DataList, function (index, data) {
+                    //alert(data.CreateTime);
+                    $("#tb1").append("<tr><td>" + data.NodeId + "</td><td>" + data.DisplayName + "</td><td>" + data.NodeURL + "</td><td>" + data.ParentNodeId + "</td><td>" + data.CreateUser + "</td><td>" + data.CreateTime + "<td></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='divUpdateShow'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='Del(" + data.NodeId + ")'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
+                });
+            }
+        });
+    }
+
+    function Del(id) {
+        alert(id);
+        if (confirm('是否删除?')) {
+            $.ajax({
+                type: "POST",
+                url: "/Yangwenjie/delFunction",
+                data: "{Id:'" + id + "'}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    if (result > 0) {
+                        alert("删除成功");
+                        layFenYe();
+                        PageList1();
+                    }
+                    else {
+                        alert("删除失败");
+                    }
+                },
+                error: function (ex) {
+                    alert(ex.responseText);
+                }
+                ,
+            });
+        }
+    }
+</script>

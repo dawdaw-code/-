@@ -68,5 +68,24 @@ namespace 仓储系统.Controllers
         {
             return Json(DepartManager.del(id), JsonRequestBehavior.AllowGet);
         }
+
+
+
+
+
+        //菜单管理页面加载和查询
+        public ActionResult getFunction(int pageIndex, int pageSize, string name)
+        {
+                //根据编号或名称查询
+                return Json(FunctionManager.getFunctionByIdAndName(pageIndex, pageSize,name), JsonRequestBehavior.AllowGet);
+        }
+
+        //删除(修改标识ID)
+
+        public ActionResult delFunction(Function fun ,int id)
+        {
+            return Json(FunctionManager.delFunction(fun,id), JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

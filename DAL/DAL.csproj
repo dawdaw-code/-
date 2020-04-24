@@ -55,6 +55,7 @@
     <Compile Include="luo\YuangoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="yangWenJie\DepartService.cs" />
+    <Compile Include="yangWenJie\FunctionService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models1\Models1.csproj">
