@@ -52,6 +52,7 @@
     <Compile Include="Jiajiaxin\ProCategoryService.cs" />
     <Compile Include="Jiajiaxin\ProductService.cs" />
     <Compile Include="luo\IndexService.cs" />
+    <Compile Include="luo\jueseService.cs" />
     <Compile Include="luo\YuangoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="yangWenJie\DepartService.cs" />

@@ -78,31 +78,54 @@ namespace DAL.luo
             return list;
         }
 
-        //新增
-        public static int Add(Depart det)
-        {
-            WarehouseEntities con = new WarehouseEntities();
-            con.Depart.Add(det);
-            return con.SaveChanges();
-        }
-
-        //删除(修改表示ID)
-        public static int delDepart(int Id)
+       
+        public static List<Role> juesselect()
         {
             WarehouseEntities entities = new WarehouseEntities();
-            var obj = (from p in entities.Admin where p.Id == Id select p).First();
-            obj.IsDelete = 1;
+            var obj = from p in entities.Role where p.IsDelete == 0 select p;
+            return obj.ToList();
+        }
+        public static List<Depart> bumenselect()
+        {
+            WarehouseEntities entities = new WarehouseEntities();
+            var obj = from p in entities.Depart where p.IsDelete == 0 select p;
+            return obj.ToList();
+        }
+        public static IQueryable adminid(int id)
+        {
+            WarehouseEntities entities = new WarehouseEntities();
+            var obj = from p in entities.Admin where p.Id == id
+                      select new {
+                          Id = p.Id,
+                          UserName = p.UserName,
+                          UserCode = p.UserCode,
+                          RealName = p.RealName,
+                          Email = p.Email,
+                          Phone = p.Phone,
+                          DepartId = p.DepartId,
+                          RoleId = p.RoleId
+                      };
+            return obj;
+        }
+        public static int adminidup(string id ,string UserName, string RealName, string Email, string Phone, int DepartId , int RoleId)
+        {
+            WarehouseEntities entities = new WarehouseEntities();
+            var obj = (from p in entities.Admin where p.UserCode == id select p).First();
+            obj.UserName = UserName;
+            obj.RealName = RealName;
+            obj.Email = Email;
+            obj.Phone = Phone;
+            obj.DepartId = DepartId;
+            obj.RoleId = RoleId;
             return entities.SaveChanges();
         }
-
-        //根据id修改
-        public static int upDepartById(string DepartName, int id)
+        //删除(修改表示ID)
+        public static int delDepart(int id)
         {
-            WarehouseEntities con = new WarehouseEntities();
-            var obj = (from p in con.Depart where p.Id == id select p).First();
-            obj.DepartName = DepartName;
-            obj.CreateTime = DateTime.Now; ;
-            return con.SaveChanges();
+            WarehouseEntities entities = new WarehouseEntities();
+            var obj = (from p in entities.Admin where p.Id == id select p).First();
+            obj.IsDelete = 1;
+            return entities.SaveChanges();
         }
     }
 }

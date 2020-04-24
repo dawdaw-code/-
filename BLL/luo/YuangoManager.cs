@@ -21,20 +21,25 @@ namespace BLL.luo
         {
             return YuangoService.getDepartByName(pageIndex, pageSize, name);
         }
-
-        public static int Add(Depart det)
+        public static List<Role> juesselect()
         {
-            return YuangoService.Add(det);
+            return YuangoService.juesselect();
         }
-
-        public static int delDepart(int Id)
+        public static List<Depart> bumenselect()
         {
-            return YuangoService.delDepart(Id);
+            return YuangoService.bumenselect();
         }
-
-        public static int upDepartById(string DepartName, int id)
+        public static IQueryable adminid(int id)
         {
-            return YuangoService.upDepartById(DepartName, id);
+            return YuangoService.adminid(id);
+        }
+        public static int adminidup(string id, string UserName, string RealName, string Email, string Phone, int DepartId, int RoleId)
+        {
+            return YuangoService.adminidup( id,  UserName,  RealName,  Email,  Phone,  DepartId,  RoleId);
+        }
+        public static int delDepart( int id)
+        {
+            return YuangoService.delDepart( id);
         }
     }
 }
