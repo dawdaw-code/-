@@ -107,13 +107,13 @@
 
             <div id="dingchen">
                 <div style="position:absolute;top:10px;left:20px;">
-                    <img style="float:left" src="../jpg/fangzi.png" /> <div style="width:200px;"><a href="">首页</a>><a href="">系统设置</a>><a href="">员工管理</a></div>
+                    <img style="float:left" src="../jpg/fangzi.png" /> <div style="width:200px;"><a href="">首页</a>><a href="">系统设置</a>><a href="">角色管理</a></div>
                 </div>
             </div>
 
 
             <div id="h4">
-                <h4 style="font-size:20px;">员工管理</h4>
+                <h4 style="font-size:20px;">角色管理</h4>
             </div>
             <br />
             <div style="height:40px">
@@ -132,13 +132,11 @@
                         <thead>
                             <tr>
                                 <td><input id="Checkbox1" type="checkbox" name="item" /></td>
-                                <td>用户名</td>
-                                <td>编号</td>
-                                <td>真名</td>
-                                <td>Email</td>
-                                <td>联系方式</td>
-                                <td>部门</td>
-                                <td>角色</td>
+                                <td>序号</td>
+                                <td>角色编号</td>
+                                <td>角色名</td>
+                                <td>创建时间</td>
+                                <td>备注</td>
                                 <td>操作</td>
                             </tr>
                         </thead>
@@ -147,12 +145,12 @@
                     <div id="pageDemo">
 
                     </div>
-                    <div id="divBtn" style="text-align:center;">
+                    @*<div id="divBtn" style="text-align:center;">
                         <input id="First" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="首页" />
                         <input id="Back" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="上一页" />
                         <input id="Next" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="下一页" />
                         <input id="Last" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="尾页" />
-                    </div>
+                    </div>*@
                 </div>
             </div>
             <div id="hidePage" style="display:none;">
@@ -160,17 +158,17 @@
                     <form id="form1">
                         <table style="border-spacing:10px 30px; margin-left:60px;width:300px;">
                             <tr>
-                                <td>用户名：<input style="width:80px;" id="Text1" type="text" /></td>
-                                <td style="margin-left:30px;">真名：<input style="width:80px;" id="Text1" type="text" /></td>
+                                <td>角色编号：<input style="width:80px;" id="Text1" type="text" /></td>
+                                
                             </tr>
 
                             <tr>
-                                <td>Email&nbsp;&nbsp;：<input style="width:80px;" id="Text1" type="text" /></td>
-                                <td style="margin-left:30px;">电话：<input style="width:80px;" id="Text1" type="text" /></td>
+                                <td>角色名称：<input style="width:80px;" id="Text1" type="text" /></td>
+                                
                             </tr>
                             <tr>
-                                <td>部&nbsp;&nbsp;&nbsp;&nbsp;门：<input style="width:80px;" id="Text1" type="text" /></td>
-                                <td style="margin-left:30px;">角色：<input style="width:80px;" id="Text1" type="text" /></td>
+                                <td style="margin-left:1000px;">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：<input style="width:80px;" id="Text1" type="text" /></td>
+                               
                             </tr>
                         </table>
                         <input id="btnSub" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:5px;margin-left:10px;" onclick=" Update()" />
@@ -259,14 +257,18 @@
 
     });
 
-
+    //时间格式转化
+    function Datte(time) {
+        var date = new Date(parseInt(time.substr(6)));
+        return date.toLocaleDateString();
+    }
 
     //分页加载全部
     function PageList() {
         var name = $("#Text1").val();
         $.ajax({
             type: "POST",
-            url: "/Text/getDepart",
+            url: "/Text/getRole",
             data: "{pageIndex:'" + pageIndex + "',pageSize:'" + pageSize + "',name:'" + name + "'}",
             dataType: "json",
             contentType: "application/json",
@@ -275,7 +277,7 @@
                 $("#tb1 tr").remove();
                 $.each(result.DataList, function (index, data) {
 
-                    $("#tb1").append("<tr><td><input id='Checkbox5' type='checkbox' name='item' /></td><td>" + data.UserName + "</td><td>" + data.UserCode + "</td><td>" + data.RealName + "</td><td>" + data.Email + "</td><td>" + data.Phone + "</td><td>" + data.DepartId + "</td><td>" + data.RoleId + "</td><td></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='divShow(" + data.Id + ")'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='Del(" + data.Id + ")'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
+                    $("#tb1").append("<tr><td><input id='Checkbox5' type='checkbox' name='item' /></td><td>" + data.Id + "</td><td>" + data.RoleNum + "</td><td>" + data.RoleName + "</td><td>" + Datte(data.CreateTime) + "</td><td>" + data.Remark + "</td><td></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='divShow(" + data.Id + ")'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='Del(" + data.Id + ")'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
                 });
 
             },
@@ -308,7 +310,7 @@
         if (confirm('是否删除?')) {
             $.ajax({
                 type: "POST",
-                url: "/Text/delDepart",
+                url: "/Text/delRole",
                 data: "{Id:'" + id+"'}",
                 dataType: "json",
                 contentType: "application/json",

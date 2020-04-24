@@ -149,12 +149,12 @@
                     <div id="pageDemo">
 
                     </div>
-                    <div id="divBtn" style="text-align:center;">
+                    @*<div id="divBtn" style="text-align:center;">
                         <input id="First" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="首页" />
                         <input id="Back" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="上一页" />
                         <input id="Next" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="下一页" />
                         <input id="Last" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="尾页" />
-                    </div>
+                    </div>*@
                 </div>
             </div>
             <div id="hidePage" style="display:none;">
@@ -162,17 +162,20 @@
                     <form id="form1">
                         <table style="border-spacing:10px 30px; margin-left:60px;width:300px;">
                             <tr>
-                                <td>用户名：<input style="width:80px;" id="Text1" type="text" /></td>
-                                <td style="margin-left:30px;">真名：<input style="width:80px;" id="Text1" type="text" /></td>
+                                <td>编&nbsp;&nbsp;号：<input   style="width:80px;" id="Text6" type="text" disabled="disabled" /></td>
+                                <td style="margin-left:30px;">昵称：<input name="UserName" style="width:80px;" id="Text2" type="text" /></td>
                             </tr>
-                            
+
                             <tr>
-                                <td>Email&nbsp;&nbsp;：<input style="width:80px;" id="Text1" type="text" /></td>
-                                <td style="margin-left:30px;">电话：<input style="width:80px;" id="Text1" type="text" /></td>
+                                <td>真&nbsp;&nbsp;名：<input name="RealName" style="width:80px;" id="Text3" type="text"value=" " /></td>
+                                <td style="margin-left:30px;">Email:<input name="Email" style="width:80px;" id="Text4" type="text" /></td>
                             </tr>
                             <tr>
-                                <td>部&nbsp;&nbsp;&nbsp;&nbsp;门：<input style="width:80px;" id="Text1" type="text" /></td>
-                                <td style="margin-left:30px;">角色：<input style="width:80px;" id="Text1" type="text" /></td>
+                                <td>电&nbsp;&nbsp;话：<input name="Phone" style="width:80px;" id="Text5" type="text" /></td>
+                                <td style="margin-left:30px;">角色：@Html.DropDownList("RoleId", null, htmlAttributes: new { @style = "width:80px;border: solid 1px red;" })</td>
+                            </tr>
+                            <tr>
+                                <td style="margin-left:30px;">部&nbsp;&nbsp;门：@Html.DropDownList("DepartId", null, htmlAttributes: new { @style = "width:80px;border: solid 1px red;" })</td>
                             </tr>
                         </table>
                         <input id="btnSub" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:5px;margin-left:10px;" onclick=" Update()" />
@@ -307,6 +310,7 @@
 
     //删除单行(修改表示ID)
     function Del(id) {
+        alert(id)
         if (confirm('是否删除?')) {
             $.ajax({
                 type: "POST",
@@ -315,6 +319,7 @@
                 dataType: "json",
                 contentType: "application/json",
                 success: function (result) {
+                    alert(JSON.stringify(result))
                     if (result > 0) {
                         alert("删除成功");
                         layFenYe();
@@ -354,6 +359,63 @@
                 }
             })
         })
+        divselect(id);
+    }
+    function divselect(id)
+    {
+        $.ajax({
+            type: "POST",
+            url: "/Text/adminid",
+            data: "{Id:'" + id + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $("#Text6").val(data.UserCode);
+                    $("#Text2").val(data.UserName);
+                    $("#Text3").val(data.RealName);
+                    $("#Text4").val(data.Email);
+                    $("#Text5").val(data.Phone);
+                    $("#RoleId").val(data.RoleId);
+                    $("#DepartId").val(data.DepartId);
+                })
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+
+        });
+    }
+    function Update()
+    {
+       
+        var id = $("#Text6").val();
+        var UserName = $("#Text2").val();
+        var RealName = $("#Text3").val();
+        var Email = $("#Text4").val();
+        var Phone = $("#Text5").val();
+        var DepartId = $("#RoleId").val();
+        var RoleId = $("#DepartId").val();
+        $.ajax({
+            type: "POST",
+            url: "/Text/adminidup",
+            data: "{id:'" + id + "',UserName:'" + UserName + "',RealName:'" + RealName + "',Email:'" + Email + "',Phone:'" + Phone + "',DepartId:'" + DepartId + "',RoleId:'" + RoleId+"'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("修改成功！");
+                    PageList();
+                } else
+                {
+                    alert("修改失败！");
+                }
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+
+        });
     }
 </script>
 
