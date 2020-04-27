@@ -105,11 +105,11 @@
 <body>
     <div id="text-1">
         <div>
-            @*<p><a href="">首页</a>><a href="">基本资料</a>><a href="">部门管理</a></p>*@
 
             <div id="dingchen">
                 <div style="position:absolute;top:10px;left:20px;">
                     <img style="float:left" src="../jpg/fangzi.png" /> <div style="width:200px;"><a href="">首页</a>><a href="">系统设置</a>><a href="">员工管理</a></div>
+
                 </div>
             </div>
 
@@ -120,7 +120,7 @@
             <br />
             <div style="height:40px">
                 <div id="text-3">
-                    <input id="xz" data-method="offset" type="button" data-type="auto" value="新增" class="btn btn-primary" />
+                    <input onclick="xz()" data-method="offset" type="button" data-type="auto" value="新增" class="btn btn-primary" />
                     <div id="o"></div>
                     <div id="p">dawdawdawd</div>
                     <input id="Button1" type="button" value="删除" class="btn btn-danger" />
@@ -150,25 +150,26 @@
 
                     </div>
                     @*<div id="divBtn" style="text-align:center;">
-                        <input id="First" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="首页" />
-                        <input id="Back" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="上一页" />
-                        <input id="Next" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="下一页" />
-                        <input id="Last" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="尾页" />
-                    </div>*@
+                    <input id="First" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="首页" />
+                    <input id="Back" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="上一页" />
+                    <input id="Next" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="下一页" />
+                    <input id="Last" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="尾页" />
+                </div>*@
                 </div>
             </div>
+            @*修改弹层*@
             <div id="hidePage" style="display:none;">
                 <div style="text-align:center;margin-top:20px;">
                     <form id="form1">
                         <table style="border-spacing:10px 30px; margin-left:60px;width:300px;">
                             <tr>
-                                <td>编&nbsp;&nbsp;号：<input   style="width:80px;" id="Text6" type="text" disabled="disabled" /></td>
+                                <td>编&nbsp;&nbsp;号：<input style="width:80px;" id="Text6" type="text" disabled="disabled" /></td>
                                 <td style="margin-left:30px;">昵称：<input name="UserName" style="width:80px;" id="Text2" type="text" /></td>
                             </tr>
 
                             <tr>
-                                <td>真&nbsp;&nbsp;名：<input name="RealName" style="width:80px;" id="Text3" type="text"value=" " /></td>
-                                <td style="margin-left:30px;">Email:<input name="Email" style="width:80px;" id="Text4" type="text" /></td>
+                                <td>真&nbsp;&nbsp;名：<input name="RealName" style="width:80px;" id="Text3" type="text" value=" " /></td>
+                                <td style="margin-left:30px;">Email:&nbsp;<input name="Email" style="width:80px;" id="Text4" type="text" /></td>
                             </tr>
                             <tr>
                                 <td>电&nbsp;&nbsp;话：<input name="Phone" style="width:80px;" id="Text5" type="text" /></td>
@@ -178,8 +179,33 @@
                                 <td style="margin-left:30px;">部&nbsp;&nbsp;门：@Html.DropDownList("DepartId", null, htmlAttributes: new { @style = "width:80px;border: solid 1px red;" })</td>
                             </tr>
                         </table>
-                        <input id="btnSub" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:5px;margin-left:10px;" onclick=" Update()" />
-        <input id="Button2" type="button" value="关闭" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:5px;margin-left:10px;" />
+                        <input id="btnSub" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:-5px;margin-left:193px;width:82px;background-color:gainsboro" onclick=" Update()" />
+                    </form>
+                </div>
+            </div>
+            @*新增弹层*@
+            <div id="hideADD" style="display:none;">
+                <div style="text-align:center;margin-top:20px;">
+                    <form id="form1">
+                        <table style="border-spacing:10px 30px; margin-left:60px;width:300px;">
+                            <tr>
+                                <td>编&nbsp;&nbsp;号：<input style="width:80px;" id="Text16" type="text" disabled="disabled" /></td>
+                                <td style="margin-left:30px;">昵称：<input name="UserName" style="width:80px;" id="Text12" type="text" /></td>
+                            </tr>
+
+                            <tr>
+                                <td>真&nbsp;&nbsp;名：<input name="RealName" style="width:80px;" id="Text13" type="text" value=" " /></td>
+                                <td style="margin-left:30px;">Email:&nbsp;<input name="Email" style="width:80px;" id="Text14" type="text" /></td>
+                            </tr>
+                            <tr>
+                                <td>电&nbsp;&nbsp;话：<input name="Phone" style="width:80px;" id="Text15" type="text" /></td>
+                                <td style="margin-left:30px;">角色：@Html.DropDownList("RoleId", null, htmlAttributes: new { @style = "width:80px;border: solid 1px red;" })</td>
+                            </tr>
+                            <tr>
+                                <td style="margin-left:30px;">部&nbsp;&nbsp;门：@Html.DropDownList("DepartId", null, htmlAttributes: new { @style = "width:80px;border: solid 1px red;" })</td>
+                            </tr>
+                        </table>
+                        <input id="btnSub" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:-5px;margin-left:193px;width:82px;background-color:gainsboro" onclick=" insert()" />
                     </form>
                 </div>
             </div>
@@ -189,9 +215,6 @@
 </html>
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script>
-
-
-
     var pageIndex = 1;
     var pageSize = 10;
     var pageCount = 0;
@@ -245,9 +268,6 @@
         return false;
     });
 
-
-
-
     //全选以及反选
     $(function () {
         $("#Checkbox1").click(function () {
@@ -263,9 +283,7 @@
         });
 
     });
-
-
-
+    
     //分页加载全部
     function PageList() {
         var name = $("#Text1").val();
@@ -279,8 +297,8 @@
                 rows = result.PageCount;
                 $("#tb1 tr").remove();
                 $.each(result.DataList, function (index, data) {
-
                     $("#tb1").append("<tr><td><input id='Checkbox5' type='checkbox' name='item' /></td><td>" + data.UserName + "</td><td>" + data.UserCode + "</td><td>" + data.RealName + "</td><td>" + data.Email + "</td><td>" + data.Phone + "</td><td>" + data.DepartId + "</td><td>" + data.RoleId + "</td><td></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='divShow(" + data.Id + ")'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='Del(" + data.Id + ")'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
+                    
                 });
 
             },
@@ -319,7 +337,6 @@
                 dataType: "json",
                 contentType: "application/json",
                 success: function (result) {
-                    alert(JSON.stringify(result))
                     if (result > 0) {
                         alert("删除成功");
                         layFenYe();
@@ -342,7 +359,7 @@
         layui.use('layer', function () {
             var layer = layui.layer;
             layer.open({
-                title: ['添加员工信息', 'font-size:15px'],
+                title: ['修改员工信息', 'font-size:15px'],
                 area: ['420px', '190px'], //宽高
                 type: 1,
                 shade: 0,
@@ -361,6 +378,7 @@
         })
         divselect(id);
     }
+    //点击修改查询数据
     function divselect(id)
     {
         $.ajax({
@@ -386,6 +404,7 @@
 
         });
     }
+    //修改
     function Update()
     {
        
@@ -416,6 +435,59 @@
             }
 
         });
+    }
+    //新增
+    function insert() {
+        var UserName = $("#Text12").val();
+        var RealName = $("#Text13").val();
+        var Email = $("#Text14").val();
+        var Phone = $("#Text15").val();
+        var DepartId = $("#hideADD #RoleId").val();
+        var RoleId = $("#hideADD #DepartId").val();
+        $.ajax({
+            type: "POST",
+            url: "/Text/insert",
+            data: "{UserName:'" + UserName + "',RealName:'" + RealName + "',Email:'" + Email + "',Phone:'" + Phone + "',DepartId:'" + DepartId + "',RoleId:'" + RoleId + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("新增成功！");
+                    PageList();
+                } else {
+                    alert("新增失败！");
+                }
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+
+        });
+    }
+   
+    //编辑弹出层
+    function xz() {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                title: ['修改员工信息', 'font-size:15px'],
+                area: ['420px', '190px'], //宽高
+                type: 1,
+                shade: 0,
+                content: $('#hideADD'),
+                //btn: ['确定', '关闭'],
+                yes: function (index, layero) {
+                    //index为当前层索引
+                    //layero 为 弹出层对象
+                    //在回调函数末尾添加 “return false”可以禁止点击该按钮关闭弹出层
+                    return false;
+                },
+                cancel: function () {//右上角关闭毁回调
+                    //return false;
+                }
+            })
+        })
+       
     }
 </script>
 
