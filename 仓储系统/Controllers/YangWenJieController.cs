@@ -26,20 +26,27 @@ namespace 仓储系统.Controllers
         {
             return View();
         }
+
+        //
+        public ActionResult menuPopup()
+        {
+            return View();
+        }
+
         //分页加载页面
         public ActionResult getDepart(int pageIndex, int pageSize, string name)
         {
-            if (!string.IsNullOrEmpty(name))
-            {
-                //根据部门名查询
-                return Json(DepartManager.getDepartByName(pageIndex, pageSize, name), JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                //页面加载
-                return Json(DepartManager.getDepart(pageIndex, pageSize), JsonRequestBehavior.AllowGet);
-            }
-
+            //if (!string.IsNullOrEmpty(name))
+            //{
+            //    //根据部门名查询
+            //    return Json(DepartManager.getDepartByName(pageIndex, pageSize, name), JsonRequestBehavior.AllowGet);
+            //}
+            //else
+            //{
+            //    //页面加载
+            //    return Json(DepartManager.getDepart(pageIndex, pageSize), JsonRequestBehavior.AllowGet);
+            //}
+            return Json(DepartManager.getDepartByName(pageIndex, pageSize, name), JsonRequestBehavior.AllowGet);
         }
         //新增
         public ActionResult Add(Depart det)
@@ -87,5 +94,27 @@ namespace 仓储系统.Controllers
             return Json(FunctionManager.delFunction(fun,id), JsonRequestBehavior.AllowGet);
         }
 
+
+        public ActionResult menuSelectById(int id)
+        {
+            return Json(FunctionManager.menuSelectById(id), JsonRequestBehavior.AllowGet);
+        }
+
+        //修改
+        public ActionResult upFunctionById(Function fun, int id)
+        {
+            return Json(FunctionManager.upFunctionById(fun, id), JsonRequestBehavior.AllowGet);
+        }
+        //新增
+        //public ActionResult menuAdd(Function fun)
+        //{
+        //    Random random = new Random();
+        //    string n = random.Next(1000000, 10000000).ToString();
+        //    //det.DepartNum = n;
+        //    //det.CreateUser = "DA_0000";
+        //    //det.CreateTime = DateTime.Now;
+        //    //det.IsDelete = 0;
+        //    //return Json(DepartManager.Add(det), JsonRequestBehavior.AllowGet);
+        //}
     }
 }

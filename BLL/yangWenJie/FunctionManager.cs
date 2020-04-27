@@ -21,7 +21,21 @@ namespace BLL
         }
         public static int delFunction(Function fun, int id)
         {
-            return FunctionService.delFunction(fun,id);
+            return FunctionService.delFunction(fun, id);
+        }
+        public static int Add(Function fun)
+        {
+            return FunctionService.Add(fun);
+        }
+
+        public static List<Function> menuSelectById(int id)
+        {
+            return FunctionService.menuSelectById(id);
+        }
+
+        public static int upFunctionById(Function fun, int id)
+        {
+            return FunctionService.upFunctionById(fun, id);
         }
     }
 }

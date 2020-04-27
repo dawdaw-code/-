@@ -46,10 +46,12 @@ namespace DAL
                           CreateUser = p.CreateUser,
                           CreateTime = p.CreateTime
                       };
+            //判断name是否为空
             if (!string.IsNullOrEmpty(name))
             {
                 for (int i = 0; i < name.Length; i++)
                 {
+                    //判断name是否为数字   
                     if (!Char.IsNumber(name, i))
                     {
                         obj = obj.Where(item => item.DisplayName.IndexOf(name) != -1);
@@ -61,7 +63,6 @@ namespace DAL
                     }
                 }
             }
-
             list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
             int rows = obj.Count();
             list.PageCount = rows;
@@ -86,16 +87,24 @@ namespace DAL
             obj.IsDelete = 1;
             return con.SaveChanges();
         }
+        //根据ID查询
+        public static List<Function> menuSelectById(int id) {
+            WarehouseEntities con = new WarehouseEntities();
+            var obj = from p in con.Function where p.NodeId == id select p;
+            return obj.ToList();
+        }
+
 
         //根据id修改
-        //public static int upFunctionById(string DepartName, int id)
-        //{
-        //    WarehouseEntities con = new WarehouseEntities();
-        //    var obj = (from p in con.Depart where p.Id == id select p).First();
-        //    obj.DepartName = DepartName;
-        //    obj.CreateTime = DateTime.Now; ;
-        //    return con.SaveChanges();
-        //}
+        public static int upFunctionById(Function fun, int id)
+        {
+            WarehouseEntities con = new WarehouseEntities();
+            var obj = (from p in con.Function where p.NodeId == id select p).First();
+            obj.DisplayName = fun.DisplayName;
+            obj.NodeURL = fun.NodeURL;
+            obj.CreateTime = DateTime.Now; ;
+            return con.SaveChanges();
+        }
     }
 }
 

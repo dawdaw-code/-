@@ -36,7 +36,7 @@
             line-height: 0px;
         }
 
-        h5 {
+        h4 {
             margin-left: 50px;
             margin-top: 20px;
             line-height: 0px;
@@ -93,10 +93,10 @@
 
             <div id="dingchen">
                 <div style="position:absolute;top:10px;left:20px;">
-                    <img style="float:left" src="~/Jpggzi.png" /> <div style="width:200px;"><a href="">首页</a>><a href="">系统设置</a>><a href="">员工管理</a></div>
+                    <img style="float:left" src="~/Jpggzi.png" /> <div style="width:200px;"><a href="">首页</a>><a href="">系统设置</a>><a href="">部门管理</a></div>
                 </div>
             </div>
-            <h5>部门管理</h5>
+            <h4>部门管理</h4>
             <div id="text-3">
                 @*<input id="Button1" type="button" value="新增" class="btn btn-primary" onclick="Add" />*@
                 <input id="Button1" data-method="offset" type="button" @*data-type="auto"*@ value="新增" class="btn btn-primary" onclick="divInsertShow()" />
@@ -106,7 +106,7 @@
             </div>
             <div id="text-4">
                 <div id="text-2">
-                    <input id="Text1" type="text" /><input id="Button1" type="button" value="搜索" class="btn btn-info" onclick="PageList()" />
+                    <input id="Text1" type="text" placeholder="请输入编号或名称"/><input id="Button1" type="button" value="搜索" class="btn btn-info" onclick="PageList()" />
                 </div>
                 <table style="width:100%;" class="layui-table" id="table1">
                     <thead>
@@ -138,78 +138,12 @@
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script>
 
-    $(function () {
-        layui.use(['laypage', 'layer'], function () {
-            var laypage = layui.laypage
-                , layer = layui.layer;
-            laypage.render({
-                elem: 'pageDemo'
-                , count: rows
-                , limit: 10
-                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
-                , jump: function (obj) {
-                    //console.log(obj)
-                    pageIndex = obj.curr;
-                    pageSize = obj.limit;
-                    PageList();
-                }
-            });
-        });
-        PageList();
-
-    });
+    
     var pageIndex = 1;
     var pageSize = 10;
     var pageCount = 0;
     var rows = 0;
     
-
-    function layFenYe() {
-
-    }
-
-    $("#First").click(function () {
-        pageIndex = 1;
-        PageList();
-        return false;
-    });
-    $("#Back").click(function () {
-        pageIndex--;
-        PageList();
-        return false;
-    });
-    $("#Next").click(function () {
-        pageIndex++;
-        PageList();
-        return false;
-    });
-    $("#Last").click(function () {
-        pageIndex = pageCount;
-        PageList();
-        return false;
-    });
-
-    //全选以及反选
-    $(function () {
-        $("#Checkbox1").click(function () {
-            if (this.checked) {
-                $("input[name='item']:checkbox").each(function () {
-                    $(this).prop("checked", true);
-                });
-            } else {
-                $("input[name='item']:checkbox").each(function () {
-                    $(this).prop("checked", false);
-                });
-            }
-        });
-    });
-
-    //时间格式转化
-    function Datte(time) {
-        var date = new Date(parseInt(time.substr(6)));
-        return date.toLocaleDateString();
-    }
-
     //分页加载全部
     function PageList() {
         var name = $("#Text1").val();
@@ -233,6 +167,76 @@
         });
     }
 
+    $(function () {
+        PageList();
+
+        layui.use(['laypage', 'layer'], function () {
+            var laypage = layui.laypage
+                , layer = layui.layer;
+            laypage.render({
+                elem: 'pageDemo'
+                , count: rows
+                , limit: 10
+                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+                , jump: function (obj) {
+                    //console.log(obj)
+                    pageIndex = obj.curr;
+                    pageSize = obj.limit;
+                    PageList();
+                }
+            });
+        });
+    });
+
+
+    function layFenYe() {
+
+    }
+
+    //$("#First").click(function () {
+    //    pageIndex = 1;
+    //    PageList();
+    //    return false;
+    //});
+    //$("#Back").click(function () {
+    //    pageIndex--;
+    //    PageList();
+    //    return false;
+    //});
+    //$("#Next").click(function () {
+    //    pageIndex++;
+    //    PageList();
+    //    return false;
+    //});
+    //$("#Last").click(function () {
+    //    pageIndex = pageCount;
+    //    PageList();
+    //    return false;
+    //});
+
+    //全选以及反选
+    $(function () {
+        $("#Checkbox1").click(function () {
+            if (this.checked) {
+                $("input[name='item']:checkbox").each(function () {
+                    $(this).prop("checked", true);
+                });
+            } else {
+                $("input[name='item']:checkbox").each(function () {
+                    $(this).prop("checked", false);
+                });
+            }
+        });
+    });
+
+    //时间格式转化
+    function Datte(time) {
+        var date = new Date(parseInt(time.substr(6)));
+        return date.toLocaleDateString();
+    }
+
+    
+
     function CheckboxYN() {
         if ($("input[name=item]:checked").length > 0) {
             if (confirm("确定要删除吗？")) {
@@ -248,13 +252,13 @@
                     success: function (msg) {
                         if (msg == "OK") {
                             alert("删除成功");
-
                         }
                         else {
                             alert("删除失败!");
                         }
                     }
                 });
+                
             };
         }
         else {
@@ -358,6 +362,7 @@
                     if (result > 0) {
                         alert("新增成功");
                         PageList();
+                        $(".layui-laypage-btn").click()
                     }
                     else {
                         alert("新增失败");

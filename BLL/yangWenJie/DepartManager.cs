@@ -10,10 +10,7 @@ namespace BLL
 {
     public class DepartManager
     {
-        public static PageList getDepart(int pageIndex, int pageSize)
-        {
-            return DepartService.getDepart(pageIndex, pageSize);
-        }
+        
         public static PageList getDepartByName(int pageIndex, int pageSize, string name)
         {
             return DepartService.getDepartByName(pageIndex, pageSize, name);
