@@ -106,15 +106,15 @@ namespace 仓储系统.Controllers
             return Json(FunctionManager.upFunctionById(fun, id), JsonRequestBehavior.AllowGet);
         }
         //新增
-        //public ActionResult menuAdd(Function fun)
-        //{
-        //    Random random = new Random();
-        //    string n = random.Next(1000000, 10000000).ToString();
-        //    //det.DepartNum = n;
-        //    //det.CreateUser = "DA_0000";
-        //    //det.CreateTime = DateTime.Now;
-        //    //det.IsDelete = 0;
-        //    //return Json(DepartManager.Add(det), JsonRequestBehavior.AllowGet);
-        //}
+        public ActionResult menuAdd(Function fun)
+        {
+            Random random = new Random();
+            int n = random.Next(10000, 100000);
+            fun.NodeId = n;
+            fun.ParentNodeId = n;
+            fun.CreateTime = DateTime.Now;
+            fun.IsDelete = 0;
+            return Json(FunctionManager.Add(fun), JsonRequestBehavior.AllowGet);
+        }
     }
 }

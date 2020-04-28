@@ -72,30 +72,7 @@
             border: 1px solid red;
         }
 
-
-
-        #Button0 {
-            background-color: #2F96B4;
-            color: white;
-            color: white;
-            width: 80px;
-            height: 30px;
-        }
-
-
-        #Button2 {
-            background-color: #BD362F;
-            color: white;
-            width: 80px;
-            height: 30px;
-        }
-
-        #Button3 {
-            background-color: #2F96B4;
-            color: white;
-            width: 80px;
-            height: 30px;
-        }
+        
 
         #table1 {
             text-align: center;
@@ -124,7 +101,6 @@
                 @*<button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal">居中弹出</button>*@
             </div>
             <div id="text-4">
-
                 <div id="text-2">
                     <input id="Text1" type="text" placeholder="请输入编号或名称" /><input id="Button1" type="button" value="搜索" class="btn btn-info" onclick="PageList1()" />
                 </div>
@@ -151,11 +127,10 @@
     <div id="tan" style="display:none;">
         <form id="form1">
             <table class="table text-center" id="tabInfo">
-
                 <thead>
                     <tr>
                         <td>编号</td>
-                        <td><input id="Text5" type="text" name="NodeId" /></td>
+                        <td><input id="Text5" type="text" name="NodeId" placeholder="自动生成" readonly/></td>
                     </tr>
                     <tr>
                         <td>菜单名称</td>
@@ -169,7 +144,6 @@
                         <td>创建人</td>
                         <td><input id="Text4" type="text" name="CreateUser" /></td>
                     </tr>
-
             </table>
         </form>
     </div>
@@ -177,8 +151,6 @@
 </html>
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script>
-
-
 
     var pageIndex = 1;
     var pageSize = 10;
@@ -209,9 +181,9 @@
             }
         });
     }
-
-
+    
     $(function () {
+
         PageList1();
 
         layui.use(['laypage', 'layer'], function () {
@@ -230,10 +202,9 @@
                 }
             });
         });
+        
     });
-
-
-
+    
 
     //时间格式转化
     function Datte(time) {
@@ -252,11 +223,9 @@
                 success: function (result) {
                     if (result > 0) {
                         alert("删除成功");
-                        layFenYe();
                         PageList1();
-                        table.reload('table1');
+                        //table.reload('table1');
                     }
-
                     else {
                         alert("删除失败");
                     }
@@ -270,6 +239,7 @@
     }
 
     function divUpdateShow(id) {
+        $("#layui-layer1").css("display", "inline-block");
         layui.use('layer', function () {
             var layer = layui.layer;
             layer.open({
@@ -293,6 +263,7 @@
                                 $("#layui-layer1").css("display", "none");
 
                                 PageList1();
+                                //setTimeout(function () { parent.layer.close() }, 100);//延迟
                             }
                             else {
                                 alert("修改失败");
@@ -308,7 +279,6 @@
                     //return false;
                 }
             })
-
         })
         $.ajax({
             type: "POST",
@@ -330,15 +300,49 @@
             ,
         });
     }
-    function Del() {
-        layer.open({
-            title: '编辑菜单',
-            type: 2,
 
-            area: ["400px", "260px"],
+    //新增
+    function divInsertShow() {
+        //alert(1);
+        $("#layui-layer1").css("display", "inline-block");
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                title: ['添加产品', 'font-size:15px'],
+                area: ["400px", "270px"], //宽高
+                btn: ['确定', '关闭'],
+                type: 1,
+                shade: 0,
+                content: $('#tan'),
+                yes: function (index, layero) {
 
-            content: "/Yangwenjie/menuPopup"
+                    $.ajax({
+                        type: "POST",
+                        url: "/Yangwenjie/menuAdd",
+                        data: "{fun:{DisplayName:'" + $("#Text2").val() + "',NodeURL:'" + $("#Text3").val() + "',CreateUser:'" + $("#Text4").val() + "'}}",
+                        dataType: "json",
+                        contentType: "application/json",
+                        success: function (result) {
+                            if (result > 0) {
+                                alert("新增成功");
+                                $("#layui-layer1").css("display", "none");
+                                PageList1();
 
+                            }
+                            else {
+                                alert("新增失败");
+                            }
+                        },
+                        //请求失败后的回调函数
+                        error: function (ex) {
+                            alert(ex.responseText);
+                        }
+                    });
+                },
+                cancel: function () {//右上角关闭毁回调
+                    //return false;
+                }
+            })
         })
     }
 </script>
