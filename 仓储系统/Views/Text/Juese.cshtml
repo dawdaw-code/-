@@ -167,7 +167,7 @@
                                 
                             </tr>
                             <tr>
-                                <td style="margin-left:1000px;">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：<input style="width:80px;" id="Text1" type="text" /></td>
+                                <td style="margin-left:1000px;">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：<input style="margin-left:1px; width:80px;" id="Text1" type="text" /></td>
                                
                             </tr>
                         </table>
@@ -182,16 +182,13 @@
 </html>
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script>
-
-
-
     var pageIndex = 1;
     var pageSize = 10;
     var pageCount = 0;
     var rows = 0;
     $(function () {
-        PageList();
         layFenYe();
+        PageList();
         $("#xz").click(function dasd() {
             $("o", "p").divShow();
         })
@@ -216,31 +213,6 @@
             });
         });
     }
-
-    $("#First").click(function () {
-        pageIndex = 1;
-        PageList();
-        return false;
-    });
-    $("#Back").click(function () {
-        pageIndex--;
-        PageList();
-        return false;
-    });
-    $("#Next").click(function () {
-        pageIndex++;
-        PageList();
-        return false;
-    });
-    $("#Last").click(function () {
-        pageIndex = pageCount;
-        PageList();
-        return false;
-    });
-
-
-
-
     //全选以及反选
     $(function () {
         $("#Checkbox1").click(function () {
@@ -288,23 +260,7 @@
         });
         btnState();
     }
-
-    //设置按钮
-    function btnState() {
-        //先设置所有按钮为可用状态
-        $("#divBtn :button").prop("disabled", false);
-        if (pageIndex == 1) {
-            //禁用首页和上一页
-            $("#First").prop("disabled", true);
-            $("#Back").prop("disabled", true);
-        }
-        if (pageIndex == pageCount) {
-            //禁用尾页和下一页
-            $("#Next").prop("disabled", true);
-            $("#Last").prop("disabled", true);
-        }
-    }
-
+    
     //删除单行(修改表示ID)
     function Del(id) {
         if (confirm('是否删除?')) {

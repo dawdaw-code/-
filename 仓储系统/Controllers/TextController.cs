@@ -38,6 +38,8 @@ namespace 仓储系统.Controllers
             //id是隐藏值，name是显示值
             list1.Insert(0, new Depart { Id = 0, DepartName = "请选择" });
             ViewBag.DepartId = new SelectList(list1, "Id", "DepartName");
+
+            
             return View();
         }
         public ActionResult Juese()
@@ -50,17 +52,9 @@ namespace 仓储系统.Controllers
         }
         public ActionResult getDepart(int pageIndex, int pageSize, string name)
         {
-            if (!string.IsNullOrEmpty(name))
-            {
                 //根据部门名查询
                 return Json(YuangoManager.getDepartByName(pageIndex, pageSize, name), JsonRequestBehavior.AllowGet);
-            }
-            else
-            {
-                //页面加载
-                return Json(YuangoManager.getDepart(pageIndex, pageSize), JsonRequestBehavior.AllowGet);
-            }
-
+           
         }
         public ActionResult delDepart( int id)
         {
@@ -71,11 +65,11 @@ namespace 仓储系统.Controllers
         {
             return Json(YuangoManager.adminid(id),JsonRequestBehavior.AllowGet);
         }
-        public ActionResult adminidup(string id, string UserName, string RealName, string Email, string Phone, int DepartId, int RoleId)
+        public ActionResult adminidup(string id, string UserName, string RealName, string Email, string Phone, int DepartId, int RoleId)//员工修改
         {
             return Json(YuangoManager.adminidup(id, UserName, RealName, Email, Phone, DepartId, RoleId), JsonRequestBehavior.AllowGet);
         }
-        public ActionResult getRole(int pageIndex, int pageSize, string name)
+        public ActionResult getRole(int pageIndex, int pageSize, string name)//角色页面数据加载
         {
             if (!string.IsNullOrEmpty(name))
             {
@@ -90,10 +84,19 @@ namespace 仓储系统.Controllers
 
         }
         
-             public ActionResult delRole(int id)
+             public ActionResult delRole(int id)//员工删除
         {
             //det.IsDelete = 1;
             return Json(jueseManager.delRole(id), JsonRequestBehavior.AllowGet);
+        }
+        //新增
+        public ActionResult insert(string UserName, string RealName, string Email, string Phone, int DepartId, int RoleId)
+        {
+            var date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            date = date.Replace("-", "");
+            date = date.Replace(" ", "");
+            date = date.Replace(":", "");
+            return Json(YuangoManager.insert(date,  UserName,  RealName,  Email,  Phone,  DepartId,  RoleId), JsonRequestBehavior.AllowGet);
         }
     }
 }
