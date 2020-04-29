@@ -67,32 +67,7 @@ namespace DAL.luo
 
             return list;
         }
-        ////页面加载
-        //public static PageList getDepart(int pageIndex, int pageSize)
-        //{
-        //    WarehouseEntities entities = new WarehouseEntities();
-        //    PageList list = new PageList();
-        //    var obj = from p in entities.Admin
-        //              where p.IsDelete == 0
-        //              orderby p.Id
-        //              select new
-        //              {
-        //                  Id = p.Id,
-        //                  UserName = p.UserName,
-        //                  UserCode = p.UserCode,
-        //                  RealName = p.RealName,
-        //                  Email = p.Email,
-        //                  Phone = p.Phone,
-        //                  DepartId = p.Depart.DepartNum,
-        //                  RoleId = p.Role.RoleName
-        //              };
-        //    list.DataList = obj.Skip((pageIndex - 1) * pageSize).Take(pageSize);
-        //    //设置总页数
-        //    int rows = obj.Count();
-        //    list.PageCount = rows; //rows % pageSize == 0 ? rows / pageSize : rows / pageSize + 1;
-
-        //    return list;
-        //}
+       
 
        
         public static List<Role> juesselect()
@@ -123,6 +98,7 @@ namespace DAL.luo
                       };
             return obj;
         }
+        //修改
         public static int adminidup(string id ,string UserName, string RealName, string Email, string Phone, int DepartId , int RoleId)
         {
             WarehouseEntities entities = new WarehouseEntities();

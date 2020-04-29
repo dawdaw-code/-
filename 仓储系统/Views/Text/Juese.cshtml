@@ -62,8 +62,9 @@
         }
 
         #text-4 {
-            /*border: solid 1px red;*/
-            height: 800px;
+            border: solid 1px red;
+            height: 585px;
+            overflow-x: auto;
         }
 
         #table1 {
@@ -76,27 +77,9 @@
             height: 40px;
             background-color: #d4d3d3;
         }
-
-
-        #o {
-            width: 100%;
-            height: 100%;
-            opacity: 0.1;
-            display: none;
-            position: absolute;
-            z-index: 1;
-            background-color: gainsboro;
-        }
-
-        #p {
-            display: none;
-            width: 350px;
-            position: absolute;
-            top: 30px;
-            left: 380px;
-            z-index: 2;
-            background: white;
-            border: 1px solid #ddd;
+        #pageDemo {
+            text-align: center;
+            /*border: 1px solid red;*/
         }
     </style>
 </head>
@@ -116,22 +99,20 @@
                 <h4 style="font-size:20px;">角色管理</h4>
             </div>
             <br />
-            <div style="height:40px">
+            <div style="height:20px">
                 <div id="text-3">
-                    <input id="xz" data-method="offset" type="button" data-type="auto" value="新增" class="btn btn-primary" />
-                    <div id="o"></div>
-                    <div id="p">dawdawdawd</div>
-                    <input id="Button1" type="button" value="删除" class="btn btn-danger" />
+                    <input id="xz" data-method="offset" type="button" data-type="auto" value="新增"onclick="xz()" class="btn btn-primary" />
+                    <input id="del" type="button" value="删除" class="btn btn-danger" />
                     <input id="Button1" type="button" value="导出" class="btn btn-info" />
                 </div>
                 <div id="text-4">
                     <div id="text-2">
-                        <input id="Text1" type="text" /><input id="Button1" type="button" value="搜索" class="btn btn-info" onclick="PageList()" />
+                        <input id="Text1" type="text"placeholder="根据角色名查询"  /><input id="Button1"type="button" value="搜索" class="btn btn-info" onclick="PageList()" />
                     </div>
                     <table style="width:100%;" class="layui-table" id="table1">
                         <thead>
                             <tr>
-                                <td><input id="Checkbox1" type="checkbox" name="item" /></td>
+                                <td><input id="chkAll" type="checkbox" name="item" /></td>
                                 <td>序号</td>
                                 <td>角色编号</td>
                                 <td>角色名</td>
@@ -146,33 +127,48 @@
 
                     </div>
                     @*<div id="divBtn" style="text-align:center;">
-                        <input id="First" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="首页" />
-                        <input id="Back" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="上一页" />
-                        <input id="Next" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="下一页" />
-                        <input id="Last" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="尾页" />
-                    </div>*@
+                    <input id="First" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="首页" />
+                    <input id="Back" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="上一页" />
+                    <input id="Next" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="下一页" />
+                    <input id="Last" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="尾页" />
+                </div>*@
                 </div>
             </div>
+            @*修改*@
             <div id="hidePage" style="display:none;">
                 <div style="text-align:center;margin-top:20px;">
                     <form id="form1">
                         <table style="border-spacing:10px 30px; margin-left:60px;width:300px;">
                             <tr>
-                                <td>角色编号：<input style="width:80px;" id="Text1" type="text" /></td>
-                                
-                            </tr>
-
-                            <tr>
-                                <td>角色名称：<input style="width:80px;" id="Text1" type="text" /></td>
-                                
+                                <td>角色编号：<input style="width:80px;" id="bianhao" type="text" disabled="disabled" /></td>
                             </tr>
                             <tr>
-                                <td style="margin-left:1000px;">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：<input style="margin-left:1px; width:80px;" id="Text1" type="text" /></td>
-                               
+                                <td>角色名称：<input style="width:80px;" id="mingchen" type="text" /></td>
+                            </tr>
+                            <tr>
+                                <td style="margin-left:1000px;">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：<input style="margin-left:1px; width:80px;" id="biezhu" type="text" /></td>
                             </tr>
                         </table>
-                        <input id="btnSub" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:5px;margin-left:10px;" onclick=" Update()" />
-                        <input id="Button2" type="button" value="关闭" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:5px;margin-left:10px;" />
+                        <input id="btnSub" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:70px;width:82px;background-color:gainsboro" onclick=" UpdateRole()" />
+                    </form>
+                </div>
+            </div>
+            @*新增*@
+            <div id="insert" style="display:none;">
+                <div style="text-align:center;margin-top:20px;">
+                    <form id="form1">
+                        <table style="border-spacing:10px 30px; margin-left:60px;width:300px;">
+                            <tr>
+                                <td>角色编号：<input style="width:80px;" id="Text1" type="text" disabled="disabled" placeholder="自动生成" /></td>
+                            </tr>
+                            <tr>
+                                <td>角色名称：<input style="width:80px;" id="Text2" type="text" /></td>
+                            </tr>
+                            <tr>
+                                <td style="margin-left:1000px;">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注：<input style="margin-left:1px; width:80px;" id="Text3" type="text" /></td>
+                            </tr>
+                        </table>
+                        <input id="btnSub" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:70px;width:82px;background-color:gainsboro" onclick=" insert()" />
                     </form>
                 </div>
             </div>
@@ -187,18 +183,11 @@
     var pageCount = 0;
     var rows = 0;
     $(function () {
-        layFenYe();
+        
         PageList();
-        $("#xz").click(function dasd() {
-            $("o", "p").divShow();
-        })
-    });
-
-    function layFenYe() {
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
-
             laypage.render({
                 elem: 'pageDemo'
                 , count: rows
@@ -212,20 +201,50 @@
                 }
             });
         });
-    }
+    });
     //全选以及反选
     $(function () {
-        $("#Checkbox1").click(function () {
-            if (this.checked) {
-                $("input[name='item']:checkbox").each(function () {
-                    $(this).prop("checked", true);
-                });
+        
+        //全选加事件
+        $("#chkAll").click(function () {
+            var f = $(this).prop("checked");	 //获取自己的
+            $(".ck").prop("checked", f);
+        });
+
+        //删除
+        $("#del").click(function () {
+            var a = $("tbody input:checked").length;
+            if (a == 0) {
+                alert("请选择要删除的记录");
             } else {
-                $("input[name='item']:checkbox").each(function () {
-                    $(this).prop("checked", false);
-                });
+                var b = confirm("您确定要删除选中的" + a + "条记录吗");
+                if (b == true) {
+                    var text = $("tbody input:checkbox:checked").map(function (index, elem) {
+                        return $(elem).val();
+                    }).get().join(',');
+                    //alert("选中的checkbox的值为：" + text);
+                    var arr = text.split(',');
+                    var str = [];
+                    for (var i = 0; i < arr.length; i++) {
+                        var list = {};
+                        list.Id = arr[i];
+                        str.push(list);
+                    }
+                    //alert(JSON.stringify(str));
+                    $.ajax({
+                        url: "/Text/DeleteOther",
+                        data: { list: str },
+                        dataType: "json",
+                        type: "post",
+                        success: function (result) {
+                            alert(result);
+                            PageList();
+                        }
+                    });
+                }
             }
         });
+
 
     });
 
@@ -243,13 +262,14 @@
             url: "/Text/getRole",
             data: "{pageIndex:'" + pageIndex + "',pageSize:'" + pageSize + "',name:'" + name + "'}",
             dataType: "json",
+            async: false,
             contentType: "application/json",
             success: function (result) {
                 rows = result.PageCount;
                 $("#tb1 tr").remove();
                 $.each(result.DataList, function (index, data) {
 
-                    $("#tb1").append("<tr><td><input id='Checkbox5' type='checkbox' name='item' /></td><td>" + data.Id + "</td><td>" + data.RoleNum + "</td><td>" + data.RoleName + "</td><td>" + Datte(data.CreateTime) + "</td><td>" + data.Remark + "</td><td></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='divShow(" + data.Id + ")'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='Del(" + data.Id + ")'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
+                    $("#tb1").append("<tr><td><input class='ck' value='" + data.Id + "' type='checkbox' name='item' /></td><td>" + data.Id + "</td><td>" + data.RoleNum + "</td><td>" + data.RoleName + "</td><td>" + Datte(data.CreateTime) + "</td><td>" + data.Remark + "</td><td></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='divShow(" + data.Id + ")'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='Del(" + data.Id + ")'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
                 });
 
             },
@@ -258,7 +278,7 @@
                 alert(ex.responseText);
             }
         });
-        btnState();
+        
     }
     
     //删除单行(修改表示ID)
@@ -287,17 +307,111 @@
             });
         }
     }
+    //新增
+    function insert() {
+        var RoleName = $("#Text2").val();
+        var Remark = $("#Text3").val();
+        
+        $.ajax({
+            type: "POST",
+            url: "/Text/insertRole",
+            data: "{RoleName:'" + RoleName + "',Remark:'" + Remark + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("新增成功！");
+                    PageList();
+                } else {
+                    alert("新增失败！");
+                }
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
 
+        });
+    }
     //编辑弹出层
     function divShow(id) {
         layui.use('layer', function () {
             var layer = layui.layer;
             layer.open({
-                title: ['添加员工信息', 'font-size:15px'],
+                title: ['添加角色信息', 'font-size:15px'],
                 area: ['420px', '190px'], //宽高
                 type: 1,
                 shade: 0,
                 content: $('#hidePage'),
+                //btn: ['确定', '关闭'],
+                yes: function (index, layero) {
+                    //index为当前层索引
+                    //layero 为 弹出层对象
+                    //在回调函数末尾添加 “return false”可以禁止点击该按钮关闭弹出层
+                    return false;
+                },
+                cancel: function () {//右上角关闭毁回调
+                    //return false;
+                }
+            })
+        })
+        divselect(id);
+    }
+    //点击修改查询数据
+    function divselect(id) {
+        $.ajax({
+            type: "POST",
+            url: "/Text/Role",
+            data: "{Id:'" + id + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $("#bianhao").val(data.RoleNum);
+                    $("#mingchen").val(data.RoleName);
+                    $("#biezhu").val(data.Remark);
+                })
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+
+        });
+    }
+    //修改
+    function UpdateRole() {
+        var id = $("#bianhao").val();
+        var RoleName = $("#mingchen").val();
+        var Remark = $("#biezhu").val();
+        $.ajax({
+            type: "POST",
+            url: "/Text/update",
+            data: "{id:'" + id + "',RoleName:'" + RoleName + "',Remark:'" + Remark + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("修改成功！");
+                    PageList();
+                } else {
+                    alert("修改失败！");
+                }
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+
+        });
+    }
+    //新增弹层
+    function xz() {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                title: ['新增角色信息', 'font-size:15px'],
+                area: ['420px', '190px'], //宽高
+                type: 1,
+                shade: 0,
+                content: $('#insert'),
                 //btn: ['确定', '关闭'],
                 yes: function (index, layero) {
                     //index为当前层索引

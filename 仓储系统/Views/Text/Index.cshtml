@@ -53,14 +53,17 @@
                     url: "/Text/Indexselect",
                     data: { name: Name, pwd: Pwd },
                     success: function (result) {
-                        if (result != null) {
-                            window.location.href = "@Url.Action("Zhuti")";
-                        }
+                        $.each(result, function (index, data) {
+                        alert(JSON.stringify(data))
+                            if (result != null) {
+                                window.location.href = "@Url.Action("Zhuti")";
+                            }
 
-                        else {
+                            else {
 
-                            alert("失败");
-                        }
+                                alert("失败");
+                            }
+                        })
                     },
                     error: function (ex) {
                         alert(ex.responseText);

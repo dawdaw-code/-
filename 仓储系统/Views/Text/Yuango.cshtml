@@ -64,7 +64,8 @@
 
         #text-4 {
             /*border: solid 1px red;*/
-            height: 800px;
+            height: 880px;
+            overflow-x: auto;
         }
 
         #table1 {
@@ -78,27 +79,10 @@
             background-color: #d4d3d3;
             
         }
-
-
-        #o {
-            width: 100%;
-            height: 100%;
-            opacity: 0.1;
-            display: none;
-            position: absolute;
-            z-index: 1;
-            background-color: gainsboro;
-        }
-
-        #p {
-            display: none;
-            width: 350px;
-            position: absolute;
-            top: 30px;
-            left: 380px;
-            z-index: 2;
-            background: white;
-            border: 1px solid #ddd;
+      
+        #pageDemo {
+            text-align: center;
+            /*border: 1px solid red;*/
         }
     </style>
 </head>
@@ -112,8 +96,6 @@
 
                 </div>
             </div>
-
-
             <div id="h4">
                 <h4 style="font-size:20px;">员工管理</h4>
             </div>
@@ -121,19 +103,17 @@
             <div style="height:40px">
                 <div id="text-3">
                     <input onclick="xz()" data-method="offset" type="button" data-type="auto" value="新增" class="btn btn-primary" />
-                    <div id="o"></div>
-                    <div id="p">dawdawdawd</div>
-                    <input id="Button1" type="button" value="删除" class="btn btn-danger" />
+                    <input id="del" type="button" value="删除" class="btn btn-danger" />
                     <input id="Button1" type="button" value="导出" class="btn btn-info" />
                 </div>
                 <div id="text-4">
                     <div id="text-2">
-                        <input id="Text1" type="text" /><input id="Button1" type="button" value="搜索" class="btn btn-info" onclick="PageList()" />
+                        <input id="Text1" type="text"placeholder="根据用户名查询"  /><input id="Button1" type="button" value="搜索" class="btn btn-info" onclick="PageList()" />
                     </div>
                     <table style="width:100%;" class="layui-table" id="table1">
                         <thead>
                             <tr>
-                                <td><input id="Checkbox1" type="checkbox" name="item" /></td>
+                                <td><input id="chkAll" type="checkbox" name="item" /></td>
                                 <td>用户名</td>
                                 <td>编号</td>
                                 <td>真名</td>
@@ -189,7 +169,7 @@
                     <form id="form1">
                         <table style="border-spacing:10px 30px; margin-left:60px;width:300px;">
                             <tr>
-                                <td>编&nbsp;&nbsp;号：<input style="width:80px;" id="Text16" type="text" disabled="disabled" /></td>
+                                <td>编&nbsp;&nbsp;号：<input style="width:80px;" id="Text16" type="text" disabled="disabled"placeholder="自动生成"  /></td>
                                 <td style="margin-left:30px;">昵称：<input name="UserName" style="width:80px;" id="Text12" type="text" /></td>
                             </tr>
 
@@ -270,15 +250,43 @@
 
     //全选以及反选
     $(function () {
-        $("#Checkbox1").click(function () {
-            if (this.checked) {
-                $("input[name='item']:checkbox").each(function () {
-                    $(this).prop("checked", true);
-                });
+        //全选加事件
+        $("#chkAll").click(function () {
+            var f = $(this).prop("checked");	 //获取自己的
+            $(".ck").prop("checked", f);
+        });
+
+        //删除
+        $("#del").click(function () {
+            var a = $("tbody input:checked").length;
+            if (a == 0) {
+                alert("请选择要删除的记录");
             } else {
-                $("input[name='item']:checkbox").each(function () {
-                    $(this).prop("checked", false);
-                });
+                var b = confirm("您确定要删除选中的" + a + "条记录吗");
+                if (b == true) {
+                    var text = $("tbody input:checkbox:checked").map(function (index, elem) {
+                        return $(elem).val();
+                    }).get().join(',');
+                    //alert("选中的checkbox的值为：" + text);
+                    var arr = text.split(',');
+                    var str = [];
+                    for (var i = 0; i < arr.length; i++) {
+                        var list = {};
+                        list.Id = arr[i];
+                        str.push(list);
+                    }
+                    //alert(JSON.stringify(str));
+                    $.ajax({
+                        url: "/Text/Deleteyuango",
+                        data: { list: str },
+                        dataType: "json",
+                        type: "post",
+                        success: function (result) {
+                            alert(result);
+                            PageList();
+                        }
+                    });
+                }
             }
         });
 
@@ -292,12 +300,13 @@
             url: "/Text/getDepart",
             data: "{pageIndex:'" + pageIndex + "',pageSize:'" + pageSize + "',name:'" + name + "'}",
             dataType: "json",
+            async: false,
             contentType: "application/json",
             success: function (result) {
                 rows = result.PageCount;
                 $("#tb1 tr").remove();
                 $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td><input id='Checkbox5' type='checkbox' name='item' /></td><td>" + data.UserName + "</td><td>" + data.UserCode + "</td><td>" + data.RealName + "</td><td>" + data.Email + "</td><td>" + data.Phone + "</td><td>" + data.DepartId + "</td><td>" + data.RoleId + "</td><td></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='divShow(" + data.Id + ")'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='Del(" + data.Id + ")'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
+                    $("#tb1").append("<tr><td><input class='ck' value='" + data.Id + "' type='checkbox' name='item' /></td><td>" + data.UserName + "</td><td>" + data.UserCode + "</td><td>" + data.RealName + "</td><td>" + data.Email + "</td><td>" + data.Phone + "</td><td>" + data.DepartId + "</td><td>" + data.RoleId + "</td><td></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='divShow(" + data.Id + ")'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='Del(" + data.Id + ")'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
                     
                 });
 
@@ -465,12 +474,12 @@
         });
     }
    
-    //编辑弹出层
+    //编辑新增弹出层
     function xz() {
         layui.use('layer', function () {
             var layer = layui.layer;
             layer.open({
-                title: ['修改员工信息', 'font-size:15px'],
+                title: ['新增员工信息', 'font-size:15px'],
                 area: ['420px', '190px'], //宽高
                 type: 1,
                 shade: 0,
@@ -487,7 +496,6 @@
                 }
             })
         })
-       
     }
 </script>
 

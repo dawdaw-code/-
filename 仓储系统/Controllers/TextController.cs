@@ -17,7 +17,14 @@ namespace 仓储系统.Controllers
         }
         public ActionResult Indexselect(string name, string pwd)
         {
-            return Json(BLL.luo.IndexManager.indexselect(name, pwd),JsonRequestBehavior.AllowGet);
+            IQueryable admin = BLL.luo.IndexManager.indexselect(name, pwd);
+
+            if (admin != null)
+            {
+
+                this.HttpContext.Session["userName"] = name;
+            }
+            return Json(admin, JsonRequestBehavior.AllowGet);
         }
         public ActionResult Home()
         {
@@ -56,7 +63,7 @@ namespace 仓储系统.Controllers
                 return Json(YuangoManager.getDepartByName(pageIndex, pageSize, name), JsonRequestBehavior.AllowGet);
            
         }
-        public ActionResult delDepart( int id)
+        public ActionResult delDepart( int id)//员工删除
         {
             //det.IsDelete = 1;
             return Json(YuangoManager.delDepart( id), JsonRequestBehavior.AllowGet);
@@ -84,7 +91,7 @@ namespace 仓储系统.Controllers
 
         }
         
-             public ActionResult delRole(int id)//员工删除
+             public ActionResult delRole(int id)//角色删除
         {
             //det.IsDelete = 1;
             return Json(jueseManager.delRole(id), JsonRequestBehavior.AllowGet);
@@ -97,6 +104,63 @@ namespace 仓储系统.Controllers
             date = date.Replace(" ", "");
             date = date.Replace(":", "");
             return Json(YuangoManager.insert(date,  UserName,  RealName,  Email,  Phone,  DepartId,  RoleId), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult insertRole( string RoleName, string Remark)
+        {
+            var date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            date = date.Replace("-", "");
+            date = date.Replace(" ", "");
+            date = date.Replace(":", "");
+            return Json(jueseManager.insert(date, RoleName, Remark), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Role(int id)
+        {
+            return Json(jueseManager.Role(id), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult update(string id, string RoleName, string Remark)
+        {
+            return Json(jueseManager.update(id, RoleName, Remark), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult Homeselectpwd(string name)
+        {
+            return Json(IndexManager.Homeselectpwd(name), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult updateADD(string name, string pwd)
+        {
+            return Json(IndexManager.update(name,pwd), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult DeleteOther(List<Role> list)
+        {
+            int val = 0;
+            foreach (var item in list)
+            {
+                val = jueseManager.delRole(item.Id);
+            }
+            if (val>0)
+            {
+                return Json("删除成功", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("删除失败", JsonRequestBehavior.AllowGet);
+            }
+        }
+        public ActionResult Deleteyuango(List<Role> list)
+        {
+            int val = 0;
+            foreach (var item in list)
+            {
+                val = YuangoManager.delDepart(item.Id);
+            }
+            if (val > 0)
+            {
+                return Json("删除成功", JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json("删除失败", JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }
