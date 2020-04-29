@@ -33,11 +33,16 @@ namespace 仓储系统.Controllers
             return View();
         }
 
-        //
-        public ActionResult menuPopup()
+        //客户管理页面跳转
+        public ActionResult keHuGuanLi()
         {
             return View();
         }
+        //
+        //public ActionResult menuPopup()
+        //{
+        //    return View();
+        //}
 
         //分页加载页面
         public ActionResult getDepart(int pageIndex, int pageSize, string name)
@@ -132,13 +137,13 @@ namespace 仓储系统.Controllers
             return Json(MeasureManager.getMeasureByName(pageIndex,pageSize,name),JsonRequestBehavior.AllowGet);
         }
 
-        //菜单删除(修改标识ID)
+        //计量单位删除(修改标识ID)
         public ActionResult delMeasure(int id)
         {
             return Json(MeasureManager.delMeasure(id), JsonRequestBehavior.AllowGet);
         }
 
-        //菜单新增
+        //计量单位新增
         public ActionResult AddMeasure(Measure mes)
         {
             Random random = new Random();
@@ -151,21 +156,63 @@ namespace 仓储系统.Controllers
         }
 
 
-        //菜单根据id查询
+        //计量单位根据id查询
         public ActionResult mesSelectById(int id)
         {
             return Json(MeasureManager.mesSelectById(id), JsonRequestBehavior.AllowGet);
         }
 
-        //菜单修改
+        //计量单位修改
         public ActionResult upMeasureById(Measure mes, int id)
         {
             return Json(MeasureManager.upMeasureById(mes, id), JsonRequestBehavior.AllowGet);
         }
 
 
+        //客户管理页面加载查询
+        public ActionResult getCustomerByName(int pageIndex, int pageSize, string name)
+        {
+            return Json(CustomerManager.getCustomerByName(pageIndex, pageSize, name), JsonRequestBehavior.AllowGet);
+        }
 
+        //客户管理删除(修改标识ID)
+        public ActionResult delCustomer(int id)
+        {
+            return Json(CustomerManager.delCustomer(id), JsonRequestBehavior.AllowGet);
+        }
 
+        //客户管理新增
+        public ActionResult AddCustomer(Customer cus)
+        {
+            Random random = new Random();
+            int n = random.Next(10000, 100000);
+            cus.CustomerNum = n.ToString();
+            cus.CreateTime = DateTime.Now;
+            cus.IsDelete = 0;
+            cus.CreateUser = "小明";
+            cus.Contacts = "A";
+            cus.Address = "交通东路";
+            return Json(CustomerManager.AddCustomer(cus), JsonRequestBehavior.AllowGet);
+        }
 
+        //客户管理根据id查询
+        public ActionResult CustomerSelectById(int id)
+        {
+            return Json(CustomerManager.CustomerSelectById(id), JsonRequestBehavior.AllowGet);
+        }
+
+        //客户管理修改
+        public ActionResult upCustomerById(Customer cus, int id)
+        {
+            Random random = new Random();
+            int n = random.Next(10000, 100000);
+            cus.CustomerNum = n.ToString();
+            cus.CreateTime = DateTime.Now;
+            cus.IsDelete = 0;
+            cus.CreateUser = "小明";
+            cus.Contacts = "A";
+            cus.Address = "交通东路";
+            return Json(CustomerManager.upCustomerById(cus, id), JsonRequestBehavior.AllowGet);
+        }
     }
 }
