@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "caiDanGuanLi";
+    ViewBag.Title = "jiLiangDanWei";
     Layout = "~/Views/Home.cshtml";
 }
 
@@ -72,7 +72,7 @@
             /*border: 1px solid red;*/
         }
 
-        
+
 
         #table1 {
             text-align: center;
@@ -91,10 +91,10 @@
         <div>
             <div id="dingchen">
                 <div style="position:absolute;top:10px;left:20px;">
-                    <img style="float:left" src="~/Jpggzi.png" /> <div style="width:200px;"><a href="">首页</a>><a href="">系统设置</a>><a href="">菜单管理</a></div>
+                    <img style="float:left" src="~/Jpggzi.png" /> <div style="width:200px;"><a href="">首页</a>><a href="">系统设置</a>><a href="">计量单位</a></div>
                 </div>
             </div>
-            <h4>菜单管理</h4>
+            <h4>计量单位</h4>
             <div id="text-3">
                 @*<input id="Button1" type="button" value="新增" class="btn btn-primary" onclick="Add" />*@
                 <input id="Button1" data-method="offset" type="button" @*data-type="auto"*@ value="新增" class="btn btn-primary" onclick="divInsertShow()" />
@@ -102,17 +102,14 @@
             </div>
             <div id="text-4">
                 <div id="text-2">
-                    <input id="Text1" type="text" placeholder="请输入编号或名称" /><input id="Button1" type="button" value="搜索" class="btn btn-info" onclick="PageList1()" />
+                    <input id="Text1" type="text" placeholder="请输入编号或名称" /><input id="Button1" type="button" value="搜索" class="btn btn-info" onclick="PageList()" />
                 </div>
                 <table style="width:100%;" class="layui-table" id="table1">
                     <thead>
                         <tr>
+                            <td>序号</td>
                             <td>编号</td>
-                            <td>菜单名称</td>
-                            <td>路径</td>
-                            <td>父级编号</td>
-                            <td>创建人</td>
-                            <td>创建时间</td>
+                            <td>名称</td>
                             <td>操作</td>
                         </tr>
                     </thead>
@@ -130,20 +127,13 @@
                 <thead>
                     <tr>
                         <td>编号</td>
-                        <td><input id="Text5" type="text" name="NodeId" placeholder="自动生成" readonly/></td>
+                        <td><input id="Text5" type="text" name="NodeId" placeholder="自动生成" readonly /></td>
                     </tr>
                     <tr>
-                        <td>菜单名称</td>
-                        <td><input id="Text2" type="text" name="DisplayName" /></td>
+                        <td>名称</td>
+                        <td><input id="Text2" type="text" name="MeasureName" /></td>
                     </tr>
-                    <tr>
-                        <td>链接地址</td>
-                        <td><input id="Text3" type="text" name="NodeURL" /></td>
-                    </tr>
-                    <tr>
-                        <td>创建人</td>
-                        <td><input id="Text4" type="text" name="CreateUser" /></td>
-                    </tr>
+
             </table>
         </form>
     </div>
@@ -157,35 +147,8 @@
     var pageCount = 0;
     var rows;
 
-    //分页加载全部
-    function PageList1() {
-        var name = $("#Text1").val();
-        $.ajax({
-            type: "POST",
-            url: "/Yangwenjie/getFunction",
-            data: "{pageIndex:'" + pageIndex + "',pageSize:'" + pageSize + "',name:'" + name + "'}",
-            dataType: "json",
-            async: false,
-            contentType: "application/json",
-            success: function (result) {
-                //alert(JSON.stringify(result))
-                rows = result.PageCount;
-                $("#tb1 tr").remove();
-                $.each(result.DataList, function (index, data) {
-                    //alert(data.CreateTime);
-                    $("#tb1").append("<tr><td>" + data.NodeId + "</td><td>" + data.DisplayName + "</td><td>" + data.NodeURL + "</td><td>" + data.ParentNodeId + "</td><td>" + data.CreateUser + "</td><td>" + Datte(data.CreateTime) + "<td></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='divUpdateShow(" + data.NodeId + ")'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='Del(" + data.NodeId + ")'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
-                });
-            },
-            //请求失败后的回调函数
-            error: function (ex) {
-                alert(ex.responseText);
-            }
-        });
-    }
-    
     $(function () {
-
-        PageList1();
+        PageList();
 
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
@@ -199,32 +162,53 @@
                     //console.log(obj)
                     pageIndex = obj.curr;
                     pageSize = obj.limit;
-                    PageList1();
+                    PageList();
                 }
             });
         });
-        
-    });
-    
 
-    //时间格式转化
-    function Datte(time) {
-        var date = new Date(parseInt(time.substr(6)));
-        return date.toLocaleDateString();
+    });
+
+    //分页加载全部
+    function PageList() {
+        var name = $("#Text1").val();
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "/Yangwenjie/getMeasureByName",
+            data: "{pageIndex:'" + pageIndex + "',pageSize:'" + pageSize + "',name:'" + name + "'}",
+            dataType: "json",
+            async: false,
+            contentType: "application/json",
+            success: function (result) {
+                rows = result.PageCount;
+                $("#tb1 tr").remove();
+                $.each(result.DataList, function (index, data) {
+                    $("#tb1").append("<tr><td>" + data.Id + "</td><td>" + data.MeasureNum + "</td><td>" + data.MeasureName + "</td><td></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='divUpdateShow(" + data.Id + ")'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='Del(" + data.Id + ")'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
+                });
+            },
+            //请求失败后的回调函数
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
     }
 
+
+
+    //删除
     function Del(id) {
         if (confirm('是否删除?')) {
             $.ajax({
                 type: "POST",
-                url: "/Yangwenjie/delFunction",
+                url: "/Yangwenjie/delMeasure",
                 data: "{Id:'" + id + "'}",
                 dataType: "json",
                 contentType: "application/json",
                 success: function (result) {
                     if (result > 0) {
                         alert("删除成功");
-                        PageList1();
+                        PageList();
                         window.location.reload();
                     }
                     else {
@@ -239,13 +223,55 @@
         }
     }
 
+    //新增
+    function divInsertShow() {
+
+        layer.prompt({
+            //formType: 2,
+            value: '',
+            title: '新增计量单位',
+            area: ['200px', '30px'] //自定义文本域宽高
+            , success: function (layero) {
+                layero.find(".layui-layer-content").prepend('<div style="margin-bottom: 15px;">名称</div>')
+            }
+        }, function (value, index, elem) {
+            //alert(value); //得到value
+            layer.close(index);
+
+            $.ajax({
+                type: "POST",
+                url: "/Yangwenjie/AddMeasure",
+                data: "{mes:{MeasureName:'" + value + "'}}",
+                dataType: "json",
+                contentType: "application/json",
+                success: function (result) {
+                    if (result > 0) {
+                        alert("新增成功");
+                        PageList();
+                        window.location.reload();
+                        //$(".layui-laypage-btn").click()
+                    }
+                    else {
+                        alert("新增失败");
+                    }
+                },
+                //请求失败后的回调函数
+                error: function (ex) {
+                    alert(ex.responseText);
+                }
+            });
+        });
+    }
+
+
+    //编辑
     function divUpdateShow(id) {
-        $("#layui-layer1").css("display", "inline-block");
+        alert(id);
         layui.use('layer', function () {
             var layer = layui.layer;
             layer.open({
                 title: ['添加产品', 'font-size:15px'],
-                area: ["400px", "270px"], //宽高
+                area: ["400px", "200px"], //宽高
                 btn: ['确定', '关闭'],
                 type: 1,
                 shade: 0,
@@ -253,8 +279,8 @@
                 yes: function (index, layero) {
                     $.ajax({
                         type: "POST",
-                        url: "/Yangwenjie/upFunctionById",
-                        data: "{fun:{DisplayName:'" + $("[name='DisplayName']").val() + "',NodeURL:'" + $("[name='NodeURL']").val() + "',CreateUser:'" + $("[name='CreateUser']").val() + "'},id:'" + id + "'}",
+                        url: "/Yangwenjie/upMeasureById",
+                        data: "{mes:{MeasureName:'" + $("[name='MeasureName']").val() + "'},id:'" + id + "'}",
                         dataType: "json",
                         contentType: "application/json",
                         success: function (result) {
@@ -263,7 +289,7 @@
 
                                 $("#layui-layer1").css("display", "none");
 
-                                PageList1();
+                                PageList();
 
                                 //setTimeout(function () { parent.layer.close() }, 100);//延迟
                             }
@@ -280,20 +306,21 @@
                 cancel: function () {//右上角关闭毁回调
                     //return false;
                 }
+
+                
             })
         })
         $.ajax({
             type: "POST",
-            url: "/Yangwenjie/menuSelectById",
+            url: "/Yangwenjie/mesSelectById",
             data: "{Id:'" + id + "'}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
                 $.each(result, function (index, data) {
-                    $("#Text5").val(data.NodeId);
-                    $("#Text2").val(data.DisplayName);
-                    $("#Text3").val(data.NodeURL);
-                    $("#Text4").val(data.CreateUser);
+                    $("#Text5").val(data.Id);
+                    $("#Text2").val(data.MeasureName);
+                    
                 })
             },
             error: function (ex) {
@@ -301,50 +328,5 @@
             }
             ,
         });
-    }
-
-    //新增
-    function divInsertShow() {
-        //alert(1);
-        $("#layui-layer1").css("display", "inline-block");
-        layui.use('layer', function () {
-            var layer = layui.layer;
-            layer.open({
-                title: ['添加产品', 'font-size:15px'],
-                area: ["400px", "270px"], //宽高
-                btn: ['确定', '关闭'],
-                type: 1,
-                shade: 0,
-                content: $('#tan'),
-                yes: function (index, layero) {
-
-                    $.ajax({
-                        type: "POST",
-                        url: "/Yangwenjie/menuAdd",
-                        data: "{fun:{DisplayName:'" + $("#Text2").val() + "',NodeURL:'" + $("#Text3").val() + "',CreateUser:'" + $("#Text4").val() + "'}}",
-                        dataType: "json",
-                        contentType: "application/json",
-                        success: function (result) {
-                            if (result > 0) {
-                                alert("新增成功");
-                                $("#layui-layer1").css("display", "none");
-                                PageList1();
-                                window.location.reload();
-                            }
-                            else {
-                                alert("新增失败");
-                            }
-                        },
-                        //请求失败后的回调函数
-                        error: function (ex) {
-                            alert(ex.responseText);
-                        }
-                    });
-                },
-                cancel: function () {//右上角关闭毁回调
-                    //return false;
-                }
-            })
-        })
     }
 </script>

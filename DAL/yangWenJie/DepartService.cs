@@ -15,7 +15,7 @@ namespace DAL
             WarehouseEntities con = new WarehouseEntities();
             PageList list = new PageList();
             var obj = from p in con.Depart
-                      where /*p.DepartName.IndexOf(name) != -1 &&*/ p.IsDelete == 0
+                      where  p.IsDelete == 0
                       orderby p.Id
                       select new
                       {
@@ -82,7 +82,7 @@ namespace DAL
         }
 
         //删除(修改表示ID)
-        public static int delDepart(Depart det,int id)
+        public static int delDepart(int id)
         {
             WarehouseEntities con = new WarehouseEntities();
             var obj = (from p in con.Depart where p.Id == id select p).First();

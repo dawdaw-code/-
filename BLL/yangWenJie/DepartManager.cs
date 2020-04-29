@@ -21,9 +21,9 @@ namespace BLL
             return DepartService.Add(det);
         }
 
-        public static int delDepart(Depart det, int id)
+        public static int delDepart(int id)
         {
-            return DepartService.delDepart(det, id);
+            return DepartService.delDepart(id);
         }
 
         public static int upDepartById(string DepartName, int id)

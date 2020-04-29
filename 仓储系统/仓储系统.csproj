@@ -290,6 +290,7 @@
     <Content Include="Views\JiaJiaXin\List2.cshtml" />
     <Content Include="Views\JiaJiaXin\Rukuguanli.cshtml" />
     <Content Include="Views\Yangwenjie\menuPopup.cshtml" />
+    <Content Include="Views\Yangwenjie\jiLiangDanWei.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
