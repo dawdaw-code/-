@@ -62,8 +62,8 @@
         }
 
         #text-4 {
-            border: solid 1px red;
-            height: 585px;
+            /*border: solid 1px red;*/
+            height: 562px;
             overflow-x: auto;
         }
 
@@ -72,7 +72,7 @@
         }
 
         #dingchen {
-            border: 1px solid white;
+            /*border: 1px solid white;*/
             width: 100%;
             height: 40px;
             background-color: #d4d3d3;
@@ -185,9 +185,13 @@
     $(function () {
         
         PageList();
+        layFenYe();
+    });
+    function layFenYe() {
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
+
             laypage.render({
                 elem: 'pageDemo'
                 , count: rows
@@ -201,7 +205,7 @@
                 }
             });
         });
-    });
+    }
     //全选以及反选
     $(function () {
         
@@ -283,6 +287,7 @@
     
     //删除单行(修改表示ID)
     function Del(id) {
+        alert(id)
         if (confirm('是否删除?')) {
             $.ajax({
                 type: "POST",
@@ -293,8 +298,8 @@
                 success: function (result) {
                     if (result > 0) {
                         alert("删除成功");
-                        layFenYe();
                         PageList();
+                        layFenYe();
                     }
                     else {
                         alert("删除失败");
@@ -322,6 +327,7 @@
                 if (result > 0) {
                     alert("新增成功！");
                     PageList();
+                    layFenYe();
                 } else {
                     alert("新增失败！");
                 }
@@ -392,6 +398,7 @@
                 if (result > 0) {
                     alert("修改成功！");
                     PageList();
+                    layFenYe();
                 } else {
                     alert("修改失败！");
                 }

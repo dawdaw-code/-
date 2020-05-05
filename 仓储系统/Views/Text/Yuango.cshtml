@@ -64,7 +64,7 @@
 
         #text-4 {
             /*border: solid 1px red;*/
-            height: 880px;
+            height: 562px;
             overflow-x: auto;
         }
 
@@ -82,6 +82,7 @@
       
         #pageDemo {
             text-align: center;
+            /*margin-top:-10px;*/
             /*border: 1px solid red;*/
         }
     </style>
@@ -202,9 +203,7 @@
     $(function () {
         PageList();
         layFenYe();
-        $("#xz").click(function dasd() {
-            $("o", "p").divShow();
-        })
+       
     });
 
     function layFenYe() {
@@ -337,7 +336,6 @@
 
     //删除单行(修改表示ID)
     function Del(id) {
-        alert(id)
         if (confirm('是否删除?')) {
             $.ajax({
                 type: "POST",
@@ -434,6 +432,7 @@
                 if (result > 0) {
                     alert("修改成功！");
                     PageList();
+                    layFenYe();
                 } else
                 {
                     alert("修改失败！");
@@ -463,6 +462,7 @@
                 if (result > 0) {
                     alert("新增成功！");
                     PageList();
+                    layFenYe();
                 } else {
                     alert("新增失败！");
                 }

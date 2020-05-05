@@ -285,13 +285,12 @@
     <Content Include="Views\Husongzhi\tuihuoAdd.cshtml" />
     <Content Include="Views\JiaJiaXin\AddChukudan.cshtml" />
     <Content Include="Views\JiaJiaXin\AddRukudan.cshtml" />
-    <Content Include="Views\JiaJiaXin\Chukuguanli.cshtml" />
     <Content Include="Views\JiaJiaXin\List.cshtml" />
     <Content Include="Views\JiaJiaXin\List2.cshtml" />
     <Content Include="Views\JiaJiaXin\Rukuguanli.cshtml" />
     <Content Include="Views\Yangwenjie\menuPopup.cshtml" />
-    <Content Include="Views\Yangwenjie\jiLiangDanWei.cshtml" />
     <Content Include="Views\Yangwenjie\keHuGuanLi.cshtml" />
+    <Content Include="Views\JiaJiaXin\Chukuguanli.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
