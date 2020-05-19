@@ -9,13 +9,37 @@ namespace BLL
 {
    public  class ReturnOrderStockManager
     {
-        public static PageList GetReturnOrderStock(int pageIndex, int pageSize)
+        public static PageList GetReturnOrderStock(int pageIndex, int pageSize, int Status)
         {
-            return ReturnOrderStockService.GetReturnOrderStock(pageIndex, pageSize);
+            return ReturnOrderStockService.GetReturnOrderStock(pageIndex, pageSize,  Status);
+        }
+        public static IQueryable ReturnOrderType()
+        {
+            return ReturnOrderStockService.ReturnOrderType();
         }
         public static int GetReturnOrderStockCount()
         {
             return ReturnOrderStockService.GetReturnOrderStockCount();
+        }
+        public static int ReturnOrderStockDel(string ReturnNum)
+        {
+            return ReturnOrderStockService.ReturnOrderStockDel(ReturnNum);
+        }
+        public static int ReturnOrderStockEdit(ReturnOrderStock p)
+        {
+            return ReturnOrderStockService.ReturnOrderStockEdit(p);
+        }
+        public static IQueryable GetReturnOrderStockId(string ReturnNum)
+        {
+            return ReturnOrderStockService.GetReturnOrderStockId(ReturnNum);
+        }
+        public static IQueryable GetAll2()
+        {
+            return ReturnOrderStockService.GetAll();
+        }
+        public static int Add2(ReturnOrderStock b)
+        {
+            return ReturnOrderStockService.Add(b);
         }
         }
 }

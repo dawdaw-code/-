@@ -10,19 +10,58 @@ namespace BLL
     //报损
     public class BadReportManager
     {
-        public static PageList GetBadReport(int pageIndex, int pageSize)
+        public static PageList GetBadReport(int pageIndex, int pageSize, int Status)
         {
-            return BadReportService.GetBadReport(pageIndex, pageSize);
+            return BadReportService.GetBadReport(pageIndex, pageSize,Status);
         }
 
-        public static int BadReportEdit(string BadNum)
+        public static IQueryable GetBadReportType()
         {
-            return BadReportService.BadReportEdit(BadNum);
+            return BadReportService.GetBadReportType();
         }
 
-        public static int  GetBadReportCount()
+            public static int BadReportDel(string BadNum)
+        {
+            return BadReportService.BadReportDel(BadNum);
+        }
+
+        public static int GetBadReportCount()
         {
             return BadReportService.GetBadReportCount();
+        }
+
+        public static int Edit(BadReport p)
+        {
+            return BadReportService.Edit(p);
+        }
+
+        public static IQueryable GetBadReportId(string BadNum)
+        {
+            return BadReportService.GetBadReportId( BadNum);
+        }
+
+        public static IQueryable Product(string ProductName)
+        {
+            return BadReportService.Product(ProductName);
+        }
+        public static IQueryable Product1()
+        {
+            return BadReportService.Product1();
+        }
+
+        public static IQueryable Product2(int id)
+        {
+            return BadReportService.Product2(id);
+        }
+
+        public static IQueryable GetAll()
+        {
+            return BadReportService.GetAll();
+        }
+        public static int Add(BadReport b)
+        {
+
+            return BadReportService.Add(b);
         }
         }
 }
