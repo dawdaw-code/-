@@ -69,13 +69,6 @@ namespace DAL
             return obj.ToList();
         }
 
-        //public static List<Customer> CustomerSelectById(string id)
-        //{
-        //    WarehouseEntities con = new WarehouseEntities();
-        //    var obj = from p in con.Customer where p.CustomerNum == id select p;
-        //    return obj.ToList();
-        //}
-
 
         //根据id修改
         public static int upCustomerById(Customer cus, int id)

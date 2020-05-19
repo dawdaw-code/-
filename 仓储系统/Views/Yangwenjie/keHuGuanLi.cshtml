@@ -130,7 +130,7 @@
                 <thead>
                     <tr>
                         <td>编号</td>
-                        <td><input id="Text5" type="text" name="Id" placeholder="自动生成" readonly /></td>
+                        <td><input id="Text5" type="text" name="CustomerNum" placeholder="自动生成" readonly /></td>
                     </tr>
                     <tr>
                         <td>名称</td>
@@ -320,7 +320,7 @@
             contentType: "application/json",
             success: function (result) {
                 $.each(result, function (index, data) {
-                    $("#Text5").val(data.Id);
+                    $("#Text5").val(data.CustomerNum);
                     $("#Text2").val(data.CustomerName);
                     $("#Text3").val(data.Remark);
                     $("#Text4").val(data.Fax);
