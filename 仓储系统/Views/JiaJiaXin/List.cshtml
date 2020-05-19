@@ -3,7 +3,7 @@
     ViewBag.Title = "List";
     Layout = "~/Views/Home.cshtml";
 }
-@*@section top{*@
+
 <link href="~/Css1/bootstrap.min.css" rel="stylesheet" />
 <link href="~/layui/css/layui.css" rel="stylesheet" />
 
@@ -11,23 +11,40 @@
     table tr th {
         text-align: center;
     }
+    #dingchen {
+        border: 1px solid white;
+        width: 100%;
+        height: 40px;
+    }
+    #dingchen {
+        border: 1px solid white;
+        width: 100%;
+        height: 40px;
+        background-color: #d4d3d3
+    }
+
 </style>
-@*}*@
+
 <div style="width:100%;height:30px;border:1px solid #f5f5f5;background-color:#f5f5f5;">
-    <ul style="margin-top:-15px;margin-left:15px;">
-        <li style="list-style:none;display:inline-block;"><a href="#" style="text-decoration:none;color:#016fa7;font-size:13px;">基本资料 > </a></li>
-        <li style="list-style:none;display:inline-block;"><a href="#" style="text-decoration:none;color:#016fa7;font-size:13px;">产品类别</a></li>
-    </ul>
-    <div style="width:1100px;height:35px;border:1px solid #f5f5f5;background-color:#EFEFEF;margin:0 auto;">
+    <div id="dingchen">
+        <div style="position:absolute;top:10px;left:20px;">
+            <img style="float:left" src="~/Jpg/fangzi.png" /> <div style="width:200px;"><a href="">首页</a>><a href="">基本资料</a>><a href="">产品类别</a></div>
+        </div>
+    </div>
+    <ul style="margin-top:10px;margin-left:15px;">
+            <li style="list-style:none;display:inline-block;"><a href="#" style="text-decoration:none;color:#016fa7;font-size:13px;">基本资料 > </a></li>
+            <li style="list-style:none;display:inline-block;"><a href="#" style="text-decoration:none;color:#016fa7;font-size:13px;">产品类别</a></li>
+        </ul>
+    <div style="width:1100px;height:35px;border:1px solid #f5f5f5;background-color:#EFEFEF;margin:0 auto;margin-left:10px;margin-top:3px;">
         <ul style="display:inline-block;">
             <li style="margin-top:-43px;"><strong style="margin-left:15px;">产品类别管理</strong></li>
         </ul>
-        <input id="Button1" type="button" value="新增" class="btn btn-primary" style="margin-left:823px;" onclick="divShow()" />
+        <input id="Button1" type="button" value="新增" class="btn btn-primary" style="margin-left:823px;" onclick="AddPage()" />
         <input id="Button2" type="button" value="删除" class="btn btn-danger" />
         <input id="Button3" type="button" value="导出" class="btn btn-info" />
         <div style="width:1100px;height:450px;border:1px solid #EFEFEF;margin-top:-20px;">
             <input id="txtCateName" type="text" class="text text-danger" placeholder=" 请输入类别或名称" style="width:300px;height:33px;margin-top:21px;margin-left:20px;" />
-            <input id="Button4" type="button" value="搜索" class="btn btn-success" onclick="PageList()" />
+            <input id="Button4" type="button" value="搜索" class="btn btn-success" onclick="PageList()" style="margin-top:20px;" />
 
             <table class="layui-table" style="margin:0 auto;width:850px;margin-top:20px;text-align:center;" id="tb">
                 <thead>
@@ -42,64 +59,83 @@
                     </tr>
                 </thead>
                 <tbody id="tbody1">
-                    @*<tr style="text-align:center;">
-                    <td>
-                        <button type="button" class="layui-btn layui-btn-sm"><i class="layui-icon layui-icon-edit"></i></button>
-                        <button type="button" class="layui-btn layui-btn-sm"><i class="layui-icon layui-icon-delete"></i></button>
-                    </td>
-                </tr>*@
+                    <tr style="text-align:center;">
+                            <td>
+                                <button type="button" class="layui-btn layui-btn-sm"><i class="layui-icon layui-icon-edit"></i></button>
+                                <button type="button" class="layui-btn layui-btn-sm"><i class="layui-icon layui-icon-delete"></i></button>
+                            </td>
+                        </tr>
                 </tbody>
             </table>
             <div id="ss" style="text-align:center;">
 
             </div>
-            @*<div style="text-align:center;">
-            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="btnFirst();">首页</button>
-            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="btnBack();">上一页</button>
-            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="btnNext();">下一页</button>
-            <button type="button" class="layui-btn layui-btn-primary layui-btn-sm" onclick="btnLast();">尾页</button>
-        </div>*@
-
             <div class="row" id="mypager"></div>
-            <div id="hidePage" style="display:none;">
-                <div style="text-align:center;margin-top:20px;">
-                    <span>类别编号<input id="Text1" type="text" placeholder="自动生成，可不填" style="margin-left:20px;" /></span><br />
-                    <span>类别名称<input id="Text2" type="text" placeholder="请输入类别名称" style="margin-left:20px;margin-top:13px;" /></span><br />
-                    <span>备注<input id="Text3" type="text" style="margin-left:45px;margin-top:13px;" /></span><br />
-                    <input id="Button1" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" />
-                    <input id="Button2" type="button" value="关闭" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" />
-                </div>
 
-            </div>
         </div>
-       
+
     </div>
     <div>
     </div>
+</div>
+
+<div id="hidePage" style="display:none;">
+    <div style="text-align:center;margin-top:20px;">
+        <form id="form1">
+            <span>类别编号<input id="Text1" type="text" placeholder="自动生成，可不填" style="margin-left:20px;" name="Id" readonly="readonly" /></span><br />
+            <span style="margin-top:10px;">类别名称<input id="Text2" type="text" placeholder="请输入类别名称" style="margin-left:20px;margin-top:5px;" name="PCateName" /></span><br />
+            <span style="margin-top:10px;">备注<input id="Text3" type="text" name="Remark" style="margin-left:45px;margin-top:5px;" /></span><br />
+            <input id="btnSub" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" onclick=" Update()" />
+            <input id="Button2" type="button" value="关闭" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" />
+        </form>
+    </div>
+</div>
+
+<div id="hidePage2" style="display:none;">    
+    <div style="text-align:center;margin-top:20px;">
+        <form id="form2">
+            <span>类别编号<input id="bianhao" type="text" placeholder="自动生成，可不填" style="margin-left:20px;" readonly="readonly" name="Id2" /></span><br />
+            <span style="margin-top:10px;">类别名称<input id="mingcheng" type="text" placeholder="请输入类别名称" style="margin-left:20px;margin-top:5px;" name="PCateName2" /></span><br />
+            <span style="margin-top:10px;">备注<input id="remark2" type="text" name="Remark2" style="margin-left:45px;margin-top:5px;" /></span><br />
+            <input id="btnSub2" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" onclick="AddPro()" />
+            <input id="guanbi" type="button" value="关闭" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" />
+        </form>
+    </div>
+    
 </div>
 @*@section foot{*@
 <script src="~/Scripts/jquery-3.3.1.min.js"></script>
 <script src="~/layer-v3.1.1/layer/layer.js"></script>
 <script src="~/layui/layui.js"></script>
+<script src="~/layui/layui.all.js"></script>
 <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
 
-    //页面层
-    function divShow() {
-        layer.open({
-            type: 1,
-            skin: 'layui-layer-rim', //加上边框
-            title: ['添加产品类别', 'font-size:15px'],
-            area: ['420px', '240px'], //宽高
-            content: 'html内容',
-            shadeClose: true,
-            content: $('#hidePage')
-        });
-        $.post('url', {}, function (str) {
-            layer.open({
-                type: 2,
-                content: str
-            })
+    function AddPro() {
+        //var data = $("#form2").serializeArray();
+        //var obj = {};
+        //$.each(data, function (a, b) {
+        //    obj[b.name] = b.value;
+        //});
+        //var jsons = JSON.stringify(obj);
+        $.ajax({
+            type: "POST",
+            url: "/JiaJiaXin/AddCategory",
+            data: "{pc:{Id:'" + $("#bianhao").val() + "',PCateName: '" + $("#mingcheng").val() + "',Remark:'" + $("#remark2").val()+"'}}",
+            //{
+            //    Id: '" + $("#bianhao").val() + "', PCateName: '" + $("#mingcheng").val() + "', Remark: '" + $("#remark2").val()+ '"}
+            //data: "{pc:" + jsons + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("添加成功!");
+                    PageList();
+                }
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
         });
     }
 
@@ -107,17 +143,16 @@
     var pageSize = 3;
     var pageCount = 0;
     var rows = 0;
-    $(function () {     
+    $(function () {
         PageList();
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
                 , layer = layui.layer;
-
             //完整功能
             laypage.render({
                 elem: 'ss'
                 , count: rows
-                , limit: 10
+                , limit: 4
                 , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
                 , jump: function (obj) {
                     pageIndex = obj.curr;
@@ -126,31 +161,118 @@
                 }
             });
         });
-        function btnFirst() {
-            pageIndex = 1;
-            PageList();
-            return false;
-        };
 
-        function btnBack() {
-            pageIndex--;
-            PageList();
-            return false;
-        };
-
-        function btnNext() {
-            pageIndex++;
-            PageList();
-            return false;
-        };
-
-        function btnLast() {
-            pageIndex = pageCount;
-            PageList();
-            return false;
-        };
     });
 
+   
+    function divShow() {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                title: ['添加产品类别', 'font-size:15px'],
+                area: ['420px', '190px'], //宽高
+                type: 1,
+                shade: 0,
+                content: $('#hidePage'),
+                //btn: ['确定', '关闭'],
+                yes: function (index, layero) {
+                    //index为当前层索引
+                    //layero 为 弹出层对象
+                    //在回调函数末尾添加 “return false”可以禁止点击该按钮关闭弹出层
+                    return false;
+                },
+                cancel: function () {//右上角关闭毁回调
+                    //return false;
+                }
+            })
+        })
+    }
+
+    function AddPage() {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                title: ['添加产品类别', 'font-size:15px'],
+                area: ['420px', '190px'], //宽高
+                type: 1,
+                shade: 0,
+                content: $('#hidePage2'),
+                //btn: ['确定', '关闭'],
+                yes: function (index, layero) {
+                    //index为当前层索引
+                    //layero 为 弹出层对象
+                    //在回调函数末尾添加 “return false”可以禁止点击该按钮关闭弹出层
+                    return false;
+                },
+                cancel: function () {//右上角关闭毁回调
+                    //return false;
+                }
+            })
+        })
+    }
+
+    function Update() {
+        //$("#btnSub").click(function () {
+        var data = $("#form1").serializeArray();
+        var obj = {};
+        $.each(data, function (a, b) {
+            obj[b.name] = b.value;
+        });
+        var jsons = JSON.stringify(obj);
+        $.ajax({
+            type: "POST",
+            url: "/JiaJiaXin/EditProductCategory",
+            //data: "{pc:{id:"+id+",animalName:'" + $("#animalName").val() + "',typeid:'" + $("#select1").val() + "',color:'" + $("#color").val() + "',weight:'" + $("#weight").val() + "',height:'" + $("#height").val() +"'}}",
+            data: "{pc:" + jsons + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("修改成功!");
+                    PageList();
+                }
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+        //});
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function Gai(id) {
+        divShow();
+        $.ajax({
+            type: "POST",
+            url: "/JiaJiaXin/GetById",
+            data: "{Id:" + id + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    $("[name='Id']").val(data.Id);
+                    $("[name='PCateName']").val(data.PCateName);
+                    $("[name='Remark']").val(data.Remark);
+                });
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
 
 
 
@@ -162,11 +284,11 @@
             dataType: "json",
             async: false,
             contentType: "application/json",
-            success: function (result) {                
+            success: function (result) {
                 $("#tbody1 tr").remove();
-                rows = result.pageCount;
+                rows = result.PageCount;
                 $.each(result.DataList, function (index, data) {
-                    $("#tbody1").append("<tr style='text - align: center;'><td><input id='Checkbox1' type='checkbox' /></td><td id='hao'>" + data.Id + "</td><td>" + data.PCateName + "</td><td>" + data.CreateUser + "</td><td>" + ConvertTime(data.CreateTime) + "</td><td>" + data.Remark + "</td><td> <button type='button' class='layui-btn layui-btn-sm'><i class='layui-icon layui-icon-edit'></i></button><button type='button' class='layui-btn layui-btn-sm' onclick='Del(" + data.Id + ")'><i class='layui-icon layui-icon-delete'></i></button></td></tr>");
+                    $("#tbody1").append("<tr style='text - align: center;'><td><input id='Checkbox1' type='checkbox' /></td><td id='hao'>" + data.Id + "</td><td>" + data.PCateName + "</td><td>" + data.CreateUser + "</td><td>" + ConvertTime(data.CreateTime) + "</td><td>" + data.Remark + "</td><td> <button type='button' id='btnGai' class='layui-btn layui-btn-sm'onclick='Gai(" + data.Id + ")'><i class='layui-icon layui-icon-edit'></i></button><button type='button' class='layui-btn layui-btn-sm' onclick='Del(" + data.Id + ")'><i class='layui-icon layui-icon-delete'></i></button></td></tr>");
                 });
             },
             error: function (ex) {
@@ -175,7 +297,7 @@
         });
     }
 
-   
+
 
 
     function ConvertTime(time) {
@@ -186,16 +308,16 @@
 
 
 
-    function Del() {
+    function Del(id) {
         if (confirm('是否删除?')) {
             $.ajax({
                 type: "POST",
                 url: "/JiaJiaXin/DelCategory",
-                data: "{pc:}",
+                data: "{Id:'" + id + "'}",
                 dataType: "json",
                 contentType: "application/json",
                 success: function (result) {
-                    if (result>0) {
+                    if (result > 0) {
                         alert("删除成功");
                         PageList();
                     }
@@ -210,28 +332,6 @@
             });
         }
     }
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </script>
 

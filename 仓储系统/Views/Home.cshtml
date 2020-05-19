@@ -9,8 +9,11 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Home</title>
-
-
+    <link href="~/Css1/bootstrap.css" rel="stylesheet" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/layui/css/layui.mobile.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
     <style>
         body {
             margin: 0;
@@ -19,8 +22,6 @@
 
         .tobu {
             width: 100%;
-
-
             height: 60px;
             background-color: #000000;
         }
@@ -51,7 +52,7 @@
 
             .ZhuTi #chebian {
                 width: 200px;
-                height: 661px;
+                height: 655px;
                 background-color: #383434;
                 float: left;
             }
@@ -67,6 +68,7 @@
             -webkit-box-sizing: border-box;
             box-sizing: border-box;
         }
+
         h1, h2, h3 {
             margin: 0;
             font-weight: normal;
@@ -233,8 +235,9 @@
             top: 60px;
             left: 200px;
         }
+
         a {
-            color:#ffffff;
+            color: white;
         }
     </style>
     <link href="~/css/iconfont.css" rel="stylesheet" />
@@ -245,14 +248,16 @@
 <body>
     <div>
         <div class="tobu">
-            <a id="wenzi"href="~/Text/Zhuti">仓储管理系统</a>
+            <a id="wenzi" href="~/Text/Zhuti">仓储管理系统</a>
             <div>
                 <div class="dropdown">
                     <span style="color:#eee">当前登录</span>
                     <div class="dropdown-content">
-                        <a href="#" style="color:#ffffff">用户信息</a><br />
-                       <a href="#" style="color:#ffffff">修改密码</a><br />
-                        <a href="#"style="color:#ffffff">退出登录</a>
+                        <a href="#" style="color:#ffffff">
+                            @(Session["userName"])
+                        </a><br />
+                        <a style="color:#ffffff" onclick="xgai()">修改密码</a><br />
+                        <a href="~/Text/Index" style="color:#ffffff">退出登录</a>
                     </div>
                 </div>
             </div>
@@ -264,12 +269,12 @@
                         系统设置
                     </div>
                     <div class="body">
-                        <h2><a href="~/Text/Yuango">员工管理</a></h2><hr />
-                        <h2><a href="~/Text/Juese">角色管理</a></h2><hr />
-                        <h2><a href="~/Text/buMenGuanLi">部门管理</a></h2><hr />
-                        <h2><a href="~/Text/caiDanGuanLi">菜单管理</a></h2><hr />
-                        <h2><a href="~/Text/quanXian">权限分配</a></h2><hr />
-                        <h2><a href="~/Text/">标识符管理</a></h2>
+                        <h2><a style="color:#ffffff" href="~/Text/Yuango">员工管理</a></h2><hr />
+                        <h2><a style="color:#ffffff" href="~/Text/Juese">角色管理</a></h2><hr />
+                        <h2><a style="color:#ffffff" href="~/Yangwenjie/buMenGuanLi">部门管理</a></h2><hr />
+                        <h2><a style="color:#ffffff" href="~/Yangwenjie/caiDanGuanLi">菜单管理</a></h2><hr />
+                        <h2><a style="color:#ffffff" href="~/Yangwenjie/quanXian">权限分配</a></h2><hr />
+                        <h2><a style="color:#ffffff" href="~/Yangwenjie/">标识符管理</a></h2>
                     </div>
                 </div>
                 <div class="section">
@@ -281,10 +286,10 @@
                     <div class="body">
                         <h2>库位管理</h2><hr />
                         <h2>供应商管理</h2><hr />
-                        <h2>客户管理</h2><hr />
-                        <h2>计量单位</h2><hr />
-                        <h2>产品类别</h2><hr />
-                        <h2>产品管理</h2>
+                        <h2 ><a style="color:#ffffff" href="~/Yangwenjie/keHuGuanLi">客户管理</a></h2><hr />
+                        <h2 ><a style="color:#ffffff" href="~/Yangwenjie/jiLiangDanWei">计量单位</a></h2><hr />
+                        <h2><a style="color:#ffffff" href="~/JiaJiaXin/List">产品类别</a></h2><hr />
+                        <h2><a style="color:#ffffff" href="~/JiaJiaXin/List2">产品管理</a></h2>
                     </div>
 
                 </div>
@@ -298,12 +303,12 @@
                     </div>
 
                     <div class="body">
-                        <h2><a href="~/Text/">入库管理</a></h2><hr />
-                        <h2><a href="~/Text/">出库管理</a></h2><hr />
-                        <h2><a href="~/Husongzhi/baosun">报损管理</a></h2><hr />
-                        <h2><a href="~/Husongzhi/yiku">移库管理</a></h2><hr />
-                        <h2><a href="~/Husongzhi/pandian">盘点管理</a></h2><hr />
-                        <h2><a href="~/Husongzhi/tuihuo">退货管理</a></h2>
+                        <h2><a style="color:#ffffff" href="~/JiaJiaXin/Rukuguanli">入库管理</a></h2><hr />
+                        <h2><a style="color:#ffffff" href="~/JiaJiaXin/Chukuguanli">出库管理</a></h2><hr />
+                        <h2><a style="color:#ffffff" href="~/Husongzhi/baosun">报损管理</a></h2><hr />
+                        <h2><a style="color:#ffffff" href="~/Husongzhi/yiku">移库管理</a></h2><hr />
+                        <h2><a style="color:#ffffff" href="~/Husongzhi/pandian">盘点管理</a></h2><hr />
+                        <h2><a style="color:#ffffff" href="~/Husongzhi/tuihuo">退货管理</a></h2>
                     </div>
 
                 </div>
@@ -313,6 +318,7 @@
                     <div class="title">
                         报表管理
                     </div>
+
                     <div class="body">
                         <h2>库存清单</h2><hr />
                         <h2>货品统计</h2><hr />
@@ -333,7 +339,24 @@
             @RenderBody()
         </div>@*内容*@
     </div>
-    
+    <div id="update" style="display:none;">
+        <div style="text-align:center;margin-top:20px;">
+            <form id="form1">
+                <table style="border-spacing:10px 30px; margin-left:60px;width:300px;">
+                    <tr>
+                        <td>当前密码：<input style="width:80px;" id="pwd1" type="text" /></td>
+                    </tr>
+                    <tr>
+                        <td>修改密码：<input style="width:80px;" id="pwd2" type="text" /></td>
+                    </tr>
+                    <tr>
+                        <td style="margin-left:1000px;">确认密码：<input style="margin-left:1px; width:80px;" id="pwd3" type="text" /></td>
+                    </tr>
+                </table>
+                <input id="ADDup" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:70px;width:82px;background-color:gainsboro" onclick="select()" />
+            </form>
+        </div>
+    </div>
 </body>
 </html>
 <script>
@@ -360,4 +383,83 @@
             };
 
     })(this, document);
+
+    function xgai() {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                title: ['修改密码', 'font-size:15px'],
+                area: ['420px', '190px'], //宽高
+                type: 1,
+                shade: 0,
+                content: $('#update'),
+                //btn: ['确定', '关闭'],
+                yes: function (index, layero) {
+                    //index为当前层索引
+                    //layero 为 弹出层对象
+                    //在回调函数末尾添加 “return false”可以禁止点击该按钮关闭弹出层
+                    return false;
+                },
+                cancel: function () {//右上角关闭毁回调
+                    //return false;
+                }
+            })
+        })
+    }
+
+</script>
+<script>
+    $(function () {
+        $("#ADDup").click(function () {
+            var name = "@(Session["userName"])";
+             var pwd1 = $("#pwd1").val();
+             var pwd2 = $("#pwd2").val();
+            var pwd3 = $("#pwd3").val();
+            if (pwd2 == pwd3) {
+                $.ajax({
+                    type: "POST",
+                    url: "/Text/Homeselectpwd",
+                    data: "{name:'" + name + "'}",
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (result) {
+                        //alert(JSON.stringify(result))
+                        $.each(result, function (index, data) {
+                            //alert(data.Password)
+                            if (pwd1 == data.Password) {
+                                 var name = "@(Session["userName"])";
+                                 $.ajax({
+                                     type: "POST",
+                                     url: "/Text/updateADD",
+                                     data: "{name:'" + name + "',pwd:'" + pwd2 + "'}",
+                                     dataType: "json",
+                                     contentType: "application/json",
+                                     success: function (result) {
+                                         if (result > 0) {
+                                             alert("修改成功！");
+
+                                         } else {
+                                             alert("修改失败！");
+                                         }
+                                     },
+                                     error: function (ex) {
+                                         alert(ex.responseText);
+                                     }
+
+                                 });
+                            } else {
+                                alert("当前密码不正确！！！");
+                            }
+                        })
+                    },
+                    error: function (ex) {
+                        alert(ex.responseText);
+                    }
+                });
+            } else {
+                 alert("输入的密码不一致");
+             }
+        });
+    })
+   
 </script>

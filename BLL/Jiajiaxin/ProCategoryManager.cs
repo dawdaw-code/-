@@ -11,9 +11,9 @@ namespace BLL.Jiajiaxin
     {
        
        
-        public static int DelCategory(ProductCategory pc)
+        public static int DelCategory(ProductCategory pc, int id)
         {
-            return ProCategoryService.DelCategory(pc);
+            return ProCategoryService.DelCategory(pc,id);
         }
 
 
@@ -38,10 +38,49 @@ namespace BLL.Jiajiaxin
             }
         }
 
-       
 
 
 
-
+        public static IQueryable GetTypes()
+        {
+            return ProCategoryService.GetTypes();
         }
+
+
+
+
+        public static IQueryable GetById(int id)
+        {
+            return ProCategoryService.GetById(id);
+        }
+
+
+
+        public static int EditProductCategory(ProductCategory pc)
+        {
+            return ProCategoryService.EditProductCategory(pc);
+        }
+
+
+
+        public static int AddCategory(ProductCategory pc)
+        {
+            return ProCategoryService.AddCategory(pc);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
 }

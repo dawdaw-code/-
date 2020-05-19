@@ -29,10 +29,43 @@ namespace BLL.Jiajiaxin
         }
 
 
+        public static int DelPro(Product pc, int id)
+        {
+            return ProductService.DelPro(pc,id);
+        }
+
+
+        //绑定客户下拉框
+        public static IQueryable BindCustomer()
+        {
+            return ProductService.BindCustomer();
+        }
+
+        //绑定计量单位下拉框
+        public static IQueryable BindMeasure()
+        {
+            return ProductService.BindMeasure();
+        }
+        //绑定仓库
+        public static IQueryable BindStorage()
+        {
+            return ProductService.BindStorage();
+        }
+        //绑定库位
+        public static IQueryable BindLocation()
+        {
+            return ProductService.BindLocation();
+        }
 
 
 
 
 
-    }
+
+
+
+
+
+
+        }
 }
