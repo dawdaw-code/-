@@ -30,6 +30,11 @@ namespace BLL
             return CustomerService.CustomerSelectById(id);
         }
 
+        //public static List<Customer> CustomerSelectById(string id)
+        //{
+        //    return CustomerService.CustomerSelectById(id);
+        //}
+
         public static int upCustomerById(Customer cus, int id)
         {
             return CustomerService.upCustomerById(cus, id);
