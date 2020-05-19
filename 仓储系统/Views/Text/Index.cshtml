@@ -54,7 +54,6 @@
                     data: { name: Name, pwd: Pwd },
                     success: function (result) {
                         $.each(result, function (index, data) {
-                        alert(JSON.stringify(data))
                             if (result != null) {
                                 window.location.href = "@Url.Action("Zhuti")";
                             }
