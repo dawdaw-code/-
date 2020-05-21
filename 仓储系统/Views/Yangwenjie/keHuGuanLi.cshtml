@@ -1,9 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "caiDanGuanLi";
+    ViewBag.Title = "keHuGuanLi";
     Layout = "~/Views/Home.cshtml";
 }
-
 <!DOCTYPE html>
 
 <html>
@@ -72,7 +71,7 @@
             /*border: 1px solid red;*/
         }
 
-        
+
 
         #table1 {
             text-align: center;
@@ -91,27 +90,28 @@
         <div>
             <div id="dingchen">
                 <div style="position:absolute;top:10px;left:20px;">
-                    <img style="float:left" src="~/Jpg/fangzi.png" /> <div style="width:200px;"><a href="">首页</a>><a href="">系统设置</a>><a href="">菜单管理</a></div>
+                    <img style="float:left" src="~/Jpg/fangzi.png" /> <div style="width:200px;"><a href="">首页</a>><a href="">系统设置</a>><a href="">客户管理</a></div>
                 </div>
             </div>
-            <h4>菜单管理</h4>
+            <h4>客户管理</h4>
             <div id="text-3">
                 @*<input id="Button1" type="button" value="新增" class="btn btn-primary" onclick="Add" />*@
                 <input id="Button1" data-method="offset" type="button" @*data-type="auto"*@ value="新增" class="btn btn-primary" onclick="divInsertShow()" />
+                <input id="Button1" type="button" value="删除" class="btn btn-danger" onclick="CheckboxYN()" />
                 @*<button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal">居中弹出</button>*@
             </div>
             <div id="text-4">
                 <div id="text-2">
-                    <input id="Text1" type="text" placeholder="请输入编号或名称" /><input id="Button1" type="button" value="搜索" class="btn btn-info" onclick="PageList1()" />
+                    <input id="Text1" type="text" placeholder="请输入编号或名称" /><input id="Button1" type="button" value="搜索" class="btn btn-info" onclick="PageList()" />
                 </div>
                 <table style="width:100%;" class="layui-table" id="table1">
                     <thead>
                         <tr>
-                            <td>编号</td>
-                            <td>菜单名称</td>
-                            <td>路径</td>
-                            <td>父级编号</td>
-                            <td>创建人</td>
+                            <td><input id="Checkbox1" type="checkbox" name="item" onclick="quanxuan('checkbox', 'reversecheck')" /></td>
+                            <td>客户编号</td>
+                            <td>客户名称</td>
+                            <td>电话</td>
+                            <td>传真</td>
                             <td>创建时间</td>
                             <td>操作</td>
                         </tr>
@@ -130,20 +130,29 @@
                 <thead>
                     <tr>
                         <td>编号</td>
-                        <td><input id="Text5" type="text" name="NodeId" placeholder="自动生成" readonly/></td>
+                        <td><input id="Text5" type="text" name="CustomerNum" placeholder="自动生成" readonly /></td>
                     </tr>
                     <tr>
-                        <td>菜单名称</td>
-                        <td><input id="Text2" type="text" name="DisplayName" /></td>
+                        <td>名称</td>
+                        <td><input id="Text2" type="text" name="CustomerName" /></td>
                     </tr>
                     <tr>
-                        <td>链接地址</td>
-                        <td><input id="Text3" type="text" name="NodeURL" /></td>
+                        <td>备注</td>
+                        <td><input id="Text3" type="text" name="Remark" /></td>
                     </tr>
                     <tr>
-                        <td>创建人</td>
-                        <td><input id="Text4" type="text" name="CreateUser" /></td>
+                        <td>传真</td>
+                        <td><input id="Text4" type="text" name="Fax" /></td>
                     </tr>
+                    <tr>
+                        <td>邮箱</td>
+                        <td><input id="Text6" type="text" name="Email" /></td>
+                    </tr>
+                    <tr>
+                        <td>电话</td>
+                        <td><input id="Text7" type="text" name="Phone" /></td>
+                    </tr>
+
             </table>
         </form>
     </div>
@@ -157,35 +166,8 @@
     var pageCount = 0;
     var rows;
 
-    //分页加载全部
-    function PageList1() {
-        var name = $("#Text1").val();
-        $.ajax({
-            type: "POST",
-            url: "/Yangwenjie/getFunction",
-            data: "{pageIndex:'" + pageIndex + "',pageSize:'" + pageSize + "',name:'" + name + "'}",
-            dataType: "json",
-            async: false,
-            contentType: "application/json",
-            success: function (result) {
-                //alert(JSON.stringify(result))
-                rows = result.PageCount;
-                $("#tb1 tr").remove();
-                $.each(result.DataList, function (index, data) {
-                    //alert(data.CreateTime);
-                    $("#tb1").append("<tr><td>" + data.NodeId + "</td><td>" + data.DisplayName + "</td><td>" + data.NodeURL + "</td><td>" + data.ParentNodeId + "</td><td>" + data.CreateUser + "</td><td>" + Datte(data.CreateTime) + "<td></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='divUpdateShow(" + data.NodeId + ")'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='Del(" + data.NodeId + ")'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
-                });
-            },
-            //请求失败后的回调函数
-            error: function (ex) {
-                alert(ex.responseText);
-            }
-        });
-    }
-    
     $(function () {
-
-        PageList1();
+        PageList();
 
         layui.use(['laypage', 'layer'], function () {
             var laypage = layui.laypage
@@ -199,13 +181,12 @@
                     //console.log(obj)
                     pageIndex = obj.curr;
                     pageSize = obj.limit;
-                    PageList1();
+                    PageList();
                 }
             });
         });
-        
+
     });
-    
 
     //时间格式转化
     function Datte(time) {
@@ -213,18 +194,66 @@
         return date.toLocaleDateString();
     }
 
+    //分页加载全部
+    function PageList() {
+        var name = $("#Text1").val();
+        $.ajax({
+            type: "POST",
+            async: false,
+            url: "/Yangwenjie/getCustomerByName",
+            data: "{pageIndex:'" + pageIndex + "',pageSize:'" + pageSize + "',name:'" + name + "'}",
+            dataType: "json",
+            async: false,
+            contentType: "application/json",
+            success: function (result) {
+                rows = result.PageCount;
+                $("#tb1 tr").remove();
+                $.each(result.DataList, function (index, data) {
+                    $("#tb1").append("<tr><td><input type='checkbox' name='checkbox' class='check' data-id='" + data.CustomerNum + "' /></td><td>" + data.CustomerNum + "</td><td>" + data.CustomerName + "</td><td>" + data.Phone + "</td><td>" + data.Fax + "</td><td>" + Datte(data.CreateTime) + "</td><td></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='divUpdateShow(" + data.CustomerNum + ")'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='Del(" + data.CustomerNum + ")'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
+                });
+            },
+            //请求失败后的回调函数
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+        });
+    }
+
+    //全选以及反选
+    function quanxuan(objName, type) {
+        var objNameList = document.getElementsByName(objName);
+        if (null != objNameList) {
+            for (var i = 0; i < objNameList.length; i++) {
+                if (objNameList[i].checked == true) {
+                    if (type != 'checkall') {  // 非全选
+                        objNameList[i].checked = false;
+                    }
+                } else {
+                    if (type != 'uncheckall') {  // 非取消全选
+                        objNameList[i].checked = true;
+                        //console.log($("input[name='checkbox']").data("id"));
+                        //alert($("input[name='checkbox']").data("id"));
+
+                    }
+                }
+            }
+        }
+    }
+
+    //删除
     function Del(id) {
+        alert(id);
         if (confirm('是否删除?')) {
             $.ajax({
                 type: "POST",
-                url: "/Yangwenjie/delFunction",
+                url: "/Yangwenjie/delCustomer",
                 data: "{Id:'" + id + "'}",
                 dataType: "json",
                 contentType: "application/json",
                 success: function (result) {
                     if (result > 0) {
                         alert("删除成功");
-                        PageList1();
+                        PageList();
                         window.location.reload();
                     }
                     else {
@@ -240,30 +269,31 @@
     }
 
     function divUpdateShow(id) {
+        alert(id);
         $("#layui-layer1").css("display", "inline-block");
         layui.use('layer', function () {
             var layer = layui.layer;
             layer.open({
                 title: ['添加产品', 'font-size:15px'],
-                area: ["400px", "270px"], //宽高
+                area: ["400px", "370px"], //宽高
                 btn: ['确定', '关闭'],
-                type: 1,
+                type: 1, 
                 shade: 0,
                 content: $('#tan'),
                 yes: function (index, layero) {
                     $.ajax({
                         type: "POST",
-                        url: "/Yangwenjie/upFunctionById",
-                        data: "{fun:{DisplayName:'" + $("[name='DisplayName']").val() + "',NodeURL:'" + $("[name='NodeURL']").val() + "',CreateUser:'" + $("[name='CreateUser']").val() + "'},id:'" + id + "'}",
+                        url: "/Yangwenjie/upCustomerById",
+                        data: "{cus:{CustomerName:'" + $("[name='CustomerName']").val() + "',Remark:'" + $("[name='Remark']").val() + "',Fax:'" + $("[name='Fax']").val() + "',Email:'" + $("[name='Email']").val() + "',Phone:'" + $("[name='Phone']").val() + "'},id:'" + CustomerNum + "'}",
                         dataType: "json",
                         contentType: "application/json",
                         success: function (result) {
-                            if (result > 0) {
+                            if (result > 0) { 
                                 alert("修改成功");
 
                                 $("#layui-layer1").css("display", "none");
 
-                                PageList1();
+                                PageList();
 
                                 //setTimeout(function () { parent.layer.close() }, 100);//延迟
                             }
@@ -284,16 +314,18 @@
         })
         $.ajax({
             type: "POST",
-            url: "/Yangwenjie/menuSelectById",
+            url: "/Yangwenjie/CustomerSelectById",
             data: "{Id:'" + id + "'}",
             dataType: "json",
             contentType: "application/json",
             success: function (result) {
                 $.each(result, function (index, data) {
-                    $("#Text5").val(data.NodeId);
-                    $("#Text2").val(data.DisplayName);
-                    $("#Text3").val(data.NodeURL);
-                    $("#Text4").val(data.CreateUser);
+                    $("#Text5").val(data.CustomerNum);
+                    $("#Text2").val(data.CustomerName);
+                    $("#Text3").val(data.Remark);
+                    $("#Text4").val(data.Fax);
+                    $("#Text6").val(data.Email);
+                    $("#Text7").val(data.Phone);
                 })
             },
             error: function (ex) {
@@ -302,6 +334,8 @@
             ,
         });
     }
+    
+
 
     //新增
     function divInsertShow() {
@@ -311,7 +345,7 @@
             var layer = layui.layer;
             layer.open({
                 title: ['添加产品', 'font-size:15px'],
-                area: ["400px", "270px"], //宽高
+                area: ["400px", "370px"], //宽高
                 btn: ['确定', '关闭'],
                 type: 1,
                 shade: 0,
@@ -320,15 +354,15 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "/Yangwenjie/menuAdd",
-                        data: "{fun:{DisplayName:'" + $("#Text2").val() + "',NodeURL:'" + $("#Text3").val() + "',CreateUser:'" + $("#Text4").val() + "'}}",
+                        url: "/Yangwenjie/AddCustomer",
+                        data: "{cus:{CustomerName:'" + $("#Text2").val() + "',Remark:'" + $("#Text3").val() + "',Fax:'" + $("#Text4").val() + "',Email:'" + $("#Text6").val() + "',Phone:'" + $("#Text7").val() + "'}}",
                         dataType: "json",
                         contentType: "application/json",
                         success: function (result) {
                             if (result > 0) {
                                 alert("新增成功");
                                 $("#layui-layer1").css("display", "none");
-                                PageList1();
+                                PageList();
                                 window.location.reload();
                             }
                             else {
@@ -346,5 +380,50 @@
                 }
             })
         })
+    }
+
+
+    function CheckboxYN() {
+        if ($("input[name=checkbox]:checked").length > 0) {
+            if (confirm("确定要删除吗？")) {
+                var fan = 0;
+                var list = []
+                $.each($("[name='checkbox']"), function (index, result) {
+                    //alert($(this).is("checked"));
+                    //console.log(result);
+                    if ($(this).prop("checked")) {
+                        list.push($(this).data("id"));
+
+                    }
+                });
+                $.each(list, function (index2, result2) {
+                    //alert(result2);
+                    $.ajax({
+                        type: "POST",
+                        url: "/Yangwenjie/delCustomer",
+                        data: "{id:" + result2 + "}",
+                        dataType: "json",
+                        contentType: "application/json",
+                        success: function (result) {
+                            //console.log(result);
+                            if (result > 0) {
+                                alert("删除成功");
+                                window.location.reload();
+
+                            } else {
+                                alert("删除失败");
+                            }
+                        },
+                        error: function (ex) {
+                            alert(ex.responseText);
+                        }
+                    });
+
+                })
+            };
+        }
+        else {
+            alert("请先选择你要删除的数据");
+        }
     }
 </script>

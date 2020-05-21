@@ -13,5 +13,13 @@ namespace BLL.luo
         {
             return IndexService.indexselect(name,pwd);
         }
+        public static IQueryable Homeselectpwd(string name)
+        {
+            return IndexService.Homeselectpwd(name);
+        }
+        public static int update(string name, string pwd)
+        {
+            return IndexService.update(name,pwd);
+        }
     }
 }

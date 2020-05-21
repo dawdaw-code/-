@@ -13,10 +13,10 @@ namespace BLL.luo
         {
             return YuangoService.AdminSelect();
         }
-        public static PageList getDepart(int pageIndex, int pageSize)
-        {
-            return YuangoService.getDepart(pageIndex, pageSize);
-        }
+        //public static PageList getDepart(int pageIndex, int pageSize)
+        //{
+        //    return YuangoService.getDepart(pageIndex, pageSize);
+        //}
         public static PageList getDepartByName(int pageIndex, int pageSize, string name)
         {
             return YuangoService.getDepartByName(pageIndex, pageSize, name);
@@ -40,6 +40,10 @@ namespace BLL.luo
         public static int delDepart( int id)
         {
             return YuangoService.delDepart( id);
+        }
+        public static int insert(string UserCode, string UserName, string RealName, string Email, string Phone, int DepartId, int RoleId)
+        {
+            return YuangoService.insert( UserCode,  UserName,  RealName,  Email,  Phone,  DepartId,  RoleId);
         }
     }
 }

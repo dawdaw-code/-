@@ -21,5 +21,17 @@ namespace BLL.luo
         {
             return jueseService.delRole(id);
         }
+        public static IQueryable Role(int id)
+        {
+            return jueseService.Role(id);
+        }
+        public static int update(string id, string RoleName, string Remark)
+        {
+            return jueseService.update(id ,RoleName,Remark);
+        }
+        public static int insert(string RoleNum, string RoleName, string Remark)
+        {
+            return jueseService.insert(RoleNum, RoleName, Remark);
+        }
     }
 }

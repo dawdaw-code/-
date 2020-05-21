@@ -63,5 +63,41 @@ namespace DAL.luo
             obj.IsDelete = 1;
             return entities.SaveChanges();
         }
+        public static IQueryable Role(int id)
+        {
+            WarehouseEntities entities = new WarehouseEntities();
+            var obj = from p in entities.Role
+                      where p.Id == id
+                      select new
+                      {
+                          Id = p.Id,
+                          RoleNum = p.RoleNum,
+                          RoleName = p.RoleName,
+                          Remark = p.Remark
+                      };
+            return obj;
+        }
+        //修改
+        public static int update(string id, string RoleName, string Remark)
+        {
+            WarehouseEntities entities = new WarehouseEntities();
+            var obj = (from p in entities.Role where p.RoleNum == id select p).First();
+            obj.RoleName = RoleName;
+            obj.Remark = Remark;
+            return entities.SaveChanges();
+        }
+        //新增
+        public static int insert(string RoleNum, string RoleName, string Remark)
+        {
+            WarehouseEntities entities = new WarehouseEntities();
+            var obj = new Role();
+            obj.RoleNum = RoleNum;
+            obj.RoleName = RoleName;
+            obj.Remark = Remark;
+            obj.CreateTime = DateTime.Now;
+            obj.IsDelete = 0;
+            entities.Role.Add(obj);
+            return entities.SaveChanges();
+        }
     }
 }

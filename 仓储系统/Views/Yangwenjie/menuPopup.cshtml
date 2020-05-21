@@ -1,0 +1,79 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>menuPopup</title>
+    <link href="~/Css1/bootstrap.css" rel="stylesheet" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <link href="~/layui/css/layui.mobile.css" rel="stylesheet" />
+    <script src="~/layui/layui.js"></script>
+</head>
+<body>
+    <div>
+        <table class="table text-center" id="tabInfo">
+            <thead>
+                <tr>
+                    <td>编号</td>
+                    <td><input id="Text1" type="text" name="NodeId"/></td>
+                </tr>
+                <tr>
+                    <td>菜单名称</td>
+                    <td><input id="Text2" type="text" name="DisplayName"/></td>
+                </tr>
+                <tr>
+                    <td>链接地址</td>
+                    <td><input id="Text3" type="text" name="NodeURL"/></td>
+                </tr>
+                <tr>
+                    <td>创建人</td>
+                    <td><input id="Text4" type="text" name="CreateUser"/></td>
+                </tr>
+
+        </table>
+        <div style="float:right;margin-right:20px">
+            <input id="Button1" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-radius" /><input id="Button1" type="button" value="关闭" class="layui-btn layui-btn-primary layui-btn-radius" onclick="thisClose()" />
+        </div>
+    </div>
+</body>
+</html>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+
+    $(function () {
+        $.ajax({
+            type: "POST",
+            url: "/Yangwenjie/menuSelectById",
+            data: "{Id:'" + id + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#Text1").val(data.NodeId);
+                $("#Text2").val(data.DisplayName);
+                $("#Text3").val(data.NodeURL);
+                $("#Text4").val(data.CreateUser);
+                
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+            ,
+        });
+    });
+
+    function thisClose() {
+        if
+        (confirm("您确定要关闭本页吗？")) {
+            window.close();
+        }
+        else {
+
+        }
+
+    }
+</script>
