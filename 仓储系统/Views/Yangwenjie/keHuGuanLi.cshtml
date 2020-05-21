@@ -269,6 +269,7 @@
     }
 
     function divUpdateShow(id) {
+        alert(id);
         $("#layui-layer1").css("display", "inline-block");
         layui.use('layer', function () {
             var layer = layui.layer;
@@ -283,7 +284,7 @@
                     $.ajax({
                         type: "POST",
                         url: "/Yangwenjie/upCustomerById",
-                        data: "{cus:{CustomerName:'" + $("[name='CustomerName']").val() + "',Remark:'" + $("[name='Remark']").val() + "',Fax:'" + $("[name='Fax']").val() + "',Email:'" + $("[name='Email']").val() + "',Phone:'" + $("[name='Phone']").val() + "'},id:'" + id + "'}",
+                        data: "{cus:{CustomerName:'" + $("[name='CustomerName']").val() + "',Remark:'" + $("[name='Remark']").val() + "',Fax:'" + $("[name='Fax']").val() + "',Email:'" + $("[name='Email']").val() + "',Phone:'" + $("[name='Phone']").val() + "'},id:'" + CustomerNum + "'}",
                         dataType: "json",
                         contentType: "application/json",
                         success: function (result) {
