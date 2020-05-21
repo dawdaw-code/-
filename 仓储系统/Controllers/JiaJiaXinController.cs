@@ -43,16 +43,13 @@ namespace 仓储系统.Controllers
             return View();
         }
 
-        public ActionResult HidePage()
-        {
-            return View();
-        }
 
+      
 
-        public ActionResult DelCategory(ProductCategory pc, int id)
+        public ActionResult DelCategory(ProductCategory pc)
         {
             pc.IsDelete = 1;
-            return Json(ProCategoryManager.DelCategory(pc,id), JsonRequestBehavior.AllowGet);
+            return Json(ProCategoryManager.DelCategory(pc), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -82,94 +79,13 @@ namespace 仓储系统.Controllers
             return Json(ProductManager.PageCount(pageSize), JsonRequestBehavior.AllowGet);
         }
 
-        //绑定类别
-        public ActionResult  GetTypes()
-        {
-            
-            return Json(ProCategoryManager.GetTypes(), JsonRequestBehavior.AllowGet); 
-        }
-
-
-        public ActionResult DelPro(Product pc, int id)
-        {
-            pc.IsDelete = 1;
-            return Json(ProductManager.DelPro(pc, id), JsonRequestBehavior.AllowGet);                
-        }
-
-
-
-        //新增入库单
-        public ActionResult AddInStorage(InStorage ie)
-        {
-            return Json(InStorageManager.AddInStorage(ie), JsonRequestBehavior.AllowGet);
-        }
-
-        //入库单查询
-        public ActionResult GetQueryInStorage(int pageIndex, int pageSize, InStorage io)
-        {
-            return Json(InStorageManager.GetQueryInStorage(pageIndex, pageSize, io), JsonRequestBehavior.AllowGet);
-             
-        }
-
-
-        //删除入库单
-        public ActionResult DelInStorage(InStorage pc, int id)
-        {
-            pc.IsDelete = 1;
-            return Json(InStorageManager.DelInStorage(pc, id), JsonRequestBehavior.AllowGet);
-        }
-
-        //产品类别修改
-        public ActionResult GetById(int id)
-        {
-            return Json(ProCategoryManager.GetById(id), JsonRequestBehavior.AllowGet); 
-        }
-
-
-
-        public ActionResult EditProductCategory(ProductCategory pc)
-        {
-            pc.CreateTime = DateTime.Now;
-            return Json(ProCategoryManager.EditProductCategory(pc), JsonRequestBehavior.AllowGet);
-        }
-
-
-        public ActionResult AddCategory(ProductCategory pc)
-        {
-            pc.CreateTime = DateTime.Now;
-            pc.CreateUser = "DA_0000";
-            pc.IsDelete = 0;
-            pc.PCateNum = "00008" + 1;
-            return Json(ProCategoryManager.AddCategory(pc) ,JsonRequestBehavior.AllowGet);
-        }
-
-
-        //绑定客户下拉框
-        public ActionResult BindCustomer()
-        {
-            return Json(ProductManager.BindCustomer(), JsonRequestBehavior.AllowGet);
-        }
-
-        //绑定计量单位
-        public ActionResult BindMeasure()
-        {
-            return Json(ProductManager.BindMeasure(), JsonRequestBehavior.AllowGet);
-        }
-
-        //绑定仓库
-        public ActionResult BindStorage()
-        {
-            return Json(ProductManager.BindStorage(), JsonRequestBehavior.AllowGet);
-        }
-        //绑定库位
-        public ActionResult BindLocation()
-        {
-            return Json(ProductManager.BindLocation(), JsonRequestBehavior.AllowGet);
-        }
 
 
 
 
 
-        }
+
+
+
+    }
 }

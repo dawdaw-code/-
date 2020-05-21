@@ -11,9 +11,6 @@
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
     <link href="~/Css1/bootstrap.css" rel="stylesheet" />
-    <link href="~/layui/css/layui.css" rel="stylesheet" />
-    <link href="~/layui/css/layui.mobile.css" rel="stylesheet" />
-    <script src="~/layui/layui.js"></script>
     <style>
         #text-1 {
             width: 100%;
@@ -21,13 +18,13 @@
             /*border: solid 1px red;*/
         }
 
-        /*a {
+        a {
             text-decoration: none;
         }
 
             a:hover {
                 text-decoration: underline;
-            }*/
+            }
 
         p {
             margin-top: 20px;
@@ -38,7 +35,6 @@
 
         h5 {
             margin-left: 50px;
-            margin-top: 25px;
             line-height: 0px;
             float: left;
         }
@@ -61,131 +57,92 @@
             margin-left: 700px;
         }
 
-        #text-4 {
-            border: solid 1px blue;
-            overflow-x: auto;
-            height: 585px;
+        #Button0 {
+            background-color: #2F96B4;
+            color: white;
+            color: white;
+            width: 80px;
+            height: 30px;
+        }
+
+        #Button1 {
+            background-color: #005DCC;
+            color: white;
+            width: 80px;
+            height: 30px;
+        }
+
+        #Button2 {
+            background-color: #BD362F;
+            color: white;
+            width: 80px;
+            height: 30px;
+        }
+
+        #Button3 {
+            background-color: #2F96B4;
+            color: white;
+            width: 80px;
+            height: 30px;
         }
 
         #table1 {
             text-align: center;
-        }
-
-        #dingchen {
-            border: 1px solid white;
-            width: 100%;
-            height: 40px;
-            background-color: #d4d3d3;
-
-        }
-
-        #pageDemo {
-            text-align: center;
-            border: 1px solid red;
         }
     </style>
 </head>
 <body>
     <div id="text-1">
         <div>
-            @*<p><a href="">首页</a>><a href="">基本资料</a>><a href="">部门管理</a></p>*@
-
-            <div id="dingchen">
-                <div style="position:absolute;top:10px;left:20px;">
-                    <img style="float:left" src="~/Jpggzi.png" /> <div style="width:200px;"><a href="">首页</a>><a href="">系统设置</a>><a href="">员工管理</a></div>
-                </div>
-            </div>
+            <p><a href="">首页</a>><a href="">基本资料</a>><a href="">部门管理</a></p>
             <h5>部门管理</h5>
             <div id="text-3">
-                @*<input id="Button1" type="button" value="新增" class="btn btn-primary" onclick="Add" />*@
-                <input id="Button1" data-method="offset" type="button" @*data-type="auto"*@ value="新增" class="btn btn-primary" onclick="divInsertShow()" />
-                @*<button data-method="offset" data-type="auto" class="layui-btn layui-btn-normal">居中弹出</button>*@
-                <input id="Button1" type="button" value="删除" class="btn btn-danger" onclick="CheckboxYN()" />
-                <input id="Button1" type="button" value="导出" class="btn btn-info" />
+                <a class="btn btn-primary" href="javascript:void(0)" onclick="Customer.Add()"><i class="icon-pencil"></i>&nbsp;新增</a>
+                <a class="btn btn-danger" href="javascript:void(0)" onclick=""><i class="icon-trash"></i>&nbsp;删除</a>
+                <a class="btn btn-info" href="javascript:void(0)" onclick=""><i class="icon-download"></i>&nbsp;导出</a>
             </div>
-            <div id="text-4">
-                <div id="text-2">
-                    <input id="Text1" type="text" /><input id="Button1" type="button" value="搜索" class="btn btn-info" onclick="PageList()" />
-                </div>
-                <table style="width:100%;" class="layui-table" id="table1">
-                    <thead>
-                        <tr>
-                            <td><input id="Checkbox1" type="checkbox" name="item" onclick="isChekbox(this)" /></td>
-                            <td>序号</td>
-                            <td>部门名称</td>
-                            <td>部门名</td>
-                            <td>创建时间</td>
-                            <td>操作</td>
-                        </tr>
-                    </thead>
-                    <tbody id="tb1"></tbody>
-                </table>
-                <div id="pageDemo">
 
-                </div>
-                @*<div id="divBtn" style="text-align:center;">
-                        <input id="First" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="首页" />
-                        <input id="Back" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="上一页" />
-                        <input id="Next" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="下一页" />
-                        <input id="Last" class="layui-btn layui-btn-primary layui-btn-sm" type="button" value="尾页" />
-                    </div>*@
+            <div id="text-2">
+                <input id="Text1" type="text" /><a id="gritter-remove-all" class="btn btn-info" href="javascript:void(0)" onclick="Customer.PageClick(1)"><i class="icon-search"></i>&nbsp;搜索</a>
             </div>
+
+
         </div>
+        <table style="width:100%;" class="table table-striped table-bordered table-hover" id="table1">
+            <thead>
+                <tr>
+                    <td><input id="Checkbox1" type="checkbox" name="item" /></td>
+                    <td>序号</td>
+                    <td>部门名称</td>
+                    <td>部门名</td>
+                    <td>创建时间</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody id="tb1"></tbody>
+            @*<tr>
+                <td><input id="Checkbox2" type="checkbox" name="item" /></td>
+               
+            </tr>
+            <tr>
+                <td><input id="Checkbox3" type="checkbox" name="item" /></td>
+                
+            </tr>
+            <tr>
+                <td><input id="Checkbox4" type="checkbox" name="item" /></td>
+                
+            </tr>
+            <tr>
+                <td><input id="Checkbox5" type="checkbox" name="item" /></td>
+                
+            </tr>*@
+        </table>
     </div>
+
 </body>
 </html>
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script>
-    var pageIndex = 1;
-    var pageSize = 10;
-    var pageCount = 0;
-    var rows = 0;
-    $(function () {
-        PageList();
-        layFenYe();
-    });
-
-    function layFenYe() {
-        layui.use(['laypage', 'layer'], function () {
-            var laypage = layui.laypage
-                , layer = layui.layer;
-            laypage.render({
-                elem: 'pageDemo'
-                , count: rows
-                , limit: 10
-                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
-                , jump: function (obj) {
-                    //console.log(obj)
-                    pageIndex = obj.curr;
-                    pageSize = obj.limit;
-                    PageList();
-                }
-            });
-        });
-    }
-
-    $("#First").click(function () {
-        pageIndex = 1;
-        PageList();
-        return false;
-    });
-    $("#Back").click(function () {
-        pageIndex--;
-        PageList();
-        return false;
-    });
-    $("#Next").click(function () {
-        pageIndex++;
-        PageList();
-        return false;
-    });
-    $("#Last").click(function () {
-        pageIndex = pageCount;
-        PageList();
-        return false;
-    });
-
-    //全选以及反选
     $(function () {
         $("#Checkbox1").click(function () {
             if (this.checked) {
@@ -198,28 +155,23 @@
                 });
             }
         });
+
+        selectByBuMen();
     });
 
-    //时间格式转化
-    function Datte(time) {
-        var date = new Date(parseInt(time.substr(6)));
-        return date.toLocaleDateString();
-    }
-
-    //分页加载全部
-    function PageList() {
-        var name = $("#Text1").val();
+    function selectByBuMen() {
         $.ajax({
             type: "POST",
-            url: "/Yangwenjie/getDepart",
-            data: "{pageIndex:'" + pageIndex + "',pageSize:'" + pageSize + "',name:'" + name + "'}",
+            url: "/Yangwenjie/selectBuMen",
+            data: "{}",
             dataType: "json",
             contentType: "application/json",
+
             success: function (result) {
-                rows = result.PageCount;
                 $("#tb1 tr").remove();
-                $.each(result.DataList, function (index, data) {
-                    $("#tb1").append("<tr><td><input id='Checkbox2'onclick='isChekbox(this)'  type='checkbox' name='item' data='" + data.Id + "'/></td><td>" + data.Id + "</td><td>" + data.DepartNum + "</td><td>" + data.DepartName + "</td><td>" + Datte(data.CreateTime) + "<td></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='divUpdateShow(" + data.Id + ")'><i class='layui-icon'>&#xe642;</i></button><button type='button' class='layui-btn layui-btn-primary layui-btn-sm' onclick='Del(" + data.Id + ")'><i class='layui-icon'>&#xe640;</i> </button></div></td></tr>");
+                $.each(result, function (index, data) {
+                    //alert(data.Id);
+                    $("#tb1").append("</tr><td><input id='Checkbox5' type='checkbox' name='item' /></td><td>" + data.Id + "</td><td>" + data.DepartNum + "</td><td>" + data.DepartName + "</td><td>" + data.CreateTime + "</td></tr>");
                 });
             },
             //请求失败后的回调函数
@@ -228,170 +180,5 @@
             }
         });
     }
-
-    function CheckboxYN() {
-        if ($("input[name=item]:checked").length > 0) {
-            if (confirm("确定要删除吗？")) {
-                var relst = "";
-                var cheked = $("#showStu input:checked").each(function () {
-                    relst += $(this).val() + ",";　　//这到上就是要吧选中的id给记下来
-                })
-                $.ajax({
-                    type: "POST",
-                    url: "/Yangwenjie/del",
-                    data: "{id:'" + id + "'}",
-                    datatype: "text",
-                    success: function (msg) {
-                        if (msg == "OK") {
-                            alert("删除成功");
-
-                        }
-                        else {
-                            alert("删除失败!");
-                        }
-                    }
-                });
-            };
-        }
-        else {
-            alert("请先选择你要删除的数据");
-        }
-    }
-
-    function isChekbox(checkbox) {
-        if (checkbox.checked == true) {
-            //alert(1);
-        } else {
-            //alert(2);
-        }
-    }
-    //删除
-    function Del(id) {
-        if (confirm('是否删除?')) {
-            $.ajax({
-                type: "POST",
-                url: "/Yangwenjie/delDepart",
-                data: "{Id:'" + id + "'}",
-                dataType: "json",
-                contentType: "application/json",
-                success: function (result) {
-                    if (result > 0) {
-                        alert("删除成功");
-                        layFenYe();
-                        PageList();
-                    }
-                    else {
-                        alert("删除失败");
-                    }
-                },
-                error: function (ex) {
-                    alert(ex.responseText);
-                }
-                ,
-            });
-        }
-    }
-
-    //编辑修改弹出层
-    function divUpdateShow(id) {
-        layer.prompt({
-            //formType: 2,
-            value: '',
-            title: '编辑部门',
-            area: ['200px', '30px'] //自定义文本域宽高
-            , success: function (layero) {
-                layero.find(".layui-layer-content").prepend('<div style="margin-bottom: 15px;">部门名称</div>')
-            }
-        }, function (value, index, elem) {
-            //alert(value); //得到value
-            layer.close(index);
-
-            $.ajax({
-                type: "POST",
-                url: "/Yangwenjie/upDepartById",
-                data: "{DepartName:'" + value + "',id:'" + id + "'}",
-                dataType: "json",
-                contentType: "application/json",
-                success: function (result) {
-                    if (result > 0) {
-                        alert("修改成功");
-                        PageList();
-                    }
-                    else {
-                        alert("修改失败");
-                    }
-                },
-                //请求失败后的回调函数
-                error: function (ex) {
-                    alert(ex.responseText);
-                }
-            });
-        });
-    }
-
-    //编辑新增弹出层
-    function divInsertShow() {
-
-        layer.prompt({
-            //formType: 2,
-            value: '',
-            title: '新增部门',
-            area: ['200px', '30px'] //自定义文本域宽高
-            , success: function (layero) {
-                layero.find(".layui-layer-content").prepend('<div style="margin-bottom: 15px;">部门名称</div>')
-            }
-        }, function (value, index, elem) {
-            //alert(value); //得到value
-            layer.close(index);
-
-            $.ajax({
-                type: "POST",
-                url: "/Yangwenjie/Add",
-                data: "{det:{DepartName:'" + value + "'}}",
-                dataType: "json",
-                contentType: "application/json",
-                success: function (result) {
-                    if (result > 0) {
-                        alert("新增成功");
-                        PageList();
-                    }
-                    else {
-                        alert("新增失败");
-                    }
-                },
-                //请求失败后的回调函数
-                error: function (ex) {
-                    alert(ex.responseText);
-                }
-            });
-        });
-
-        //layer.prompt({
-        //    //formType: 3,
-        //    //placeholder: '输入注销原因',
-        //    value: '',
-        //    title: '修改报损单',
-        //    area: ['1000px', '500px'] //自定义文本域宽高
-        //}, function (value, index, elem) {
-        //    var data2 = $('#zxr2').val()
-        //    var data3 = $('#zxr3').val()
-        //    var data4 = $('#zxr4').val()
-        //    var data5 = $('#zxr5').val()
-        //    var data6 = $('#zxr6').val()
-        //    var data7 = $('#zxr7').val()
-
-
-        //    alert(value); //得到value
-        //    alert(data2); //得到value
-        //    alert(data3); //得到value
-        //    alert(data4); //得到value
-        //    alert(data5); //得到value
-        //    alert(data6); //得到value
-        //    alert(data7); //得到value
-        //    layer.close(index);
-        //});
-
-        //$(".layui-layer-content").append('<div style="">部门名称</div>','<div ><form id="form1"><span style="">编号&nbsp;<input type="text" name=" id" readon1y=" readon1y" placeholder=" 自动生成" disabled="disabled" /></span><span>备注&nbsp;<input type="text" name="" beizhu" placeholder="" id="zxr2"/></span><span>备注&nbsp;<input type="text" name="" beizhu" placeholder="" id="zxr3"/></span><span>备注&nbsp;<input type="text" name="" beizhu" placeholder="" id="zxr4"/></span><span>备注&nbsp;<input type="text" name="" beizhu" placeholder="" id="zxr5"/></span><span>备注&nbsp;<input type="text" name="" beizhu" placeholder="" id="zxr6"/></span><span>备注&nbsp;<input type="text" name="" beizhu" placeholder="" id="zxr7"/></span></form></div>')
-        ////$(".layui-layer-content").append("<br/><input type=\"text\" id= \"zxr2\" class=\"layui-input\" placeholder=\"输入注销人\"/>")
-    }
 </script>
+

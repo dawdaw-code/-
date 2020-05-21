@@ -3,91 +3,315 @@
     ViewBag.Title = "baosunAdd";
     Layout = "~/Views/Home.cshtml";
 }
+<style>
+    a {
+        color: aliceblue;
+    }
 
+    #dingchen {
+        border: 1px solid white;
+        width: 150%;
+        height: 40px;
+        background-color: #d4d3d3
+    }
+</style>
+<div id="dingchen">
+    <div style="position:absolute;top:10px;left:20px;">
+        <img style="float:left" src="~/Jpggzi.png" /> <div style="width:200px;"><a href="">首页</a>><a href="">仓库作业</a>><a href="~/Husongzhi/baosun">报损管理</a>><a href="~/Husongzhi/baosunAdd">新增报损单</a></div>
+    </div>
+</div>
 <h2>新增报损单</h2>
 <div>
-    <div style="float:left;">
-        <label class="control-label" for="txtOrderNum">报损单编号</label>
-        <div class="controls">
-            <input type="text" lay-verify="title" placeholder="可不填,自动生成" disabled="disabled">
+    <form id="form1">
+        <div class="layui-inline" style="float:left">
+            <label class="control-label" for="txtOrderNum">报损单编号</label>
+            <input type="text" name="BadNum" required lay-verify="required" placeholder="自动生成" autocomplete="off" class="layui-input" style="width:200px" id="text1" disabled="disabled">
+            <input type="text" name="BadNum" hidden="hidden">
         </div>
-    </div>
-    <div style="float:left;">
-        <div class="control-group">
+        <div style="float:left;" class="layui-inline">
             <label class="control-label" for="ddlBadType">报损类型</label>
             <div class="controls">
-                <select id="ddlBadType" name="ddlBadType" class="span12">
-                    <option value="">请选择报损类型</option>
-                    <option value="1" selected="selected">损坏报损</option>
-                    <option value="2">丢失报损</option>
-                </select>
-                <span class="help-block"></span>
+                <select id="select2" name="BadTypeId" class="layui-input" style="width:200px"></select>
             </div>
         </div>
-    </div>
-
-    <div  style="float:left;">
-        <div class="control-group">
-            <!--control-group error-->
-            <label class="control-label" for="txtContractOrder">关联订单号</label>
-            <div class="controls">
-                <input type="text" placeholder="">
-                <span class="help-block"></span>
-            </div>
+        <div class="layui-inline" style="float:left">
+            <label class="control-label" for="txtOrderNum">关联单号</label>
+            <input type="text" name="ProductId" required lay-verify="required" autocomplete="off" class="layui-input" style="width:200px" disabled="disabled">
+            <input type="text" name="ProductId" hidden="hidden">
         </div>
-    </div>
-    <div  style="float:left;">
-        <div class="control-group">
-            <label class="control-label" for="txtOrderTime">制单时间</label>
-            <div class="controls">
-                <input type="text" id="txtOrderTime"  onfocus="WdatePicker()" realvalue="">
-                <span class="help-block"></span>
-            </div>
+        <div class="layui-inline" style="float:left">
+            <label class="control-label" for="txtOrderNum">制单时间</label>
+            <input type="text" id="text2" name="AuditTime" required lay-verify="required" autocomplete="off" class="layui-input" style="width:200px">
         </div>
-    </div>
-    <div class="control-group" style="float:left;">
-        <label class="control-label" for="txtCrateUser">制单人</label>
-        <div class="controls">
-            <input type="text" id="txtCrateUser"  value="administrator">
-            <span class="help-block"></span>
+        <div class="layui-inline" style="float:left">
+            <label class="control-label" for="txtOrderNum">制单人</label>
+            <input type="text" name="AuditUser" required lay-verify="required" autocomplete="off" class="layui-input" style="width:200px" value="DA_0000">
         </div>
-    </div>
-    <label  >备注</label>
-    <div class="controls">
-        <input type="text" id="txtRemark" >
-        <span class="help-block"></span>
-    </div>
-
-
-    @*<div class="control-group">
-        <label class="control-label" for="ddlProductType">入库产品类型</label>
-        <div class="controls">
-            <select id="ddlProductType" name="ddlProductType" class="span12" disabled="disabled">
-                <option value="">请选择入库产品类型</option>
-                <option value="1">原料</option>
-                <option value="2" selected="selected">产品</option>
+        <div class="layui-inline" style="float:left">
+            <label class="control-label" for="txtOrderNum">状态</label>
+            <select id="select11" name="Status" class="layui-input" style="width:200px">
+                <option value="等待审核" selected="selected">等待审核</option>
+                <option value="审核通过">审核通过</option>
+                <option value="审核失败">审核失败</option>
             </select>
-            <span class="help-block"></span>
         </div>
-    </div>*@
+        <div class="layui-inline" style="float:left">
+            <label class="control-label" for="txtOrderNum">数量</label>
+            <input type="text" name="Num" required lay-verify="required" autocomplete="off" class="layui-input" style="width:200px">
+        </div>
+        <div class="layui-inline" style="float:left">
+            <label class="control-label" for="txtOrderNum">金额</label>
+            <input type="text" name="SumMoney" required lay-verify="required" autocomplete="off" class="layui-input" style="width:200px">
+        </div>
+        <div class="layui-inline" style="float:left">
+            <label class="control-label" for="txtOrderNum">备注</label>
+            <input type="text" name="title" required lay-verify="required" autocomplete="off" class="layui-input" style="width:200px">
+        </div>
+    </form>
+
     <table class="layui-table">
         <thead>
-            <tr >
-                <th >产品编号</th>
-                <th >产品名称</th>
-                <th >产品条码</th>
-                <th >批次</th>
-                <th >库位</th>
-                <th >报损数量</th>
-                <th>操作</th>
+            <tr>
+                <th>产品编号</th>
+                <th>产品条码</th>
+                <th>产品名称</th>
+                <th>价格</th>
+                <th>颜色</th>
+                <th>规格</th>
             </tr>
         </thead>
-        <tbody></tbody>
+        <tbody id="td2"></tbody>
     </table>
     <div class="form-actions formBtn">
-        <button type="submit"  class="layui-btn layui-btn-primary" onclick="">新增产品</button>
-        <button type="submit"  class="layui-btn layui-btn-primary" onclick="">保存</button>
-        <button type="button"  class="layui-btn layui-btn-primary" onclick="">取消</button>
+        <button type="submit" class="layui-btn layui-btn-primary" onclick="Product1()">新增产品</button>
+        <button type="submit" class="layui-btn layui-btn-primary" onclick="Add()">保存</button>
+        <button type="button" class="layui-btn layui-btn-primary" onclick="">取消</button>
     </div>
 </div>
 
+<div id="hidePage" hidden="hidden" style="text-align:center;">
+    <div>
+        <div style="float:left">
+            <input type="text" id="ProductName" name="ProductName" placeholder="" class="layui-input" style="width:200px" />
+        </div>
+        <div style="float:left">
+            <button type="button"  class="layui-btn layui-btn-primary" onclick="Product()">查询</button>
+        </div>
+        <table class="layui-table">
+            <thead>
+                <tr>
+                    <th><input type="checkbox" id="check1" onclick="opcheckboxed('checkbox', 'reversecheck')" />全选</th>
+                    <th>产品编号</th>
+                    <th>产品条码</th>
+                    <th>产品名称</th>
+                    <th>价格</th>
+                    <th>颜色</th>
+                    <th>规格</th>
+                </tr>
+            </thead>
+            <tbody id="tb1"></tbody>
+        </table>
+    </div>
+    <div style="text-align:center;position:absolute;left: 35%">
+        <input id="Button1" type="button" value="确定" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px;" onclick="qeuding()" />
+        <input id="Button2" type="button" value="关闭" class="layui-btn layui-btn-primary layui-btn-sm" style="margin-top:15px;margin-left:10px; " onclick="closeAll()" />
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script src="~/layui/layui.js"></script>
+<link href="~/layui/css/layui.mobile.css" rel="stylesheet" />
+<script src="~/layui/layui.all.js"></script>
+
+<script>
+    function closeAll() {
+        $("#Button2").click(function () {
+            layer.closeAll('page');
+        })
+    }
+    $(function () {
+        GetBadReportType();
+        GetAll();
+    });
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#Time'  //指定元素
+        });
+    });
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+        laydate.render({
+            elem: '#text2'  //指定元素
+        });
+    });
+
+    //修改弹框
+    function divShow() {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+            layer.open({
+                title: ['添加产品', 'font-size:15px'],
+                area: ['800px', '300px'], //宽高
+                type: 1,
+                shade: 0,
+                content: $('#hidePage'),
+                //btn: ['确定', '关闭'],
+                yes: function (index, layero) {
+                    //index为当前层索引
+                    //layero 为 弹出层对象
+                    //在回调函数末尾添加 “return false”可以禁止点击该按钮关闭弹出层
+                    return false;
+                },
+                cancel: function () {//右上角关闭毁回调
+                    //return false;
+                },
+            });
+        });
+    }
+    function GetBadReportType() {
+        $.ajax({
+            type: "POST",
+            url: "/Husongzhi/GetBadReportType",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#select2 option").remove();
+                $.each(result, function (index, data) {
+                    $("#select2").append("<option value=" + data.Id + ">" + data.BadTypeName + "</option>");
+                })
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+            ,
+        });
+    }
+
+    function Product1() {
+        divShow();
+        GetBadReportType();
+        $.ajax({
+            type: "POST",
+            url: "/Husongzhi/Product1",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#select2 option").remove();
+                $.each(result, function (index, data) {
+                    $("#tb1").append("<tr><td><input type='checkbox' name='checkbox' class='check' value='" + data.Id + "'/></td><td>" + data.Id + "</td><td>" + data.ProductNum + "</td><td>" + data.ProductName + "</td><td>" + data.OutPrice + "</td><td>" + data.Color + "</td><td>" + data.Size + "</td></tr> ");
+                })
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+            ,
+        }); 
+        GetBadReportType();
+    }
+
+    function qeuding() {
+        obj = document.getElementsByName("checkbox");
+            check_val = [];
+            for (k in obj) {
+                if (obj[k].checked)
+                    check_val.push(obj[k].value);
+        }
+        ProductID(check_val);
+        
+    }
+
+    function ProductID(id) {
+        $.ajax({
+            type: "POST",
+            url: "/Husongzhi/ProductID",
+            data: "{id1:'" + id + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#td2 tr").remove();
+                $.each(result, function (index, data) {
+                    $("#td2").append("<tr><td>" + data.Id + "</td><td>" + data.ProductNum + "</td><td>" + data.ProductName + "</td><td>" + data.OutPrice + "</td><td>" + data.Color + "</td><td>" + data.Size + "</td></tr> ");
+                    
+                    $("[name='ProductId']").val(data.Id);
+                })
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+            ,
+        });
+        GetBadReportType();
+    }
+
+    function Product() {
+        var ProductName = $("#ProductName").val();
+        divShow();
+        GetBadReportType();
+        $.ajax({
+            type: "POST",
+            url: "/Husongzhi/Product",
+            data: "{ProductName:'" + ProductName + "'}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $("#td1 tr").remove();
+                $.each(result, function (index, data) {
+                    $("#td1").append("<tr><td><input type='checkbox' name='checkbox' class='check' id=" + data.Id + "/></td><td>" + data.ProductNum + "</td><td>" + data.ProductName + "</td><td>" + data.OutPrice + "</td><td>" + data.Color + "</td><td>" + data.Size + "</td></tr> ");
+                    alert(data.ProductNum);
+                })
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+            ,
+        });
+        GetBadReportType();
+    }
+
+    function Add() {
+        var data = $("#form1").serializeArray();
+        var obj = {};
+        $.each(data, function (a, b) {
+            obj[b.name] = b.value;
+        });
+        var jsons = JSON.stringify(obj);
+        $.ajax({
+            type: "POST",
+            url: "/Husongzhi/Add",
+            data: "{b:" + jsons + "}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                if (result > 0) {
+                    alert("添加成功");
+                    PageList(1);
+                }
+                else {
+                    alert("添加失败");
+                }
+            },
+            error: function (ex) {
+                alert(ex.responseText);
+            }
+            ,
+        });
+    };
+
+    function GetAll() {
+        $.ajax({
+            type: "post",
+            url: "/Husongzhi/GetAll",
+            data: "{}",
+            dataType: "json",
+            contentType: "application/json",
+            success: function (result) {
+                $.each(result, function (index, data) {
+                    var num = data.BadNum;
+                    $("[name='BadNum']").val(++num);
+                });
+            }
+        });
+    }
+</script>

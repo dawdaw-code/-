@@ -1,34 +1,32 @@
 ﻿
 @{
     ViewBag.Title = "List";
-    Layout = "~/Views/Home.cshtml";
+    Layout = "~/Views/LayOut.cshtml";
 }
-@*@section top{*@
-<link href="~/Css1/bootstrap.min.css" rel="stylesheet" />
-<link href="~/layui/css/layui.css" rel="stylesheet" />
-
-<style>
-    table tr th {
-        text-align: center;
-    }
-</style>
-@*}*@
-<div style="width:100%;height:30px;border:1px solid #f5f5f5;background-color:#f5f5f5;margin-top:20px;">
+@section top{
+    <link href="~/Css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/layui/css/layui.css" rel="stylesheet" />
+    <style>
+        table tr th {
+            text-align: center;
+        }
+    </style>
+}
+<div style="width:100%;height:30px;border:1px solid #f5f5f5;background-color:#f5f5f5;">
     <ul style="margin-top:-15px;margin-left:15px;">
         <li style="list-style:none;display:inline-block;"><a href="#" style="text-decoration:none;color:#016fa7;font-size:13px;">仓库作业 > </a></li>
         <li style="list-style:none;display:inline-block;"><a href="#" style="text-decoration:none;color:#016fa7;font-size:13px;">入库管理</a></li>
     </ul>
-    <div style="width:1100px;height:35px;border:1px solid #f5f5f5;background-color:#EFEFEF;margin:0 auto;margin-left:70px;">
-            <ul style="display:inline-block;">
-                <li style="margin-top:-143px;"><strong style="margin-left:15px;">入库单管理</strong></li>
-            </ul>
-
+    <div style="width:1100px;height:35px;border:1px solid #f5f5f5;background-color:#EFEFEF;margin:0 auto;">
+        <ul style="display:inline-block;">
+            <li style="margin-top:-43px;"><strong style="margin-left:15px;">入库单管理</strong></li>
+        </ul>
         <input id="Button1" type="button" value="新增" class="btn btn-primary" style="margin-left:839px;" />
         <input id="Button2" type="button" value="删除" class="btn btn-danger" />
         <input id="Button3" type="button" value="导出" class="btn btn-info" />
-        <div style="width:1100px;height:450px;border:1px solid #EFEFEF;margin-top:-80px;margin-left:-30px;">
+        <div style="width:1100px;height:450px;border:1px solid #EFEFEF;margin-top:-20px;">
 
-            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="margin-top:10px;">
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief" style="margin-top:-50px;">
                 <ul class="layui-tab-title">
                     <li class="layui-this">所有</li>
                     <li>待审核</li>
@@ -37,34 +35,20 @@
                 </ul>
                 <div class="layui-tab-content" style="height: 100px;">
                     <div class="layui-tab-item layui-show">
-                        <input id="InSNum" type="text" placeholder=" 请输入入库单号" style="width:200px;height:33px;" />  时间<input id="Text2" type="text" style="width:200px;height:33px;" />-<input id="Text3" type="text" style="width:200px;height:33px;" /><input id="Button4" type="button" value="搜索" class="btn btn-success" style="margin-top:-5px;margin-left:5px;" />
-                        <input id="Button4" type="button" value="高级搜索" class="btn btn-primary dropdown-toggle" style="margin-top:-5px;" />
-                        <table class="table table-striped table-bordered table-hover" style="margin-top:10px;">
-                            <thead>
-                                <tr style="text-align:center;">
-                                    <td><input id="Checkbox1" type="checkbox" /></td>
-                                    <td>入库单号</td>
-                                    <td>入库类型</td>
-                                    <td>供应商</td>
-                                    <td>关联单号</td>
-                                    <td>货品总数</td>
-                                    <td>总金额</td>
-                                    <td>状态</td>
-                                    <td>制单人</td>
-                                    <td>操作方式</td>
-                                    <td>创建时间</td>
-                                    <td>操作</td>
-                                </tr>
-                            </thead>
-                            <tbody id="tbody1"></tbody>
-                        </table>
+                        <input id="Text1" type="text" placeholder=" 请输入入库单号" style="width:200px;height:33px;"/>  时间<input id="Text2" type="text" style="width:200px;height:33px;"/>-<input id="Text3" type="text"  style="width:200px;height:33px;"/><input id="Button4" type="button" value="搜索"  class="btn btn-success" style="margin-top:-5px;margin-left:5px;"/>
+                        <input id="Button4" type="button" value="高级搜索" class="btn btn-primary dropdown-toggle" style="margin-top:-5px;"/>
+
+                        <table class="layui-hide" id="test" style="margin:0 auto;"></table>
+
                     </div>
                     <div class="layui-tab-item">内容2</div>
                     <div class="layui-tab-item">内容3</div>
                     <div class="layui-tab-item">内容4</div>
                 </div>
-            </div>
+            </div> 
 
+            @*<table class="layui-hide" id="test"></table>*@
+         
             <div class="row" id="mypager">
 
             </div>
@@ -73,118 +57,59 @@
     <div>
     </div>
 </div>
-@*@section foot{*@
-<script src="~/Scripts/jquery-3.3.1.min.js"></script>
-<script src="~/layer-v3.1.1/layer/layer.js"></script>
-<script src="~/layui/layui.js"></script>
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
-<script>
-    $(function () {
-        PageList();
+@section foot{
+    <script src="~/layui/layui.js"></script>
+    <!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+    <script>        
+        layui.use('element', function () {
+            var element = layui.element;
 
-
-    })
-
-
-
-
-
-
-
-    layui.use('element', function () {
-        var element = layui.element;
-
-        //一些事件监听
-        element.on('tab(demo)', function (data) {
-            console.log(data);
-        });
-    });
-
-    var pageIndex = 1;
-    var pageSize = 3;
-    var pageCount = 0;
-    var rows = 0;
-    function PageList() {
-        $.ajax({
-            type: "post",
-            url: "/JiaJiaXin/GetQueryInStorage",
-            data: "{pageIndex:'" + pageIndex + "',pageSize:'" + pageSize + "',io:{InSNum:'" + $("#InSNum").val() + "'}}",
-            dataType: "json",
-            contentType: "application/json",
-            async: false,
-            success: function (result) {
-                $("#tbody1 tr").remove();
-                rows = result.pageCount;
-                $.each(result.DataList, function (index, data) {
-                    $("#tbody1").append("<tr style='text-align:center;'><td><input id='Checkbox1' type='checkbox' /></td><td id='hao'>" + data.InSNum + "</td><td>" + data.InSTypeId + "</td><td>" + data.SupplierId + "</td><td>" + data.DetailNum + "</td><td>" + data.Num + "</td><td>" + data.SumMoney + "</td><td>" + data.Status + "</td><td>" + data.AuditUser + "</td><td>" + data.Operation + "</td><td>" + ConvertTime(data.AuditTime)+ "</td><td> <button type='button' class='layui-btn layui-btn-sm'><i class='layui-icon layui-icon-edit'></i></button><button type='button' class='layui-btn layui-btn-sm' onclick='Del(" + data.Id + ")'><i class='layui-icon layui-icon-delete'></i></button></td></tr>");
-                });
-            },
-            error: function (ex) {
-                alert(ex.responseText);
-            }
-        });
-    }
-
-
-
-    function Del(id) {
-        if (confirm('是否删除?')) {
-            $.ajax({
-                type: "POST",
-                url: "/JiaJiaXin/DelInStorage",
-                data: "{Id:'" + id + "'}",
-                dataType: "json",
-                contentType: "application/json",
-                success: function (result) {
-                    if (result > 0) {
-                        alert("删除成功");
-                        PageList();
-                    }
-                    else {
-                        alert("删除失败");
-                    }
-                },
-                error: function (ex) {
-                    alert(ex.responseText);
-                }
-                ,
+            //一些事件监听
+            element.on('tab(demo)', function (data) {
+                console.log(data);
             });
-        }
-    }
+        });
+
+
+        layui.use('table', function () {
+            var table = layui.table;
+
+            table.render({
+                elem: '#test'
+                , url: '/demo/table/user/'
+                , page: { //支持传入 laypage 组件的所有参数（某些参数除外，如：jump/elem） - 详见文档
+                    layout: ['limit', 'count', 'prev', 'page', 'next', 'skip'] //自定义分页布局
+                    //,curr: 5 //设定初始在第 5 页
+                    , groups: 1 //只显示 1 个连续页码
+                    , first: false //不显示首页
+                    , last: false //不显示尾页
+
+                }
+                , cols: [[
+                    { field: 'sex1', title: '<input id="Checkbox1" type="checkbox" />', align: 'center', width: 60 }
+                    , { field: 'sex', title: '入库单号', align: 'center'}
+                    , { field: 'city', title: '入库类型', align: 'center'}
+                    , { field: 'sign', title: '供应商' }
+                    , { field: 'classify', title: '关联单号', align: 'center' } //单元格内容水平居中
+                    , { field: 'experience', title: '货品总数', align: 'center' } //单元格内容水平居中
+                    , { field: 'score', title: '总金额', sort: true, align: 'right' }
+                    , { field: 'wealth', title: '状态', align: 'right' }
+                    , { field: 'wealth1', title: '制单人', align: 'right' }
+                    , { field: 'wealth2', title: '操作方式', align: 'right' }
+                    , { field: 'wealth3', title: '创建时间', align: 'right' }
+                    , { field: 'wealth4', title: '操作', align: 'center' }
+                ]]
+
+            });
+        });
+      
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    function ConvertTime(time) {
-        var date = new Date(parseInt(time.substr(6)));
-        return date.toLocaleDateString();
-    }
-
-
-
-</script>
-@*}*@
+    </script>
+}
 
 
